@@ -47,7 +47,7 @@ struct shape_t {
   bool operator!=(const shape_t &other) const { return !((*this) == other); }
 
   ANY_DEVICE_INLINE
-  constexpr int size(void) const { return n_dims; }
+  static constexpr int size(void) { return n_dims; }
 
 protected:
   Int _raw_data[n_dims];

@@ -64,8 +64,8 @@ public:
   }
 
   ANY_DEVICE_INLINE const shape_type &shape() const { return _shape; }
-  ANY_DEVICE_INLINE size_type &shape(int k) { return _shape[k]; }
   ANY_DEVICE_INLINE size_type shape(int k) const { return _shape[k]; }
+  ANY_DEVICE_INLINE size_type size() const { return product(_shape); }
 
   ANY_DEVICE_INLINE pointer raw() { return raw_ptr(_array); }
   ANY_DEVICE_INLINE const_pointer raw() const { return raw_ptr(_array); }
@@ -93,11 +93,11 @@ void save(const HDF5Writer &writer,
   // TODO disable for non column-major indexing order.
 
   T const *const data = arr.raw();
-  const auto &dims = arr.shape;
+  const auto &dims = arr.shape();
 
   HDF5DataType data_type = make_hdf5_data_type<double>();
 
-  constexpr int rank = Shape::size();
+  constexpr auto rank = Shape::size();
   hsize_t h5_dims[rank];
   for (int i = 0; i < rank; ++i) {
     h5_dims[i] = hsize_t(dims(i)); // size of (i, j, k) axes
