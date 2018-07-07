@@ -66,7 +66,7 @@ private:
   using super = array_view_base<T, Indexing<n_dims>>;
 
 public:
-  using super::array_view_base;
+  using super::super;
 
   template <class Array, class Shape>
   ANY_DEVICE_INLINE
@@ -81,7 +81,7 @@ private:
   using super = array_view_base<const T, Indexing<n_dims>>;
 
 public:
-  using super::array_view_base;
+  using super::super;
 
   template <class Array, class Shape>
   ANY_DEVICE_INLINE

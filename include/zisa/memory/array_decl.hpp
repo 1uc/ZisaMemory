@@ -30,7 +30,7 @@ protected:
   using shape_type = typename super::shape_type;
 
 public:
-  using super::array_base;
+  using super::super;
 
   array(const shape_type &shape, device_type device = device_type::cpu);
 
