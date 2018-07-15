@@ -49,7 +49,7 @@ public:
   array_base &operator=(array_base &&other) = default;
 
   ANY_DEVICE_INLINE T &operator[](size_type i) { return _array[i]; }
-  ANY_DEVICE_INLINE T operator[](size_type i) const { return _array[i]; }
+  ANY_DEVICE_INLINE const T &operator[](size_type i) const { return _array[i]; }
 
   template <class... Ints>
   ANY_DEVICE_INLINE T &operator()(Ints... ints) {
@@ -58,7 +58,7 @@ public:
   }
 
   template <class... Ints>
-  ANY_DEVICE_INLINE T operator()(Ints... ints) const {
+  ANY_DEVICE_INLINE const T &operator()(Ints... ints) const {
     auto l = Indexing::linear_index(shape(), std::forward<Ints>(ints)...);
     return (*this)[l];
   }
