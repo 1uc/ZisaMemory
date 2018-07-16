@@ -19,11 +19,11 @@ public:
 
 protected:
   virtual inline pointer do_allocate(size_type n) override {
-    return (pointer)malloc(n * sizeof(T));
+    return new T[n];
   }
 
   virtual inline void do_deallocate(pointer ptr, size_type) override {
-    free(ptr);
+    delete [] ptr;
   }
 
   virtual inline device_type do_device() const override {

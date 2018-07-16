@@ -84,7 +84,7 @@ operator=(contiguous_memory_base &&other) {
 
   _raw_data = other._raw_data;
   n_elements = other.n_elements;
-  _allocator = std::move(other._allocator);
+  _allocator = other._allocator;
 
   other._raw_data = nullptr;
   other.n_elements = 0;
