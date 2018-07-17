@@ -96,12 +96,14 @@ operator=(contiguous_memory_base &&other) {
 template <class T, class Allocator>
 ANY_DEVICE_INLINE T &contiguous_memory_base<T, Allocator>::
 operator[](size_type i) {
+  assert(i < size());
   return _raw_data[i];
 }
 
 template <class T, class Allocator>
 ANY_DEVICE_INLINE const T &contiguous_memory_base<T, Allocator>::
 operator[](size_type i) const {
+  assert(i < size());
   return _raw_data[i];
 }
 
