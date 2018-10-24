@@ -12,10 +12,10 @@
 namespace zisa {
 
 template <class Indexing>
-class indexing_traits;
+struct indexing_traits;
 
 template <class Array>
-class array_traits;
+struct array_traits;
 
 template <class T, class Indexing, class Array, class Shape>
 void save(const HDF5Writer &writer,
