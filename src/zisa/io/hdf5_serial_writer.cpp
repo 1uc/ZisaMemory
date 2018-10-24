@@ -25,16 +25,18 @@ void HDF5SerialWriter::write_array(void const *const data,
   assert(data_type() > 0);
   assert(rank > 0);
 
+  std::size_t urank = static_cast<std::size_t>(rank);
+
   // create a simple dataspace for storing an array of fixed size 'dims'.
   hid_t dataspace = H5Screate_simple(rank, dims, NULL);
 
   // create properties list for chunking and compression
   hid_t properties = H5Pcreate(H5P_DATASET_CREATE);
 
-  std::vector<hsize_t> chunks(rank);
+  std::vector<hsize_t> chunks(urank);
 
-  int chunk_size = 32;
-  for (int i = 0; i < rank; ++i) {
+  hsize_t chunk_size = 32;
+  for (std::size_t i = 0; i < urank; ++i) {
     if (rank == 1) {
       chunks[i] = chunk_size * chunk_size;
     } else {
