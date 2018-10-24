@@ -13,6 +13,8 @@ public:
   using pointer = T *;
 
 public:
+  virtual ~memory_resource() = default;
+
   inline pointer allocate(size_type n) { return do_allocate(n); }
   inline void deallocate(pointer ptr, size_type n) { do_deallocate(ptr, n); }
 
