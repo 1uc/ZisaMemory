@@ -23,6 +23,7 @@ void HDF5SerialWriter::write_array(void const *const data,
                                    const int rank,
                                    hsize_t const *const dims) const {
   assert(data_type() > 0);
+  assert(rank > 0);
 
   // create a simple dataspace for storing an array of fixed size 'dims'.
   hid_t dataspace = H5Screate_simple(rank, dims, NULL);
