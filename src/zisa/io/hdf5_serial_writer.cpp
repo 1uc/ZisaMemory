@@ -45,7 +45,7 @@ void HDF5SerialWriter::write_array(void const *const data,
 
   bool is_compressed = true;
   bool is_chunked = true || is_compressed; // compression requires chunking
-  int compression_level = 6;
+  unsigned int compression_level = 6u;
 
   if (is_chunked) {
     H5Pset_chunk(properties, rank, &chunks[0]);
