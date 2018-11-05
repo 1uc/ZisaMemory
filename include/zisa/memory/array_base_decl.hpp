@@ -89,7 +89,6 @@ template <class T, class Indexing, class Array, class Shape>
 void save(const HDF5Writer &writer,
           const array_base<T, Indexing, Array, Shape> &arr,
           const std::string &tag) {
-
   // TODO disable for non column-major indexing order.
 
   T const *const data = arr.raw();
