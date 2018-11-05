@@ -27,6 +27,13 @@ public:
     resource->deallocate(ptr, n);
   }
 
+  template <class... Args>
+  inline void construct(T *const xptr, Args &&... args) {
+    *xptr = T(std::forward<Args>(args)...);
+  }
+
+  inline void destroy(T *const xptr) { xptr->~T(); }
+
   inline device_type device() const { return resource->device(); }
 
 protected:

@@ -54,7 +54,11 @@ public:
 
 private:
   void allocate(size_type n_elements, Allocator allocator);
+  void allocate(size_type n_elements);
+
   void free();
+  void free_data();
+  void free_allocator();
 
   Allocator *allocator();
   Allocator const *allocator() const;
@@ -62,6 +66,16 @@ private:
   template <class TT, class A1, class A2>
   friend void copy(contiguous_memory_base<TT, A1> &dst,
                    const contiguous_memory_base<TT, A2> &src);
+
+  template <class TT, class A1, class A2>
+  friend void copy_construct(contiguous_memory_base<TT, A1> &dst,
+                             const contiguous_memory_base<TT, A2> &src);
+
+  void default_construct();
+
+  template <class A>
+  bool resize(const contiguous_memory_base<T, A> &other);
+  bool resize(const size_type &n_elements);
 
 private:
   pointer _raw_data;

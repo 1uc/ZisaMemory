@@ -86,6 +86,24 @@ private:
 };
 
 template <class T, class Indexing, class Array, class Shape>
+bool operator==(const array_base<T, Indexing, Array, Shape> &lhs,
+                const array_base<T, Indexing, Array, Shape> &rhs) {
+
+  if (shape(lhs) != shape(rhs)) {
+    return false;
+  }
+
+  return std::equal(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
+}
+
+template <class T, class Indexing, class Array, class Shape>
+bool operator!=(const array_base<T, Indexing, Array, Shape> &lhs,
+                const array_base<T, Indexing, Array, Shape> &rhs) {
+
+  return !(lhs == rhs);
+}
+
+template <class T, class Indexing, class Array, class Shape>
 void save(const HDF5Writer &writer,
           const array_base<T, Indexing, Array, Shape> &arr,
           const std::string &tag) {
