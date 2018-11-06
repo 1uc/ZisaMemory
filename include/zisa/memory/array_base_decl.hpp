@@ -53,13 +53,13 @@ public:
 
   template <class... Ints>
   ANY_DEVICE_INLINE T &operator()(Ints... ints) {
-    auto l = Indexing::linear_index(shape(), std::forward<Ints>(ints)...);
+    auto l = Indexing::linear_index(shape(), ints...);
     return (*this)[l];
   }
 
   template <class... Ints>
   ANY_DEVICE_INLINE const T &operator()(Ints... ints) const {
-    auto l = Indexing::linear_index(shape(), std::forward<Ints>(ints)...);
+    auto l = Indexing::linear_index(shape(), ints...);
     return (*this)[l];
   }
 
