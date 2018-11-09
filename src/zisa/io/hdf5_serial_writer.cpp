@@ -8,11 +8,7 @@
 namespace zisa {
 HDF5SerialWriter::HDF5SerialWriter(const std::string &filename) {
   hid_t h5_file
-      = H5Fcreate(filename.c_str(), H5F_ACC_TRUNC, H5P_DEFAULT, H5P_DEFAULT);
-
-  if (h5_file < 0) {
-    LOG_ERR(string_format("Can't open file. [%s]", filename.c_str()));
-  }
+      = H5F::create(filename.c_str(), H5F_ACC_TRUNC, H5P_DEFAULT, H5P_DEFAULT);
 
   file.push(h5_file);
 }
@@ -28,10 +24,10 @@ void HDF5SerialWriter::write_array(void const *const data,
   std::size_t urank = static_cast<std::size_t>(rank);
 
   // create a simple dataspace for storing an array of fixed size 'dims'.
-  hid_t dataspace = H5Screate_simple(rank, dims, NULL);
+  hid_t dataspace = H5S::create_simple(rank, dims, nullptr);
 
   // create properties list for chunking and compression
-  hid_t properties = H5Pcreate(H5P_DATASET_CREATE);
+  hid_t properties = H5P::create(H5P_DATASET_CREATE);
 
   std::vector<hsize_t> chunks(urank);
 
@@ -58,15 +54,13 @@ void HDF5SerialWriter::write_array(void const *const data,
   }
 
   // set meta data, where the data is say to represent the pressure.
-  hid_t dataset = H5Dcreate(file.top(),
-                            tag.c_str(),
-                            data_type(),
-                            dataspace,
-                            H5P_DEFAULT,
-                            properties,
-                            H5P_DEFAULT);
-
-  assert(dataset >= 0);
+  hid_t dataset = H5D::create(file.top(),
+                              tag.c_str(),
+                              data_type(),
+                              dataspace,
+                              H5P_DEFAULT,
+                              properties,
+                              H5P_DEFAULT);
 
   // finally, write the data
   H5Dwrite(dataset, data_type(), H5S_ALL, H5S_ALL, H5P_DEFAULT, data);
@@ -81,23 +75,23 @@ void HDF5SerialWriter::write_scalar(void const *const data,
                                     const HDF5DataType &data_type,
                                     const std::string &tag) const {
   // create a scalar data space.
-  hid_t dataspace = H5Screate(H5S_SCALAR);
+  hid_t dataspace = H5S::create(H5S_SCALAR);
 
   // create dataspace
-  hid_t dataset = H5Dcreate(file.top(),
-                            tag.c_str(),
-                            data_type(),
-                            dataspace,
-                            H5P_DEFAULT,
-                            H5P_DEFAULT,
-                            H5P_DEFAULT);
+  hid_t dataset = H5D::create(file.top(),
+                              tag.c_str(),
+                              data_type(),
+                              dataspace,
+                              H5P_DEFAULT,
+                              H5P_DEFAULT,
+                              H5P_DEFAULT);
 
   // write the scalar
-  H5Dwrite(dataset, data_type(), H5S_ALL, H5S_ALL, H5P_DEFAULT, data);
+  H5D::write(dataset, data_type(), H5S_ALL, H5S_ALL, H5P_DEFAULT, data);
 
   // close
-  H5Dclose(dataset);
-  H5Sclose(dataspace);
+  H5D::close(dataset);
+  H5S::close(dataspace);
 }
 
 void HDF5SerialWriter::write_string(const std::string &data,
@@ -105,59 +99,51 @@ void HDF5SerialWriter::write_string(const std::string &data,
   // strings can be stored as 1d-arrays of characters.
   // don't forget the null-character at the end of 'data.c_str()'.
   hsize_t dims[1] = {data.size() + 1};
-  hid_t dataspace = H5Screate_simple(1, dims, NULL);
+  hid_t dataspace = H5S::create_simple(1, dims, nullptr);
 
   // this type of characters
   HDF5DataType data_type = make_hdf5_data_type<char>();
 
   // create dataset
-  hid_t dataset = H5Dcreate(file.top(),
-                            tag.c_str(),
-                            data_type(),
-                            dataspace,
-                            H5P_DEFAULT,
-                            H5P_DEFAULT,
-                            H5P_DEFAULT);
+  hid_t dataset = H5D::create(file.top(),
+                              tag.c_str(),
+                              data_type(),
+                              dataspace,
+                              H5P_DEFAULT,
+                              H5P_DEFAULT,
+                              H5P_DEFAULT);
 
   // write the string
-  H5Dwrite(dataset, data_type(), H5S_ALL, H5S_ALL, H5P_DEFAULT, data.c_str());
+  H5D::write(dataset, data_type(), H5S_ALL, H5S_ALL, H5P_DEFAULT, data.c_str());
 
   // close
-  H5Dclose(dataset);
-  H5Sclose(dataspace);
+  H5D::close(dataset);
+  H5S::close(dataspace);
 }
 
 HDF5SerialReader::HDF5SerialReader(const std::string &filename) {
-  hid_t h5_file = H5Fopen(filename.c_str(), H5F_ACC_RDWR, H5P_DEFAULT);
-  if (h5_file < 0) {
-    LOG_ERR(string_format("Failed to open file. [%s]", filename.c_str()));
-  }
+  hid_t h5_file = H5F::open(filename.c_str(), H5F_ACC_RDWR, H5P_DEFAULT);
 
   file.push(h5_file);
   path.push_back(filename);
 }
 
-void *HDF5SerialReader::read_array(const HDF5DataType &data_type,
-                                   const std::string &tag,
-                                   int rank,
-                                   hsize_t *const dims) const {
-  // open the dataset
+std::vector<hsize_t> HDF5SerialReader::dims(const std::string &tag) const {
   hid_t dataset = open_dataset(tag);
-
-  // open a dataspace, which knows about size of array etc.
   hid_t dataspace = get_dataspace(dataset);
 
-  // read the dimensions
-  get_dims(dataspace, dims, rank);
+  auto rank = H5S::get_simple_extent_ndims(dataspace);
+  std::vector<hsize_t> dims(rank);
 
-  size_t data_size = 1;
-  for (int i = 0; i < rank; ++i) {
-    data_size *= dims[i];
-  }
-  assert(data_size > 0);
+  H5S::get_simple_extent_dims(dataspace, &(dims[0]), nullptr);
 
-  // allocate and read data
-  void *data = malloc(data_size * data_type.size);
+  return dims;
+}
+
+void HDF5SerialReader::read_array(void *data,
+                                  const HDF5DataType &data_type,
+                                  const std::string &tag) const {
+  hid_t dataset = open_dataset(tag);
   auto status
       = H5Dread(dataset, data_type(), H5S_ALL, H5S_ALL, H5P_DEFAULT, data);
 
@@ -167,11 +153,7 @@ void *HDF5SerialReader::read_array(const HDF5DataType &data_type,
                           hierarchy().c_str()));
   }
 
-  // close
-  H5Dclose(dataset);
-  H5Sclose(dataspace);
-
-  return data;
+  H5D::close(dataset);
 }
 
 void HDF5SerialReader::read_scalar(void *const data,
@@ -181,24 +163,22 @@ void HDF5SerialReader::read_scalar(void *const data,
   hid_t dataspace = get_dataspace(dataset);
 
   // read the scalar
-  H5Dread(dataset, data_type(), H5S_ALL, H5S_ALL, H5P_DEFAULT, data);
+  H5D::read(dataset, data_type(), H5S_ALL, H5S_ALL, H5P_DEFAULT, data);
 
   // close
-  H5Dclose(dataset);
-  H5Sclose(dataspace);
+  H5D::close(dataset);
+  H5S::close(dataspace);
 }
 
 std::string HDF5SerialReader::read_string(const std::string &tag) const {
   HDF5DataType data_type = make_hdf5_data_type<char>();
 
-  int ndims = 1;
-  hsize_t dims;
+  auto length = dims(tag)[0];
 
-  char *raw_data = (char *)read_array(data_type, tag, ndims, &dims);
-  auto str = std::string(raw_data, dims);
-  free(raw_data);
+  std::vector<char> buf(length);
+  read_array(&buf[0], data_type, tag);
 
-  return str;
+  return std::string(&buf[0], buf.size());
 }
 
 } // namespace zisa

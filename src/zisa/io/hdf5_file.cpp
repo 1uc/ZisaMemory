@@ -4,16 +4,16 @@
  *    Date: 2014-09-03
  */
 
-#include "zisa/io/hdf5_writer.hpp"
+#include <zisa/io/hdf5_file.hpp>
 
-#include "zisa/io/concatenate.hpp"
-#include "zisa/io/hdf5.hpp"
+#include <zisa/io/concatenate.hpp>
+#include <zisa/io/hdf5.hpp>
 
 namespace zisa {
 HDF5DataType::HDF5DataType(const hid_t &h5_type, size_t size)
     : size(size), h5_type(h5_type) {}
 
-HDF5DataType::~HDF5DataType() { H5Tclose(h5_type); }
+HDF5DataType::~HDF5DataType() { zisa::H5T::close(h5_type); }
 
 /// Return the HDF5 identifier of the data-type.
 hid_t HDF5DataType::operator()(void) const {
@@ -26,30 +26,10 @@ HDF5DataType make_hdf5_data_type(const hid_t &hdf5_data_type, size_t size) {
   return HDF5DataType(h5_type, size);
 }
 
-FileNameGenerator::FileNameGenerator(const std::string &stem,
-                                     const std::string &pattern,
-                                     const std::string &suffix)
-    : filename_stem(stem),
-      steady_state_filename(stem + "_steady-state" + suffix),
-      reference_filename(stem + "_reference" + suffix),
-      grid_filename(stem + "_grid" + suffix),
-      xdmf_grid_filename(stem + "_xdmf_grid" + suffix),
-      pattern(stem + pattern + suffix),
-      count(0) {}
-
-std::string FileNameGenerator::next_name(void) {
-  std::string file_name = string_format(pattern, count);
-
-  ++count;
-  return file_name;
-}
-
-void FileNameGenerator::advance_to(int k) { count = k; }
-
 HDF5File::~HDF5File() {
   // all IDs not on the bottom are group IDs
   while (file.size() > 1) {
-    H5Gclose(file.top());
+    zisa::H5G::close(file.top());
     file.pop();
   }
 
@@ -67,12 +47,12 @@ void HDF5File::open_group(const std::string &group_name) {
 
   // if the group exists open it
   if (group_exists(group_name)) {
-    h5_group = H5Gopen(file.top(), group_name.c_str(), H5P_DEFAULT);
+    h5_group = zisa::H5G::open(file.top(), group_name.c_str(), H5P_DEFAULT);
   }
 
   // otherwise create it
   else {
-    h5_group = H5Gcreate(
+    h5_group = zisa::H5G::create(
         file.top(), group_name.c_str(), H5P_DEFAULT, H5P_DEFAULT, H5P_DEFAULT);
   }
 
@@ -89,7 +69,7 @@ void HDF5File::close_group(void) {
     LOG_ERR("Closing group, but tree is empty.");
   }
 
-  H5Gclose(file.top());
+  zisa::H5G::close(file.top());
   file.pop();
   path.pop_back();
 }
@@ -123,20 +103,6 @@ hid_t HDF5File::get_dataspace(const hid_t &dataset) const {
   }
 
   return dataspace;
-}
-
-int HDF5File::get_dims(const hid_t &dataspace,
-                       hsize_t *const dims,
-                       int rank) const {
-  int ndims = H5Sget_simple_extent_dims(dataspace, dims, NULL);
-
-  if (ndims < 0 || rank != ndims) {
-    LOG_ERR(string_format("Failed to get dimensions. ndims = %d [%s]",
-                          rank,
-                          hierarchy().c_str()));
-  }
-
-  return ndims;
 }
 
 std::string HDF5File::hierarchy(void) const {

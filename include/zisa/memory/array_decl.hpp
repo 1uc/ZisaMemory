@@ -42,6 +42,17 @@ array<T, n_dims, Indexing> empty_like(const array<T, n_dims, Indexing> &other) {
 
   return array<T, n_dims, Indexing>(other.shape());
 }
+
+template <class T, int n_dims>
+void save(const HDF5Writer &writer,
+          const array<T, n_dims> &arr,
+          const std::string &tag);
+
+template <class T, int n_dims>
+void load(const HDF5Reader &reader,
+          array<T, n_dims> &arr,
+          const std::string &tag);
+
 } // namespace zisa
 
 #endif /* end of include guard */

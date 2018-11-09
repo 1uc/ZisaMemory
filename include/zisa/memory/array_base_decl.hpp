@@ -104,26 +104,6 @@ bool operator!=(const array_base<T, Indexing, Array, Shape> &lhs,
 }
 
 template <class T, class Indexing, class Array, class Shape>
-void save(const HDF5Writer &writer,
-          const array_base<T, Indexing, Array, Shape> &arr,
-          const std::string &tag) {
-  // TODO disable for non column-major indexing order.
-
-  T const *const data = arr.raw();
-  const auto &dims = arr.shape();
-
-  HDF5DataType data_type = make_hdf5_data_type<double>();
-
-  constexpr auto rank = Shape::size();
-  hsize_t h5_dims[rank];
-  for (int i = 0; i < rank; ++i) {
-    h5_dims[i] = hsize_t(dims(i)); // size of (i, j, k) axes
-  }
-
-  writer.write_array((double *)data, data_type, tag, rank, h5_dims);
-}
-
-template <class T, class Indexing, class Array, class Shape>
 ANY_DEVICE_INLINE auto raw_ptr(array_base<T, Indexing, Array, Shape> &a)
     -> decltype(a.raw()) {
   return a.raw();

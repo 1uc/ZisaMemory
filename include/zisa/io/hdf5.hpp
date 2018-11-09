@@ -33,8 +33,14 @@ hid_t write(Args &&... args) {
 }
 
 template <class... Args>
-hid_t create(Args &&... args) {
-  HDF5_SAFE_CALL(H5Dcreate, "Failed to create HDF5 dataset. [%d].");
+hid_t create(hid_t h5_file, char const *const tag, Args &&... args) {
+  auto ret = H5Dcreate(h5_file, tag, std::forward<Args>(args)...);
+
+  LOG_ERR_IF(
+      ret < 0,
+      string_format("Failed to create HDF5 dataset '%s'. [%d]", tag, ret));
+
+  return ret;
 }
 
 template <class... Args>
@@ -46,15 +52,21 @@ hid_t close(Args &&... args) {
 
 namespace H5F {
 template <class... Args>
-hid_t open(Args &&... args) {
-  HDF5_SAFE_CALL(H5Fopen, "Failed to open HDF5 file. [%d].");
+hid_t open(char const *const filename, Args &&... args) {
+  auto h5_file = H5Fopen(filename, std::forward<Args>(args)...);
+  LOG_ERR_IF(
+      h5_file < 0,
+      string_format("Failed to open file '%s'. [%d]", filename, h5_file));
+  return h5_file;
 }
 
 template <class... Args>
 hid_t create(char const *const filename, Args &&... args) {
-  auto ret = H5Fcreate(filename, std::forward<Args>(args)...);
-  LOG_ERR_IF(ret < 0, string_format("Failed to open file. [%s]", filename));
-  return ret;
+  auto h5_file = H5Fcreate(filename, std::forward<Args>(args)...);
+  LOG_ERR_IF(
+      h5_file < 0,
+      string_format("Failed to open file '%s', [%d]", filename, h5_file));
+  return h5_file;
 }
 
 template <class... Args>
@@ -62,6 +74,29 @@ hid_t close(Args &&... args) {
   HDF5_SAFE_CALL(H5Fclose, "Failed to close HDF5 file. [%d].");
 }
 } // namespace H5F
+
+namespace H5G {
+
+template <class... Args>
+hid_t open(hid_t h5_file, char const *const group_name, Args &&... args) {
+  auto ret = H5Gopen(h5_file, group_name, std::forward<Args>(args)...);
+  LOG_ERR_IF(ret < 0,
+             string_format("Failed to open group '%s'. [%d]", group_name, ret));
+
+  return ret;
+}
+
+template <class... Args>
+hid_t close(Args &&... args) {
+  HDF5_SAFE_CALL(H5Gclose, "Failed to close HDF5 group. [%d].");
+}
+
+template <class... Args>
+hid_t create(Args &&... args) {
+  HDF5_SAFE_CALL(H5Gcreate, "Failed to create HDF5 group. [%d].");
+}
+
+} // namespace H5G
 
 namespace H5S {
 
@@ -85,6 +120,18 @@ hid_t close(Args &&... args) {
   HDF5_SAFE_CALL(H5Sclose, "Failed to close HDF5 dataspace. [%d].");
 }
 
+template <class... Args>
+int get_simple_extent_dims(Args &&... args) {
+  HDF5_SAFE_CALL(H5Sget_simple_extent_dims,
+                 "Failed to get dataspace dims. [%d].");
+}
+
+template <class... Args>
+int get_simple_extent_ndims(Args &&... args) {
+  HDF5_SAFE_CALL(H5Sget_simple_extent_ndims,
+                 "Failed to get rank of dataspace. [%d].");
+}
+
 } // namespace H5S
 
 namespace H5T {
@@ -94,6 +141,10 @@ hid_t copy(Args &&... args) {
   HDF5_SAFE_CALL(H5Tcopy, "Failed to copy HDF5 datatype. [%d].");
 }
 
+template <class... Args>
+hid_t close(Args &&... args) {
+  HDF5_SAFE_CALL(H5Tclose, "Failed to close HDF5 datatype. [%d].");
+}
 } // namespace H5T
 
 namespace H5P {
@@ -120,5 +171,5 @@ hid_t set_fapl_mpio(Args &&... args) {
 
 } // namespace H5P
 
-} // namespace tyr
+} // namespace zisa
 #endif /* end of include guard */

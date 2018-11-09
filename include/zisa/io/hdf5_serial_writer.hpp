@@ -41,10 +41,11 @@ public:
   HDF5SerialReader(const std::string &filename);
   virtual ~HDF5SerialReader() = default;
 
-  virtual void *read_array(const HDF5DataType &data_type,
-                           const std::string &tag,
-                           int rank,
-                           hsize_t *const dims) const override;
+  virtual std::vector<hsize_t> dims(const std::string &tag) const override;
+
+  virtual void read_array(void *data,
+                          const HDF5DataType &data_type,
+                          const std::string &tag) const override;
 
   using HDF5Reader::read_scalar;
 
