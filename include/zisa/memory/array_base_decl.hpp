@@ -64,7 +64,7 @@ public:
   }
 
   ANY_DEVICE_INLINE const shape_type &shape() const { return _shape; }
-  ANY_DEVICE_INLINE size_type shape(int k) const { return _shape[k]; }
+  ANY_DEVICE_INLINE size_type shape(size_type k) const { return _shape[k]; }
   ANY_DEVICE_INLINE size_type size() const { return product(_shape); }
 
   ANY_DEVICE_INLINE pointer raw() { return raw_ptr(_array); }

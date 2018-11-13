@@ -22,20 +22,20 @@ struct shape_t {
   ANY_DEVICE_INLINE shape_t(Ints... ints) : _raw_data{ints...} {}
 
   ANY_DEVICE_INLINE
-  Int operator[](int dim) const { return _raw_data[dim]; }
+  Int operator[](int_t dim) const { return _raw_data[dim]; }
 
   ANY_DEVICE_INLINE
-  Int &operator[](int dim) { return _raw_data[dim]; }
+  Int &operator[](int_t dim) { return _raw_data[dim]; }
 
   ANY_DEVICE_INLINE
-  Int operator()(int dim) const { return _raw_data[dim]; }
+  Int operator()(int_t dim) const { return _raw_data[dim]; }
 
   ANY_DEVICE_INLINE
-  Int &operator()(int dim) { return _raw_data[dim]; }
+  Int &operator()(int_t dim) { return _raw_data[dim]; }
 
   ANY_DEVICE_INLINE
   bool operator==(const shape_t &other) const {
-    for (int i = 0; i < n_dims; ++i) {
+    for (int_t i = 0; i < n_dims; ++i) {
       if ((*this)(i) != other(i))
         return false;
     }
@@ -47,7 +47,7 @@ struct shape_t {
   bool operator!=(const shape_t &other) const { return !((*this) == other); }
 
   ANY_DEVICE_INLINE
-  static constexpr int size(void) { return n_dims; }
+  static constexpr int_t size(void) { return n_dims; }
 
 protected:
   Int _raw_data[n_dims];
@@ -56,7 +56,7 @@ protected:
 template <int n_dims, class Int>
 ANY_DEVICE_INLINE Int product(const shape_t<n_dims, Int> &shape) {
   Int nml = 1;
-  for (int k = 0; k < n_dims; ++k) {
+  for (Int k = 0; k < n_dims; ++k) {
     nml *= shape[k];
   }
 

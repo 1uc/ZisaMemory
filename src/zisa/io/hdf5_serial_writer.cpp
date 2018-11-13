@@ -132,7 +132,7 @@ std::vector<hsize_t> HDF5SerialReader::dims(const std::string &tag) const {
   hid_t dataset = open_dataset(tag);
   hid_t dataspace = get_dataspace(dataset);
 
-  auto rank = H5S::get_simple_extent_ndims(dataspace);
+  auto rank = static_cast<int_t> (H5S::get_simple_extent_ndims(dataspace));
   std::vector<hsize_t> dims(rank);
 
   H5S::get_simple_extent_dims(dataspace, &(dims[0]), nullptr);

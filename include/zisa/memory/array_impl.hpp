@@ -25,7 +25,7 @@ void save(const HDF5Writer &writer,
   HDF5DataType data_type = make_hdf5_data_type<T>();
 
   hsize_t h5_dims[n_dims];
-  for (int i = 0; i < n_dims; ++i) {
+  for (int_t i = 0; i < n_dims; ++i) {
     h5_dims[i] = hsize_t(dims(i)); // size of (i, j, k) axes
   }
 
@@ -40,7 +40,7 @@ void load(const HDF5Reader &reader,
   auto dims = reader.dims(tag);
 
   assert(dims.size() == arr.n_dims);
-  for (int i = 0; i < n_dims; ++i) {
+  for (int_t i = 0; i < n_dims; ++i) {
     assert(dims[i] == arr.shape(i));
   }
 
