@@ -169,6 +169,16 @@ hid_t set_fapl_mpio(Args &&... args) {
   HDF5_SAFE_CALL(H5Pset_fapl_mpio, "Failed to close HDF5 property list. [%d].");
 }
 
+template <class... Args>
+hid_t set_chunk(Args &&... args) {
+  HDF5_SAFE_CALL(H5Pset_chunk, "Failed to set chunk. [%d].");
+}
+
+template <class... Args>
+hid_t set_deflate(Args &&... args) {
+  HDF5_SAFE_CALL(H5Pset_deflate, "Failed to set deflate. [%d].");
+}
+
 } // namespace H5P
 
 } // namespace zisa

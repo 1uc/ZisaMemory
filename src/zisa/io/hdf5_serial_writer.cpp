@@ -47,10 +47,10 @@ void HDF5SerialWriter::write_array(void const *const data,
   unsigned int compression_level = 6u;
 
   if (is_chunked) {
-    H5Pset_chunk(properties, rank, &chunks[0]);
+    H5P::set_chunk(properties, rank, &chunks[0]);
   }
   if (is_compressed) {
-    H5Pset_deflate(properties, compression_level);
+    H5P::set_deflate(properties, compression_level);
   }
 
   // set meta data, where the data is say to represent the pressure.
@@ -63,12 +63,12 @@ void HDF5SerialWriter::write_array(void const *const data,
                               H5P_DEFAULT);
 
   // finally, write the data
-  H5Dwrite(dataset, data_type(), H5S_ALL, H5S_ALL, H5P_DEFAULT, data);
+  H5D::write(dataset, data_type(), H5S_ALL, H5S_ALL, H5P_DEFAULT, data);
 
   // close
-  H5Dclose(dataset);
-  H5Sclose(dataspace);
-  H5Pclose(properties);
+  H5D::close(dataset);
+  H5S::close(dataspace);
+  H5P::close(properties);
 }
 
 void HDF5SerialWriter::write_scalar(void const *const data,
@@ -132,7 +132,7 @@ std::vector<hsize_t> HDF5SerialReader::dims(const std::string &tag) const {
   hid_t dataset = open_dataset(tag);
   hid_t dataspace = get_dataspace(dataset);
 
-  auto rank = static_cast<int_t> (H5S::get_simple_extent_ndims(dataspace));
+  auto rank = static_cast<int_t>(H5S::get_simple_extent_ndims(dataspace));
   std::vector<hsize_t> dims(rank);
 
   H5S::get_simple_extent_dims(dataspace, &(dims[0]), nullptr);
@@ -144,15 +144,7 @@ void HDF5SerialReader::read_array(void *data,
                                   const HDF5DataType &data_type,
                                   const std::string &tag) const {
   hid_t dataset = open_dataset(tag);
-  auto status
-      = H5Dread(dataset, data_type(), H5S_ALL, H5S_ALL, H5P_DEFAULT, data);
-
-  if (status < 0) {
-    LOG_ERR(string_format("Failed to read dataset, tag = %s [%s]",
-                          tag.c_str(),
-                          hierarchy().c_str()));
-  }
-
+  H5D::read(dataset, data_type(), H5S_ALL, H5S_ALL, H5P_DEFAULT, data);
   H5D::close(dataset);
 }
 
