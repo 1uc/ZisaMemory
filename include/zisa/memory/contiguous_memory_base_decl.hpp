@@ -19,7 +19,7 @@ public:
   using size_type = typename std::allocator_traits<Allocator>::size_type;
 
 public:
-  contiguous_memory_base() : _raw_data(nullptr), _allocator(nullptr) {}
+  contiguous_memory_base() : _raw_data(nullptr), n_elements(0), _allocator(nullptr) {}
   contiguous_memory_base(size_type n_elements,
                          const Allocator &allocator = Allocator());
   template <class A>
