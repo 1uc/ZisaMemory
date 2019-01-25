@@ -5,8 +5,8 @@
 
 #include "zisa/memory/array_base_decl.hpp"
 #include "zisa/memory/column_major.hpp"
-#include "zisa/memory/row_major.hpp"
 #include "zisa/memory/contiguous_memory.hpp"
+#include "zisa/memory/row_major.hpp"
 #include "zisa/memory/shape.hpp"
 
 namespace zisa {
