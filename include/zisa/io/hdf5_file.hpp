@@ -1,8 +1,8 @@
 #ifndef HDF5_FILE_H_QYUAX
 #define HDF5_FILE_H_QYUAX
 
-#include <string>
 #include <stack>
+#include <string>
 #include <vector>
 
 #include <zisa/io/hdf5.hpp>

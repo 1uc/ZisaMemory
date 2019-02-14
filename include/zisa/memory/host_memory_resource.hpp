@@ -18,12 +18,10 @@ public:
   using pointer = typename super::pointer;
 
 protected:
-  virtual inline pointer do_allocate(size_type n) override {
-    return new T[n];
-  }
+  virtual inline pointer do_allocate(size_type n) override { return new T[n]; }
 
   virtual inline void do_deallocate(pointer ptr, size_type) override {
-    delete [] ptr;
+    delete[] ptr;
   }
 
   virtual inline device_type do_device() const override {

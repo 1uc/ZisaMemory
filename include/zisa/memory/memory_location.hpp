@@ -7,13 +7,10 @@
 
 namespace zisa {
 
-
 template <class T>
 device_type memory_location(const std::allocator<T> &) {
   return device_type::cpu;
 }
 
-
-
-}  // zisa
+} // zisa
 #endif /* end of include guard */
