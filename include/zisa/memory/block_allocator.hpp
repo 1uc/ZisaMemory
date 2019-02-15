@@ -7,6 +7,7 @@
 
 #include <exception>
 #include <memory>
+#include <mutex>
 #include <tuple>
 
 #include <zisa/config.hpp>
@@ -91,8 +92,7 @@ public:
   }
 
   std::tuple<std::size_t, bool> acquire() {
-    // TODO implement thread safety.
-    // acquire a lock.
+    auto lock = std::lock_guard(mutex);
 
     if (free_list.empty()) {
 
@@ -110,15 +110,14 @@ public:
   }
 
   void release(const locked_ptr<T> &ptr) {
-    // TODO implement thread safety.
-    // acquire a lock.
-
+    auto lock = std::lock_guard(mutex);
     free_list.push_back(ptr.index);
   }
 
 private:
   std::vector<int> free_list;
   std::vector<T *> large_block;
+  std::mutex mutex;
 };
 
 } // namespace zisa
