@@ -9,6 +9,7 @@
 #include <memory>
 #include <mutex>
 #include <tuple>
+#include <vector>
 
 #include <zisa/config.hpp>
 
@@ -23,7 +24,7 @@ public:
   locked_ptr() : data(nullptr), index(0), allocator(nullptr) {}
 
   locked_ptr(T *const data,
-             std::size_t index,
+             int_t index,
              std::shared_ptr<block_allocator<T>> allocator)
       : data(data), index(index), allocator(std::move(allocator)) {}
 
@@ -59,7 +60,7 @@ public:
 private:
   T *data;
 
-  std::size_t index;
+  int_t index;
   std::shared_ptr<block_allocator<T>> allocator;
 
   friend class block_allocator<T>;
@@ -69,7 +70,7 @@ template <class T>
 class block_allocator
     : public std::enable_shared_from_this<block_allocator<T>> {
 public:
-  block_allocator(std::size_t max_elements) {
+  block_allocator(int_t max_elements) {
     free_list.reserve(max_elements);
     large_block.reserve(max_elements);
   }
@@ -91,7 +92,7 @@ public:
     return locked_ptr<T>(large_block[index], index, this->shared_from_this());
   }
 
-  std::tuple<std::size_t, bool> acquire() {
+  std::tuple<int_t, bool> acquire() {
     auto lock = std::lock_guard(mutex);
 
     if (free_list.empty()) {
@@ -115,7 +116,7 @@ public:
   }
 
 private:
-  std::vector<int> free_list;
+  std::vector<int_t> free_list;
   std::vector<T *> large_block;
   std::mutex mutex;
 };
