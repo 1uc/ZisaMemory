@@ -18,11 +18,6 @@ template <class Array>
 struct array_traits;
 
 template <class T, class Indexing, class Array, class Shape>
-void save(const HDF5Writer &writer,
-          const array_base<T, Indexing, Array, Shape> &arr,
-          const std::string &tag);
-
-template <class T, class Indexing, class Array, class Shape>
 class array_base {
 public:
   using shape_type = Shape;
@@ -75,10 +70,6 @@ public:
 
   ANY_DEVICE_INLINE pointer end() { return _array.end(); }
   ANY_DEVICE_INLINE const_pointer end() const { return _array.end(); }
-
-  void save(HDF5Writer &writer, const std::string &tag) {
-    zisa::save(writer, *this, tag);
-  }
 
 private:
   Shape _shape;

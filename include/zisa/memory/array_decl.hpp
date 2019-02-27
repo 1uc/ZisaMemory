@@ -45,12 +45,12 @@ array<T, n_dims, Indexing> empty_like(const array<T, n_dims, Indexing> &other) {
 }
 
 template <class T, int n_dims>
-void save(const HDF5Writer &writer,
+void save(HDF5Writer &writer,
           const array<T, n_dims> &arr,
           const std::string &tag);
 
 template <class T, int n_dims>
-void load(const HDF5Reader &reader,
+void load(HDF5Reader &reader,
           array<T, n_dims> &arr,
           const std::string &tag);
 
