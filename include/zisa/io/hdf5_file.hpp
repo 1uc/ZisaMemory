@@ -50,6 +50,11 @@ inline hid_t get_hdf5_data_type<int>(void) {
 }
 
 template <>
+inline hid_t get_hdf5_data_type<unsigned long>(void) {
+  return H5T_NATIVE_ULONG;
+}
+
+template <>
 inline hid_t get_hdf5_data_type<char>(void) {
   return H5T_NATIVE_CHAR;
 }
