@@ -67,18 +67,24 @@ void save(HDF5Writer &writer,
   save(writer, arr, tag, typename array_save_traits<T>::dispatch_tag{});
 }
 
-template <class T, int n_dims>
-void load(HDF5Reader &reader, array<T, n_dims> &arr, const std::string &tag) {
+template <class T, int n_dims, template <int N> class Indexing>
+array<T, n_dims> array<T, n_dims, Indexing>::load(HDF5Reader &reader,
+                                                  const std::string &tag) {
 
   auto dims = reader.dims(tag);
+  auto shape = shape_t<n_dims>{};
 
-  assert(dims.size() == arr.n_dims);
+  LOG_ERR_IF(dims.size() != n_dims, "Dimension mismatch.");
   for (int_t i = 0; i < n_dims; ++i) {
-    assert(dims[i] == arr.shape(i));
+    shape[i] = dims[i];
   }
+
+  auto arr = array<T, n_dims>{shape, device_type::cpu};
 
   auto h5_datatype = make_hdf5_data_type<T>();
   reader.read_array(arr.raw(), h5_datatype, tag);
+
+  return arr;
 }
 } // namespace zisa
 

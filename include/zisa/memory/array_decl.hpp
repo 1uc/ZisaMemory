@@ -36,6 +36,8 @@ public:
   array(const shape_type &shape, device_type device = device_type::cpu);
 
   using super::operator=;
+
+  static array<T, n_dims> load(HDF5Reader &reader, const std::string &tag);
 };
 
 template <class T, int n_dims, template <int N> class Indexing = column_major>
@@ -47,11 +49,6 @@ array<T, n_dims, Indexing> empty_like(const array<T, n_dims, Indexing> &other) {
 template <class T, int n_dims>
 void save(HDF5Writer &writer,
           const array<T, n_dims> &arr,
-          const std::string &tag);
-
-template <class T, int n_dims>
-void load(HDF5Reader &reader,
-          array<T, n_dims> &arr,
           const std::string &tag);
 
 } // namespace zisa
