@@ -5,8 +5,10 @@
 #ifndef HDF5_H_XC8WA
 #define HDF5_H_XC8WA
 
-#include "zisa/config.hpp"
 #include <hdf5.h>
+
+#include <zisa/config.hpp>
+#include <zisa/io/file_manipulation.hpp>
 
 namespace zisa {
 
@@ -62,6 +64,9 @@ hid_t open(char const *const filename, Args &&... args) {
 
 template <class... Args>
 hid_t create(char const *const filename, Args &&... args) {
+
+  zisa::create_directory(zisa::dirname(filename));
+
   auto h5_file = H5Fcreate(filename, std::forward<Args>(args)...);
   LOG_ERR_IF(
       h5_file < 0,
