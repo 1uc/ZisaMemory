@@ -34,7 +34,6 @@ public:
   using super::super;
 
   array(const shape_type &shape, device_type device = device_type::cpu);
-
   using super::operator=;
 
   static array<T, n_dims> load(HDF5Reader &reader, const std::string &tag);
@@ -52,5 +51,4 @@ void save(HDF5Writer &writer,
           const std::string &tag);
 
 } // namespace zisa
-
 #endif /* end of include guard */
