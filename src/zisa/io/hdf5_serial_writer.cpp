@@ -21,7 +21,7 @@ void HDF5SerialWriter::write_array(void const *const data,
   assert(data_type() > 0);
   assert(rank > 0);
 
-  std::size_t urank = static_cast<std::size_t>(rank);
+  auto urank = static_cast<std::size_t>(rank);
 
   // create a simple dataspace for storing an array of fixed size 'dims'.
   hid_t dataspace = H5S::create_simple(rank, dims, nullptr);

@@ -16,7 +16,7 @@ HDF5DataType::HDF5DataType(const hid_t &h5_type, size_t size)
 HDF5DataType::~HDF5DataType() { zisa::H5T::close(h5_type); }
 
 /// Return the HDF5 identifier of the data-type.
-hid_t HDF5DataType::operator()(void) const {
+hid_t HDF5DataType::operator()() const {
   assert(h5_type > 0);
   return h5_type;
 }
@@ -61,7 +61,7 @@ void HDF5File::open_group(const std::string &group_name) {
   path.push_back(group_name);
 }
 
-void HDF5File::close_group(void) {
+void HDF5File::close_group() {
   if (file.size() == 1) {
     LOG_ERR("Closing group, but its a file.");
   }
@@ -105,7 +105,7 @@ hid_t HDF5File::get_dataspace(const hid_t &dataset) const {
   return dataspace;
 }
 
-std::string HDF5File::hierarchy(void) const {
+std::string HDF5File::hierarchy() const {
   return zisa::concatenate(path.begin(), path.end(), "/");
 }
 
