@@ -23,7 +23,7 @@ struct array_save_traits {
 
 template <class T, int n_dims>
 void save(HDF5Writer &writer,
-          const array<T, n_dims> &arr,
+          const array<T, n_dims, row_major> &arr,
           const std::string &tag,
           default_dispatch_tag) {
 
@@ -44,7 +44,7 @@ struct split_array_dispatch_tag {};
 
 template <class T, int n_dims>
 void save(HDF5Writer &writer,
-          const array<T, n_dims> &arr,
+          const array<T, n_dims, row_major> &arr,
           const std::string &tag,
           split_array_dispatch_tag) {
   HDF5DataType data_type = make_hdf5_data_type<double>();
@@ -59,17 +59,20 @@ void save(HDF5Writer &writer,
   writer.write_array((double *)arr.raw(), data_type, tag, rank, h5_dims);
 }
 
-template <class T, int n_dims>
+template <class T, int n_dims, template <int> class Indexing>
 void save(HDF5Writer &writer,
-          const array<T, n_dims> &arr,
+          const array<T, n_dims, Indexing> &arr,
           const std::string &tag) {
 
   save(writer, arr, tag, typename array_save_traits<T>::dispatch_tag{});
 }
 
 template <class T, int n_dims, template <int N> class Indexing>
-array<T, n_dims> array<T, n_dims, Indexing>::load(HDF5Reader &reader,
-                                                  const std::string &tag) {
+array<T, n_dims, row_major>
+array<T, n_dims, Indexing>::load(HDF5Reader &reader, const std::string &tag) {
+
+  static_assert(std::is_same<row_major<n_dims>, Indexing<n_dims>>::value,
+                "This has only been implemented for row-major index order.");
 
   auto dims = reader.dims(tag);
   auto shape = shape_t<n_dims>{};

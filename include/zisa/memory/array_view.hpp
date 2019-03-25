@@ -60,7 +60,7 @@ private:
   T *_ptr;
 };
 
-template <class T, int n_dims, template <int> class Indexing = column_major>
+template <class T, int n_dims, template <int> class Indexing = row_major>
 class array_view : public array_view_base<T, Indexing<n_dims>> {
 private:
   using super = array_view_base<T, Indexing<n_dims>>;
@@ -74,7 +74,7 @@ public:
       : array_view(zisa::shape(other), zisa::raw_ptr(other)) {}
 };
 
-template <class T, int n_dims, template <int> class Indexing = column_major>
+template <class T, int n_dims, template <int> class Indexing = row_major>
 class array_const_view : public array_view_base<const T, Indexing<n_dims>> {
 
 private:

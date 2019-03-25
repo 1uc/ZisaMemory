@@ -13,7 +13,7 @@ namespace zisa {
 
 namespace detail {
 
-template <class T, int n_dims, template <int N> class Indexing = column_major>
+template <class T, int n_dims, template <int N> class Indexing = row_major>
 using array_super_
     = array_base<T,
                  Indexing<n_dims>,
@@ -22,7 +22,7 @@ using array_super_
 
 } // namespace detail
 
-template <class T, int n_dims, template <int N> class Indexing = column_major>
+template <class T, int n_dims, template <int N> class Indexing = row_major>
 class array : public detail::array_super_<T, n_dims, Indexing> {
 private:
   using super = detail::array_super_<T, n_dims, Indexing>;
@@ -36,7 +36,8 @@ public:
   array(const shape_type &shape, device_type device = device_type::cpu);
   using super::operator=;
 
-  static array<T, n_dims> load(HDF5Reader &reader, const std::string &tag);
+  [[nodiscard]] static array<T, n_dims, row_major> load(HDF5Reader &reader,
+                                                        const std::string &tag);
 };
 
 template <class T, int n_dims, template <int N> class Indexing = column_major>
@@ -45,9 +46,9 @@ array<T, n_dims, Indexing> empty_like(const array<T, n_dims, Indexing> &other) {
   return array<T, n_dims, Indexing>(other.shape());
 }
 
-template <class T, int n_dims>
+template <class T, int n_dims, template <int N> class Indexing>
 void save(HDF5Writer &writer,
-          const array<T, n_dims> &arr,
+          const array<T, n_dims, Indexing> &arr,
           const std::string &tag);
 
 } // namespace zisa
