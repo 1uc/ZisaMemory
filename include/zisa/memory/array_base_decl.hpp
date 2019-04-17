@@ -35,13 +35,12 @@ public:
       : _shape(std::move(shape)), _array(std::move(array)) {}
 
   array_base(const array_base &other) = default;
-  array_base(array_base &&other)
-      : _shape(std::move(other._shape)), _array(std::move(other._array)) {}
+  array_base(array_base &&other) noexcept = default;
 
   ~array_base() = default;
 
   array_base &operator=(const array_base &other) = default;
-  array_base &operator=(array_base &&other) = default;
+  array_base &operator=(array_base &&other) noexcept = default;
 
   ANY_DEVICE_INLINE T &operator[](size_type i) { return _array[i]; }
   ANY_DEVICE_INLINE const T &operator[](size_type i) const { return _array[i]; }
@@ -67,9 +66,11 @@ public:
 
   ANY_DEVICE_INLINE pointer begin() { return _array.begin(); }
   ANY_DEVICE_INLINE const_pointer begin() const { return _array.begin(); }
+  ANY_DEVICE_INLINE const_pointer cbegin() const { return _array.cbegin(); }
 
   ANY_DEVICE_INLINE pointer end() { return _array.end(); }
   ANY_DEVICE_INLINE const_pointer end() const { return _array.end(); }
+  ANY_DEVICE_INLINE const_pointer cend() const { return _array.cend(); }
 
 private:
   Shape _shape;

@@ -33,8 +33,16 @@ protected:
 public:
   using super::super;
 
-  array(const shape_type &shape, device_type device = device_type::cpu);
+  array(const array &) = default;
+  array(array &&) noexcept = default;
+
+  explicit array(const shape_type &shape,
+                 device_type device = device_type::cpu);
+
   using super::operator=;
+
+  array &operator=(const array &) = default;
+  array &operator=(array &&) noexcept = default;
 
   [[nodiscard]] static array<T, n_dims, row_major> load(HDF5Reader &reader,
                                                         const std::string &tag);

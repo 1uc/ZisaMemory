@@ -54,35 +54,49 @@ template <class A>
 contiguous_memory_base<T, Allocator>::contiguous_memory_base(
     const contiguous_memory_base<T, A> &other)
     : _raw_data(nullptr), n_elements(0), _allocator(nullptr) {
-  allocate(other.size(), Allocator());
-  copy_construct(*this, other);
+
+  if (other._raw_data != nullptr) {
+    allocate(other.size(), Allocator());
+    copy_construct(*this, other);
+  }
 }
 
 template <class T, class Allocator>
 contiguous_memory_base<T, Allocator>::contiguous_memory_base(
     const contiguous_memory_base<T, Allocator> &other)
     : _raw_data(nullptr), n_elements(0), _allocator(nullptr) {
-  allocate(other.n_elements, *other.allocator());
-  copy_construct(*this, other);
+
+  if (other._raw_data != nullptr) {
+    allocate(other.n_elements, *other.allocator());
+    copy_construct(*this, other);
+  }
 }
 
 template <class T, class Allocator>
 contiguous_memory_base<T, Allocator>::contiguous_memory_base(
-    contiguous_memory_base<T, Allocator> &&other)
+    contiguous_memory_base<T, Allocator> &&other) noexcept
     : _raw_data(nullptr), n_elements(0), _allocator(nullptr) {
 
-  (*this) = std::move(other);
+  if (other._raw_data != nullptr) {
+    (*this) = std::move(other);
+  }
 }
 
 template <class T, class Allocator>
 contiguous_memory_base<T, Allocator>::~contiguous_memory_base() {
-  free();
+  this->free();
 }
 
 template <class T, class Allocator>
 template <class A>
 contiguous_memory_base<T, Allocator> &contiguous_memory_base<T, Allocator>::
 operator=(const contiguous_memory_base<T, A> &other) {
+
+  if (other._raw_data == nullptr) {
+    this->free();
+    return *this;
+  }
+
   resize(other);
   copy(*this, other);
   return *this;
@@ -91,6 +105,11 @@ operator=(const contiguous_memory_base<T, A> &other) {
 template <class T, class Allocator>
 contiguous_memory_base<T, Allocator> &contiguous_memory_base<T, Allocator>::
 operator=(const contiguous_memory_base &other) {
+  if (other._raw_data == nullptr) {
+    this->free();
+    return *this;
+  }
+
   resize(other);
   copy(*this, other);
   return *this;
@@ -98,8 +117,8 @@ operator=(const contiguous_memory_base &other) {
 
 template <class T, class Allocator>
 contiguous_memory_base<T, Allocator> &contiguous_memory_base<T, Allocator>::
-operator=(contiguous_memory_base &&other) {
-  free();
+operator=(contiguous_memory_base &&other) noexcept {
+  this->free();
 
   _raw_data = other._raw_data;
   n_elements = other.n_elements;
@@ -146,6 +165,7 @@ void contiguous_memory_base<T, Allocator>::free_data() {
 
     allocator()->deallocate(_raw_data, n_elements);
     _raw_data = nullptr;
+    n_elements = 0;
   }
 }
 

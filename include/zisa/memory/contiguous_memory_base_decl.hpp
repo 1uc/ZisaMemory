@@ -21,17 +21,17 @@ public:
 public:
   contiguous_memory_base()
       : _raw_data(nullptr), n_elements(0), _allocator(nullptr) {}
-  contiguous_memory_base(size_type n_elements,
-                         const Allocator &allocator = Allocator());
+  explicit contiguous_memory_base(size_type n_elements,
+                                  const Allocator &allocator = Allocator());
   template <class A>
   contiguous_memory_base(const contiguous_memory_base<T, A> &other);
   contiguous_memory_base(const contiguous_memory_base &other);
-  contiguous_memory_base(contiguous_memory_base &&other);
+  contiguous_memory_base(contiguous_memory_base &&other) noexcept;
 
   ~contiguous_memory_base();
 
-  inline contiguous_memory_base &operator=(const contiguous_memory_base &other);
-  inline contiguous_memory_base &operator=(contiguous_memory_base &&other);
+  contiguous_memory_base &operator=(const contiguous_memory_base &other);
+  contiguous_memory_base &operator=(contiguous_memory_base &&other) noexcept;
 
   template <class A>
   inline contiguous_memory_base<T, Allocator> &
@@ -45,9 +45,13 @@ public:
 
   ANY_DEVICE_INLINE pointer begin() { return _raw_data; }
   ANY_DEVICE_INLINE const_pointer begin() const { return _raw_data; }
+  ANY_DEVICE_INLINE const_pointer cbegin() const { return _raw_data; }
 
   ANY_DEVICE_INLINE pointer end() { return _raw_data + n_elements; }
   ANY_DEVICE_INLINE const_pointer end() const { return _raw_data + n_elements; }
+  ANY_DEVICE_INLINE const_pointer cend() const {
+    return _raw_data + n_elements;
+  }
 
   ANY_DEVICE_INLINE size_type size() const { return n_elements; }
 
