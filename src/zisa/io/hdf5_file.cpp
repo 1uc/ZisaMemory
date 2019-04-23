@@ -34,7 +34,7 @@ HDF5File::~HDF5File() {
   }
 
   // the bottom of the stack is a file ID
-  H5Fclose(file.top());
+  zisa::H5F::close(file.top());
   file.pop();
 }
 
@@ -57,6 +57,7 @@ void HDF5File::open_group(const std::string &group_name) {
   }
 
   assert(h5_group > 0); // check for success
+
   file.push(h5_group);
   path.push_back(group_name);
 }

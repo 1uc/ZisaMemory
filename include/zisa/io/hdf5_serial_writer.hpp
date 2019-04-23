@@ -13,7 +13,7 @@ namespace zisa {
 /// Write data to an HDF5 file, serial version.
 class HDF5SerialWriter : public HDF5Writer {
 public:
-  HDF5SerialWriter(const std::string &filename);
+  explicit HDF5SerialWriter(const std::string &filename);
   virtual ~HDF5SerialWriter() = default;
 
   virtual void write_array(void const *const data,
@@ -38,7 +38,7 @@ private:
   using super = HDF5Reader;
 
 public:
-  HDF5SerialReader(const std::string &filename);
+  explicit HDF5SerialReader(const std::string &filename);
   virtual ~HDF5SerialReader() = default;
 
   virtual std::vector<hsize_t> dims(const std::string &tag) const override;
