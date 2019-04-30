@@ -14,6 +14,14 @@ struct array_traits {
   using size_type = typename Array::size_type;
 };
 
+struct default_dispatch_tag {};
+struct split_array_dispatch_tag {};
+
+template <class T>
+struct array_save_traits {
+  using dispatch_tag = default_dispatch_tag;
+};
+
 } // namespace zisa
 
 #endif /* end of include guard */

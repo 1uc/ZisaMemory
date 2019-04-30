@@ -14,13 +14,6 @@ template <class T, int n_dims, template <int N> class Indexing>
 array<T, n_dims, Indexing>::array(const shape_type &shape, device_type device)
     : super(shape, contiguous_memory<T>(product(shape), device)) {}
 
-struct default_dispatch_tag {};
-
-template <class T>
-struct array_save_traits {
-  using dispatch_tag = default_dispatch_tag;
-};
-
 template <class T, int n_dims>
 void save(HDF5Writer &writer,
           const array<T, n_dims, row_major> &arr,
@@ -39,8 +32,6 @@ void save(HDF5Writer &writer,
 
   writer.write_array((T *)data, data_type, tag, n_dims, h5_dims);
 }
-
-struct split_array_dispatch_tag {};
 
 template <class T, int n_dims>
 void save(HDF5Writer &writer,
