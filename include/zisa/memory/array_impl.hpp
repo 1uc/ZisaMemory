@@ -14,22 +14,6 @@ template <class T, int n_dims, template <int N> class Indexing>
 array<T, n_dims, Indexing>::array(const shape_type &shape, device_type device)
     : super(shape, contiguous_memory<T>(product(shape), device)) {}
 
-struct default_dispatch_tag {};
-
-template <class T>
-struct array_save_traits {
-  using dispatch_tag = default_dispatch_tag;
-  using scalar_type = T;
-};
-
-struct bool_dispatch_tag {};
-
-template <>
-struct array_save_traits<bool> {
-  using dispatch_tag = bool_dispatch_tag;
-  using scalar_type = char;
-};
-
 template <class T, int n_dims>
 void save(HDF5Writer &writer,
           const array<T, n_dims, row_major> &arr,
