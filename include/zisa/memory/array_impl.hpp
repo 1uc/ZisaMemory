@@ -9,6 +9,15 @@
 #include "zisa/memory/array_decl.hpp"
 
 namespace zisa {
+template <class T, int n_dims, template <int N> class Indexing>
+array<T, n_dims, Indexing>::array(T *raw_ptr, const shape_type &shape)
+    : super(shape, contiguous_memory<T>(product(shape))) {
+
+  auto n = product(shape);
+  for (int_t i = 0; i < n; ++i) {
+    (*this)[i] = raw_ptr[i];
+  }
+}
 
 template <class T, int n_dims, template <int N> class Indexing>
 array<T, n_dims, Indexing>::array(const shape_type &shape, device_type device)

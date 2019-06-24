@@ -36,6 +36,7 @@ public:
   array(const array &) = default;
   array(array &&) noexcept = default;
 
+  array(T *raw_ptr, const shape_type &shape);
   explicit array(const shape_type &shape,
                  device_type device = device_type::cpu);
 
