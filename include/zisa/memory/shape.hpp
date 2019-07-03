@@ -67,7 +67,7 @@ template <int n, class Int>
 std::ostream &operator<<(std::ostream &os, const shape_t<n, Int> &shape) {
   os << "[";
   for (int i = 0; i < n; ++i) {
-    os << shape(i) << (i != n - 1 ? ", " : "]");
+    os << shape(Int(i)) << (i != n - 1 ? ", " : "]");
   }
 
   return os;
