@@ -54,6 +54,7 @@ public:
   }
 
   ANY_DEVICE_INLINE const shape_type &shape() const { return _shape; }
+  ANY_DEVICE_INLINE size_type shape(size_type i) const { return _shape(i); }
 
 private:
   shape_type _shape;
