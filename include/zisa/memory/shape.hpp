@@ -13,7 +13,7 @@ namespace zisa {
 template <int n_dims, class Int = int_t>
 struct shape_t {
 private:
-  template<class I>
+  template <class I>
   static constexpr Int int_cast(I i) {
     static_assert(std::is_integral<I>::value);
     return Int(i);
@@ -56,6 +56,12 @@ public:
 
   ANY_DEVICE_INLINE
   static constexpr int_t size(void) { return n_dims; }
+
+  ANY_DEVICE_INLINE
+  Int const *raw() const { return _raw_data; }
+
+  ANY_DEVICE_INLINE
+  Int *raw() { return _raw_data; }
 
 protected:
   Int _raw_data[n_dims];

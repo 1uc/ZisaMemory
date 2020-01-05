@@ -39,7 +39,7 @@ public:
   ANY_DEVICE_INLINE T const *raw() const { return _ptr; }
 
   ANY_DEVICE_INLINE T &operator[](size_type i) { return _ptr[i]; }
-  ANY_DEVICE_INLINE T operator[](size_type i) const { return _ptr[i]; }
+  ANY_DEVICE_INLINE const T &operator[](size_type i) const { return _ptr[i]; }
 
   template <class... Ints>
   ANY_DEVICE_INLINE T &operator()(Ints... ints) {
