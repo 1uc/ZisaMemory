@@ -30,16 +30,22 @@ public:
   ANY_DEVICE_INLINE shape_t(Ints... ints) : _raw_data{int_cast(ints)...} {}
 
   ANY_DEVICE_INLINE
-  Int operator[](int_t dim) const { return _raw_data[dim]; }
+  Int operator[](int_t dim) const {
+    assert(dim < n_dims);
+    return _raw_data[dim];
+  }
 
   ANY_DEVICE_INLINE
-  Int &operator[](int_t dim) { return _raw_data[dim]; }
+  Int &operator[](int_t dim) {
+    assert(dim < n_dims);
+    return _raw_data[dim];
+  }
 
   ANY_DEVICE_INLINE
-  Int operator()(int_t dim) const { return _raw_data[dim]; }
+  Int operator()(int_t dim) const { return (*this)[dim]; }
 
   ANY_DEVICE_INLINE
-  Int &operator()(int_t dim) { return _raw_data[dim]; }
+  Int &operator()(int_t dim) { return (*this)[dim]; }
 
   ANY_DEVICE_INLINE
   bool operator==(const shape_t &other) const {
