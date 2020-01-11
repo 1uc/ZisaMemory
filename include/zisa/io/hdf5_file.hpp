@@ -1,6 +1,7 @@
 #ifndef HDF5_FILE_H_QYUAX
 #define HDF5_FILE_H_QYUAX
 
+#include <mutex>
 #include <stack>
 #include <string>
 #include <vector>
@@ -8,6 +9,10 @@
 #include <zisa/io/hdf5.hpp>
 
 namespace zisa {
+
+/// Locks the HDF5 library.
+extern std::mutex hdf5_mutex;
+
 /// Abstraction of the HDF5 data-type macros.
 /** More direct approaches using templates exist, however we intend to
  *  pass the data-type into several functions that would in that case need
@@ -70,8 +75,10 @@ HDF5DataType make_hdf5_data_type(void) {
 
 /// Representation of the current branch of the opened HDF5 file.
 class HDF5File {
+protected:
+  HDF5File() : h5_lock(hdf5_mutex) {}
+
 public:
-  HDF5File() = default;
   virtual ~HDF5File();
 
   /// Open HDF5 group.
@@ -96,6 +103,9 @@ protected:
 protected:
   std::stack<hid_t> file;        ///< HDF5 file/group identifiers (branch)
   std::vector<std::string> path; ///< HDF5 path
+
+private:
+  std::lock_guard<std::mutex> h5_lock;
 };
 
 } // namespace zisa

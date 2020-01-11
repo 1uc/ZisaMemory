@@ -10,6 +10,8 @@
 #include <zisa/io/hdf5.hpp>
 
 namespace zisa {
+std::mutex hdf5_mutex;
+
 HDF5DataType::HDF5DataType(const hid_t &h5_type, size_t size)
     : size(size), h5_type(h5_type) {}
 

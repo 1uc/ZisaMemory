@@ -20,8 +20,11 @@ namespace zisa {
 
 /// Interface for writing data to an HDF5 file.
 class HDF5Writer : public HDF5File {
-public:
+protected:
+  // Aquires a lock on the HDF5 library.
   HDF5Writer() = default;
+
+public:
   virtual ~HDF5Writer() = default;
 
   /// Write a multi-dimensional array to an HDF5 file.
