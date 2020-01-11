@@ -53,13 +53,24 @@ public:
     return (*this)[l];
   }
 
+  ANY_DEVICE_INLINE size_type size() const { return product(_shape); }
+
   ANY_DEVICE_INLINE const shape_type &shape() const { return _shape; }
   ANY_DEVICE_INLINE size_type shape(size_type i) const { return _shape(i); }
+
+  ANY_DEVICE_INLINE T *begin() { return _ptr; }
+  ANY_DEVICE_INLINE T *end() { return _ptr + size(); }
+
+  ANY_DEVICE_INLINE T const *begin() const { return _ptr; }
+  ANY_DEVICE_INLINE T const *end() const { return _ptr + size(); }
 
 private:
   shape_type _shape;
   T *_ptr;
 };
+
+template <class T, int n_dims, template <int> class Indexing = row_major>
+class array_const_view;
 
 template <class T, int n_dims, template <int> class Indexing = row_major>
 class array_view : public array_view_base<T, Indexing<n_dims>> {
@@ -73,9 +84,17 @@ public:
   ANY_DEVICE_INLINE
   array_view(array_base<T, Indexing<n_dims>, Array, Shape> &other)
       : array_view(zisa::shape(other), zisa::raw_ptr(other)) {}
+
+  void copy_data(const array_const_view<T, n_dims, Indexing> &other) {
+    assert((*this).shape() == other.shape());
+
+    if (other.raw() != (*this).raw()) {
+      std::copy(other.begin(), other.end(), (*this).begin());
+    }
+  }
 };
 
-template <class T, int n_dims, template <int> class Indexing = row_major>
+template <class T, int n_dims, template <int> class Indexing>
 class array_const_view : public array_view_base<const T, Indexing<n_dims>> {
 
 private:
@@ -91,8 +110,34 @@ public:
 
   ANY_DEVICE_INLINE
   array_const_view(const array_view<T, n_dims, Indexing> &other)
-      : super(zisa::shape(other), zisa::raw_ptr(other)) {}
+      : super(other.shape(), other.raw()) {}
 };
+
+namespace detail {
+template <class T, int n_dims>
+array_const_view<T, n_dims, row_major>
+slice(const array_const_view<T, n_dims, row_major> &arr, int_t i0, int_t i1) {
+  auto sub_shape = arr.shape();
+  sub_shape[0] = i1 - i0;
+
+  int_t offset = i0 * (product(sub_shape) / (i1 - i0));
+  auto ptr = arr.raw() + offset;
+  return {sub_shape, ptr};
+}
+}
+
+template <class T, int n_dims>
+array_view<T, n_dims, row_major>
+slice(const array_view<T, n_dims, row_major> &arr, int_t i0, int_t i1) {
+  auto const_view = detail::slice(array_const_view(arr), i0, i1);
+  return {const_view.shape(), const_cast<T *>(const_view.raw())};
+}
+
+template <class T, int n_dims>
+array_const_view<T, n_dims, row_major> const_slice(
+    const array_const_view<T, n_dims, row_major> &arr, int_t i0, int_t i1) {
+  return detail::slice(arr, i0, i1);
+}
 
 } // namespace zisa
 #endif /* end of include guard */
