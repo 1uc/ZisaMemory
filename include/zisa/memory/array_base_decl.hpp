@@ -10,6 +10,7 @@
 #include <zisa/loops/range.hpp>
 #include <zisa/memory/array_base_fwd.hpp>
 #include <zisa/memory/array_traits.hpp>
+#include <zisa/utils/integer_cast.hpp>
 
 namespace zisa {
 
@@ -47,15 +48,18 @@ public:
   ANY_DEVICE_INLINE T &operator[](size_type i) { return _array[i]; }
   ANY_DEVICE_INLINE const T &operator[](size_type i) const { return _array[i]; }
 
+  ANY_DEVICE_INLINE T &operator[](int i) { return _array[integer_cast<size_type>(i)]; }
+  ANY_DEVICE_INLINE const T &operator[](int i) const { return _array[integer_cast<size_type>(i)]; }
+
   template <class... Ints>
   ANY_DEVICE_INLINE T &operator()(Ints... ints) {
-    auto l = Indexing::linear_index(shape(), ints...);
+    auto l = Indexing::linear_index(shape(), integer_cast<size_type>(ints)...);
     return (*this)[l];
   }
 
   template <class... Ints>
   ANY_DEVICE_INLINE const T &operator()(Ints... ints) const {
-    auto l = Indexing::linear_index(shape(), ints...);
+    auto l = Indexing::linear_index(shape(), integer_cast<size_type>(ints)...);
     return (*this)[l];
   }
 
