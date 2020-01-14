@@ -20,7 +20,11 @@ private:
   }
 
 public:
-  ANY_DEVICE shape_t() = default;
+  ANY_DEVICE shape_t() {
+    for(int k = 0; k < n_dims; ++k){
+      _raw_data[k] = 0;
+    }
+  }
 
   ANY_DEVICE shape_t(const shape_t &rhs) = default;
 
@@ -62,6 +66,9 @@ public:
 
   ANY_DEVICE_INLINE
   static constexpr int_t size(void) { return n_dims; }
+
+  ANY_DEVICE_INLINE
+  shape_t<1> shape(void) const { return shape_t<1>{n_dims}; }
 
   ANY_DEVICE_INLINE
   Int const *raw() const { return _raw_data; }

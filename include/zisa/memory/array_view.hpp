@@ -80,6 +80,9 @@ private:
 public:
   using super::super;
 
+  ANY_DEVICE_INLINE
+  array_view(const shape_t<n_dims> &shape, T * ptr) : super(shape, ptr) {}
+
   template <class Array, class Shape>
   ANY_DEVICE_INLINE
   array_view(array_base<T, Indexing<n_dims>, Array, Shape> &other)
@@ -102,6 +105,9 @@ private:
 
 public:
   using super::super;
+
+  ANY_DEVICE_INLINE
+  array_const_view(const shape_t<n_dims> &shape, T * ptr) : super(shape, ptr) {}
 
   template <class Array, class Shape>
   ANY_DEVICE_INLINE
