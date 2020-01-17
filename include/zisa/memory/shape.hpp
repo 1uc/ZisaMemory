@@ -12,13 +12,6 @@ namespace zisa {
 
 template <int n_dims, class Int = int_t>
 struct shape_t {
-private:
-  template <class I>
-  static constexpr Int int_cast(I i) {
-    static_assert(std::is_integral<I>::value);
-    return Int(i);
-  }
-
 public:
   ANY_DEVICE shape_t() {
     for(int k = 0; k < n_dims; ++k){
@@ -31,7 +24,7 @@ public:
   template <class... Ints,
             class SFINAE
             = typename std::enable_if<all_integral<Ints...>::value, void>::type>
-  ANY_DEVICE_INLINE shape_t(Ints... ints) : _raw_data{int_cast(ints)...} {}
+  ANY_DEVICE_INLINE shape_t(Ints... ints) : _raw_data{integer_cast<Int>(ints)...} {}
 
   ANY_DEVICE_INLINE
   Int operator[](int_t dim) const {
