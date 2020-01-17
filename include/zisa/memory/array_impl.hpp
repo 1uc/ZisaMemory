@@ -1,7 +1,3 @@
-/*
- *
- */
-
 #ifndef ARRAY_IMPL_H_1WC9M
 #define ARRAY_IMPL_H_1WC9M
 
