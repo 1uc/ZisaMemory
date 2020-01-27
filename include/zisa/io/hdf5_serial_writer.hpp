@@ -56,5 +56,11 @@ public:
   virtual std::string read_string(const std::string &tag) const override;
 };
 
+template<class T, class... Args>
+T load_serial(const std::string &filename, Args&& ...args){
+  auto reader = HDF5SerialReader(filename);
+  return T::load(reader, std::forward<Args>(args)...);
+}
+
 } // namespace zisa
 #endif /* end of include guard: HDF5_SERIAL_WRITER_H_RVN8KWYI */

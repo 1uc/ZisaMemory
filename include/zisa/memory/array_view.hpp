@@ -79,7 +79,7 @@ private:
 
 public:
   ANY_DEVICE_INLINE
-  array_view(const shape_t<n_dims> &shape, T * ptr) : super(shape, ptr) {}
+  array_view(const shape_t<n_dims> &shape, T *ptr) : super(shape, ptr) {}
 
   template <class Array, class Shape>
   ANY_DEVICE_INLINE
@@ -108,7 +108,8 @@ private:
 
 public:
   ANY_DEVICE_INLINE
-  array_const_view(const shape_t<n_dims> &shape, T const * ptr) : super(shape, ptr) {}
+  array_const_view(const shape_t<n_dims> &shape, T const *ptr)
+      : super(shape, ptr) {}
 
   template <class Array, class Shape>
   ANY_DEVICE_INLINE
