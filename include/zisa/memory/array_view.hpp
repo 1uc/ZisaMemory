@@ -86,6 +86,8 @@ public:
   array_view(array_base<T, Indexing<n_dims>, Array, Shape> &other)
       : array_view(zisa::shape(other), zisa::raw_ptr(other)) {}
 
+  array_view(std::vector<T> &v) : array_view(shape_t<1>{v.size()}, v.data()) {}
+
   void copy_data(const array_const_view<T, n_dims, Indexing> &other) {
     assert((*this).shape() == other.shape());
 
@@ -94,6 +96,9 @@ public:
     }
   }
 };
+
+template <class T>
+array_view(std::vector<T> &v)->array_view<T, 1, row_major>;
 
 template <class T, int n_dims, template <int> class Indexing>
 class array_const_view : public array_view_base<const T, Indexing<n_dims>> {
@@ -113,7 +118,13 @@ public:
   ANY_DEVICE_INLINE
   array_const_view(const array_view<T, n_dims, Indexing> &other)
       : super(other.shape(), other.raw()) {}
+
+  array_const_view(std::vector<T> &v)
+      : array_const_view(shape_t<1>{v.size()}, v.data()) {}
 };
+
+template <class T>
+array_const_view(std::vector<T> &v)->array_const_view<T, 1, row_major>;
 
 namespace detail {
 template <class T, int n_dims>
