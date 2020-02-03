@@ -13,11 +13,11 @@ HDF5SerialWriter::HDF5SerialWriter(const std::string &filename) {
   file.push(h5_file);
 }
 
-void HDF5SerialWriter::write_array(void const *const data,
+void HDF5SerialWriter::do_write_array(const void *data,
                                    const HDF5DataType &data_type,
                                    const std::string &tag,
-                                   const int rank,
-                                   hsize_t const *const dims) const {
+                                   int rank,
+                                      const hsize_t *dims) const {
   assert(data_type() > 0);
   assert(rank > 0);
 
@@ -71,7 +71,7 @@ void HDF5SerialWriter::write_array(void const *const data,
   H5P::close(properties);
 }
 
-void HDF5SerialWriter::write_scalar(void const *const data,
+void HDF5SerialWriter::do_write_scalar(const void *data,
                                     const HDF5DataType &data_type,
                                     const std::string &tag) const {
   // create a scalar data space.
@@ -94,7 +94,7 @@ void HDF5SerialWriter::write_scalar(void const *const data,
   H5S::close(dataspace);
 }
 
-void HDF5SerialWriter::write_string(const std::string &data,
+void HDF5SerialWriter::do_write_string(const std::string &data,
                                     const std::string &tag) const {
   // strings can be stored as 1d-arrays of characters.
   // don't forget the null-character at the end of 'data.c_str()'.
@@ -128,7 +128,7 @@ HDF5SerialReader::HDF5SerialReader(const std::string &filename) {
   path.push_back(filename);
 }
 
-std::vector<hsize_t> HDF5SerialReader::dims(const std::string &tag) const {
+std::vector<hsize_t> HDF5SerialReader::do_dims(const std::string &tag) const {
   hid_t dataset = open_dataset(tag);
   hid_t dataspace = get_dataspace(dataset);
 
@@ -140,7 +140,7 @@ std::vector<hsize_t> HDF5SerialReader::dims(const std::string &tag) const {
   return dims;
 }
 
-void HDF5SerialReader::read_array(void *data,
+void HDF5SerialReader::do_read_array(void *data,
                                   const HDF5DataType &data_type,
                                   const std::string &tag) const {
   hid_t dataset = open_dataset(tag);
@@ -148,7 +148,7 @@ void HDF5SerialReader::read_array(void *data,
   H5D::close(dataset);
 }
 
-void HDF5SerialReader::read_scalar(void *const data,
+void HDF5SerialReader::do_read_scalar(void *data,
                                    const HDF5DataType &data_type,
                                    const std::string &tag) const {
   hid_t dataset = open_dataset(tag);
@@ -162,7 +162,7 @@ void HDF5SerialReader::read_scalar(void *const data,
   H5S::close(dataspace);
 }
 
-std::string HDF5SerialReader::read_string(const std::string &tag) const {
+std::string HDF5SerialReader::do_read_string(const std::string &tag) const {
   HDF5DataType data_type = make_hdf5_data_type<char>();
 
   auto length = dims(tag)[0];
