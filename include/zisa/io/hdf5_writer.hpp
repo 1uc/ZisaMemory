@@ -30,7 +30,7 @@ public:
    *  @param data_type  HDF5 data type identifier.
    *  @param tag  Name of the data field in the HDF5 file.
    *  @param rank  Number of dimension of the array.
-   *  @param dims  Size (in byte) of each dimension.
+   *  @param dims  Size (number of elements) of each dimension.
    */
   virtual void write_array(void const *data,
                            const HDF5DataType &data_type,
