@@ -10,7 +10,7 @@
 #include <zisa/io/hdf5.hpp>
 
 namespace zisa {
-std::mutex hdf5_mutex;
+std::recursive_mutex hdf5_mutex;
 
 HDF5DataType::HDF5DataType(const hid_t &h5_type, size_t size)
     : size(size), h5_type(h5_type) {}
@@ -24,11 +24,14 @@ hid_t HDF5DataType::operator()() const {
 }
 
 HDF5DataType make_hdf5_data_type(const hid_t &hdf5_data_type, size_t size) {
+  auto lock = std::lock_guard(hdf5_mutex);
   hid_t h5_type = zisa::H5T::copy(hdf5_data_type);
   return HDF5DataType(h5_type, size);
 }
 
 HDF5File::~HDF5File() {
+  auto lock = std::lock_guard(hdf5_mutex);
+
   // all IDs not on the bottom are group IDs
   while (file.size() > 1) {
     zisa::H5G::close(file.top());
@@ -41,6 +44,8 @@ HDF5File::~HDF5File() {
 }
 
 void HDF5File::open_group(const std::string &group_name) {
+  auto lock = std::lock_guard(hdf5_mutex);
+
   hid_t h5_group = -1;
 
   if (group_name.empty()) {
@@ -65,6 +70,8 @@ void HDF5File::open_group(const std::string &group_name) {
 }
 
 void HDF5File::close_group() {
+  auto lock = std::lock_guard(hdf5_mutex);
+
   if (file.size() == 1) {
     LOG_ERR("Closing group, but its a file.");
   }
@@ -78,15 +85,18 @@ void HDF5File::close_group() {
 }
 
 void HDF5File::switch_group(const std::string &group_name) {
+  auto lock = std::lock_guard(hdf5_mutex);
   close_group();
   open_group(group_name);
 }
 
 bool HDF5File::group_exists(const std::string &group_name) const {
+  auto lock = std::lock_guard(hdf5_mutex);
   return H5Lexists(file.top(), group_name.c_str(), H5P_DEFAULT);
 }
 
 hid_t HDF5File::open_dataset(const std::string &tag) const {
+  auto lock = std::lock_guard(hdf5_mutex);
   hid_t dataset = H5Dopen(file.top(), tag.c_str(), H5P_DEFAULT);
 
   if (dataset < 0) {
@@ -99,6 +109,7 @@ hid_t HDF5File::open_dataset(const std::string &tag) const {
 }
 
 hid_t HDF5File::get_dataspace(const hid_t &dataset) const {
+  auto lock = std::lock_guard(hdf5_mutex);
   hid_t dataspace = H5Dget_space(dataset);
 
   if (dataspace < 0) {

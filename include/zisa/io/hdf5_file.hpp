@@ -11,7 +11,7 @@
 namespace zisa {
 
 /// Locks the HDF5 library.
-extern std::mutex hdf5_mutex;
+extern std::recursive_mutex hdf5_mutex;
 
 /// Abstraction of the HDF5 data-type macros.
 /** More direct approaches using templates exist, however we intend to
@@ -75,9 +75,6 @@ HDF5DataType make_hdf5_data_type(void) {
 
 /// Representation of the current branch of the opened HDF5 file.
 class HDF5File {
-protected:
-  HDF5File() : h5_lock(hdf5_mutex) {}
-
 public:
   virtual ~HDF5File();
 
@@ -103,9 +100,6 @@ protected:
 protected:
   std::stack<hid_t> file;        ///< HDF5 file/group identifiers (branch)
   std::vector<std::string> path; ///< HDF5 path
-
-private:
-  std::lock_guard<std::mutex> h5_lock;
 };
 
 } // namespace zisa
