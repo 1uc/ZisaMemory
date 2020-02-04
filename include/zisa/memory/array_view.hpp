@@ -120,12 +120,12 @@ public:
   array_const_view(const array_view<T, n_dims, Indexing> &other)
       : super(other.shape(), other.raw()) {}
 
-  array_const_view(std::vector<T> &v)
+  array_const_view(const std::vector<T> &v)
       : array_const_view(shape_t<1>{v.size()}, v.data()) {}
 };
 
 template <class T>
-array_const_view(std::vector<T> &v)->array_const_view<T, 1, row_major>;
+array_const_view(const std::vector<T> &v)->array_const_view<T, 1, row_major>;
 
 namespace detail {
 template <class T, int n_dims>
