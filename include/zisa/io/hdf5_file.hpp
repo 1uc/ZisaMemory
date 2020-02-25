@@ -31,7 +31,7 @@ public:
   virtual ~HDF5DataType();
 
   /// Return the HDF5 identifier of the data-type.
-  hid_t operator()(void) const;
+  hid_t operator()() const;
 
 public:
   size_t size; ///< essentially, `sizeof(T)`
@@ -42,25 +42,25 @@ protected:
 
 namespace {
 template <typename T>
-inline hid_t get_hdf5_data_type(void);
+inline hid_t get_hdf5_data_type();
 
 template <>
-inline hid_t get_hdf5_data_type<double>(void) {
+inline hid_t get_hdf5_data_type<double>() {
   return H5T_NATIVE_DOUBLE;
 }
 
 template <>
-inline hid_t get_hdf5_data_type<int>(void) {
+inline hid_t get_hdf5_data_type<int>() {
   return H5T_NATIVE_INT;
 }
 
 template <>
-inline hid_t get_hdf5_data_type<unsigned long>(void) {
+inline hid_t get_hdf5_data_type<unsigned long>() {
   return H5T_NATIVE_ULONG;
 }
 
 template <>
-inline hid_t get_hdf5_data_type<char>(void) {
+inline hid_t get_hdf5_data_type<char>() {
   return H5T_NATIVE_CHAR;
 }
 } // namespace
@@ -69,7 +69,7 @@ HDF5DataType make_hdf5_data_type(const hid_t &hdf5_data_type, size_t size);
 
 /// Return the HDF5 native data-type identifier for `T`.
 template <typename T>
-HDF5DataType make_hdf5_data_type(void) {
+HDF5DataType make_hdf5_data_type() {
   return make_hdf5_data_type(get_hdf5_data_type<T>(), sizeof(T));
 }
 
@@ -82,7 +82,7 @@ public:
   void open_group(const std::string &group_name);
 
   /// Close HDF5 group.
-  void close_group(void);
+  void close_group();
 
   /// Switch HDF5 group.
   void switch_group(const std::string &group_name);
@@ -91,7 +91,7 @@ public:
   bool group_exists(const std::string &group_name) const;
 
   /// Human readable description of the current hierarchy.
-  std::string hierarchy(void) const;
+  std::string hierarchy() const;
 
 protected:
   hid_t open_dataset(const std::string &tag) const;
