@@ -64,8 +64,7 @@ hid_t open(char const *const filename, Args &&... args) {
 
 template <class... Args>
 hid_t create(char const *const filename, Args &&... args) {
-
-  zisa::create_directory(zisa::dirname(filename));
+  zisa::ensure_directory_exists(filename);
 
   auto h5_file = H5Fcreate(filename, std::forward<Args>(args)...);
   LOG_ERR_IF(
