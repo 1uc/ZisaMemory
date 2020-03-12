@@ -3,6 +3,7 @@
 
 #include "zisa/memory/array_base.hpp"
 #include "zisa/memory/array_decl.hpp"
+#include <zisa/grid/cell_flags.hpp>
 
 namespace zisa {
 template <class T, int n_dims, template <int N> class Indexing>
