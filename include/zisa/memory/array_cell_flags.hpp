@@ -29,6 +29,7 @@ void save(HDF5Writer &writer,
       int_arr.begin(),
       [](const CellFlags &cell_flags) { return cell_flags.ghost_cell; });
   save(writer, int_arr, "ghost_cell");
+
   writer.close_group();
 }
 

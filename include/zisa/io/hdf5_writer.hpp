@@ -96,10 +96,6 @@ public:
                   const HDF5DataType &data_type,
                   const std::string &tag) const;
 
-  // read_array
-  // read_scalar
-  // read_string
-
   /// Read a scalar from the HDF5 file.
   /** @param tag Name of the scalar in the HDF5 file.
    */
