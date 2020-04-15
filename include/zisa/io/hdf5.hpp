@@ -110,7 +110,12 @@ hid_t create(Args &&... args) {
 }
 
 template <class... Args>
-hid_t select_hyperslab(Args &&... args) {
+herr_t select_elements(Args &&... args) {
+  HDF5_SAFE_CALL(H5Sselect_elements, "Failed to select HDF5 elements. [%d].");
+}
+
+template <class... Args>
+herr_t select_hyperslab(Args &&... args) {
   HDF5_SAFE_CALL(H5Sselect_hyperslab, "Failed to select HDF5 hyperslab. [%d].");
 }
 
