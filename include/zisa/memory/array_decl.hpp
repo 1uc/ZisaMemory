@@ -1,13 +1,15 @@
 #ifndef ARRAY_H_TH7WE
 #define ARRAY_H_TH7WE
 
-#include "zisa/config.hpp"
+#include <zisa/config.hpp>
 
-#include "zisa/memory/array_base_decl.hpp"
-#include "zisa/memory/column_major.hpp"
-#include "zisa/memory/contiguous_memory.hpp"
-#include "zisa/memory/row_major.hpp"
-#include "zisa/memory/shape.hpp"
+#include <zisa/memory/array_base_decl.hpp>
+#include <zisa/memory/column_major.hpp>
+#include <zisa/memory/contiguous_memory.hpp>
+#include <zisa/memory/row_major.hpp>
+#include <zisa/memory/shape.hpp>
+
+#include <zisa/memory/array_view_fwd.hpp>
 
 namespace zisa {
 
@@ -36,14 +38,18 @@ public:
   array(const array &) = default;
   array(array &&) noexcept = default;
 
+  explicit array(const array_const_view<T, n_dims, Indexing> &other);
+  explicit array(const array_view<T, n_dims, Indexing> &other);
+
   array(T *raw_ptr, const shape_type &shape);
   explicit array(const shape_type &shape,
                  device_type device = device_type::cpu);
 
-  using super::operator=;
-
   array &operator=(const array &) = default;
   array &operator=(array &&) noexcept = default;
+
+  array &operator=(const array_const_view<T, n_dims, Indexing> &);
+  array &operator=(const array_view<T, n_dims, Indexing> &);
 
   [[nodiscard]] static array<T, n_dims, row_major> load(HDF5Reader &reader,
                                                         const std::string &tag);

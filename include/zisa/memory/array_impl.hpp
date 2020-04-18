@@ -20,6 +20,45 @@ template <class T, int n_dims, template <int N> class Indexing>
 array<T, n_dims, Indexing>::array(const shape_type &shape, device_type device)
     : super(shape, contiguous_memory<T>(product(shape), device)) {}
 
+template <class T, int n_dims, template <int N> class Indexing>
+array<T, n_dims, Indexing>::array(
+    const array_const_view<T, n_dims, Indexing> &other)
+    : super(shape, contiguous_memory<T>(product(other.shape()))) {
+  std::copy(other.begin(), other.end(), this->begin());
+}
+
+template <class T, int n_dims, template <int N> class Indexing>
+array<T, n_dims, Indexing>::array(const array_view<T, n_dims, Indexing> &other)
+    : super(shape, contiguous_memory<T>(product(other.shape()))) {
+  std::copy(other.begin(), other.end(), this->begin());
+}
+
+template <class T, int n_dims, template <int N> class Indexing>
+array<T, n_dims, Indexing> &array<T, n_dims, Indexing>::operator=(
+    const array_const_view<T, n_dims, Indexing> &other) {
+
+  if (this->shape() != other.shape()) {
+    (*this) = array<T, n_dims, Indexing>(other.shape());
+  }
+
+  // It's pointing to *all* of this array.
+  if (raw_ptr(*this) == raw_ptr(other)) {
+    return *this;
+  }
+
+  std::copy(other.begin(), other.end(), this->begin());
+
+  return *this;
+}
+
+template <class T, int n_dims, template <int N> class Indexing>
+array<T, n_dims, Indexing> &array<T, n_dims, Indexing>::operator=(
+    const array_view<T, n_dims, Indexing> &other) {
+
+  (*this) = array_const_view(other);
+  return *this;
+}
+
 template <class T, int n_dims>
 void save(HDF5Writer &writer,
           const array<T, n_dims, row_major> &arr,

@@ -1,15 +1,16 @@
 #ifndef ARRAY_VIEW_H_NPPW3
 #define ARRAY_VIEW_H_NPPW3
 
-#include "zisa/config.hpp"
+#include <zisa/config.hpp>
 
-#include "zisa/memory/array.hpp"
-#include "zisa/memory/array_traits.hpp"
-#include "zisa/memory/column_major.hpp"
-#include "zisa/memory/contiguous_memory.hpp"
-#include "zisa/memory/shape.hpp"
-#include "zisa/meta/add_const_if.hpp"
-#include "zisa/meta/if_t.hpp"
+#include <zisa/memory/array.hpp>
+#include <zisa/memory/array_traits.hpp>
+#include <zisa/memory/array_view_fwd.hpp>
+#include <zisa/memory/column_major.hpp>
+#include <zisa/memory/contiguous_memory.hpp>
+#include <zisa/memory/shape.hpp>
+#include <zisa/meta/add_const_if.hpp>
+#include <zisa/meta/if_t.hpp>
 
 namespace zisa {
 
@@ -69,10 +70,7 @@ private:
   T *_ptr;
 };
 
-template <class T, int n_dims, template <int> class Indexing = row_major>
-class array_const_view;
-
-template <class T, int n_dims, template <int> class Indexing = row_major>
+template <class T, int n_dims, template <int> class Indexing>
 class array_view : public array_view_base<T, Indexing<n_dims>> {
 private:
   using super = array_view_base<T, Indexing<n_dims>>;
@@ -151,6 +149,18 @@ template <class T, int n_dims>
 array_const_view<T, n_dims, row_major> const_slice(
     const array_const_view<T, n_dims, row_major> &arr, int_t i0, int_t i1) {
   return detail::slice(arr, i0, i1);
+}
+
+template <class T, class Indexing>
+ANY_DEVICE_INLINE auto raw_ptr(array_view_base<T, Indexing> &a)
+    -> decltype(a.raw()) {
+  return a.raw();
+}
+
+template <class T, class Indexing>
+ANY_DEVICE_INLINE auto raw_ptr(const array_view_base<T, Indexing> &a)
+    -> decltype(a.raw()) {
+  return a.raw();
 }
 
 } // namespace zisa
