@@ -176,7 +176,6 @@ array<T, n_dims, Indexing>::load(HDF5Reader &reader, const std::string &tag) {
 
   return arr;
 }
-
 } // namespace zisa
 
 #endif /* end of include guard */
