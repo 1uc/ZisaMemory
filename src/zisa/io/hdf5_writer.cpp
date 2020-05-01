@@ -41,7 +41,7 @@ void HDF5Reader::read_array(void *data,
                             const HDF5DataType &data_type,
                             const std::string &tag) const {
   auto lock = std::lock_guard(hdf5_mutex);
-  do_read_scalar(data, data_type, tag);
+  do_read_array(data, data_type, tag);
 }
 
 std::vector<hsize_t> HDF5Reader::dims(const std::string &tag) const {

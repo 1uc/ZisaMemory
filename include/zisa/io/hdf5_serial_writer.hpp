@@ -16,6 +16,7 @@ public:
   explicit HDF5SerialWriter(const std::string &filename);
   virtual ~HDF5SerialWriter() = default;
 
+protected:
   virtual void do_write_array(const void *data,
                               const HDF5DataType &data_type,
                               const std::string &tag,
@@ -41,13 +42,12 @@ public:
   explicit HDF5SerialReader(const std::string &filename);
   virtual ~HDF5SerialReader() = default;
 
+protected:
   virtual std::vector<hsize_t> do_dims(const std::string &tag) const override;
 
   virtual void do_read_array(void *data,
                              const HDF5DataType &data_type,
                              const std::string &tag) const override;
-
-  using HDF5Reader::read_scalar;
 
   virtual void do_read_scalar(void *data,
                               const HDF5DataType &data_type,

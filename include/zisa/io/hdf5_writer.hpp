@@ -84,13 +84,13 @@ public:
   std::vector<hsize_t> dims(const std::string &tag) const;
 
   /// Low-level function to read an HDF5 array into memory.
-  /** This will allocate and initialize an array.
+  /** Allocating (and managing) the memory, is job of the caller. One can
+   *  use `dims` to query the size of the HDF5 array.
    *
-   *  @param[out] data  allocated memory of sufficient size.
-   *  @param[in] data_type  HDF5 data type of the data.
-   *  @param[in] tag  Name of the array in the HDF5 file.
-   * dimension.
-   *
+   *  @param[out] data       allocated memory of sufficient size.
+   *  @param[in]  data_type  HDF5 data type of the data.
+   *  @param[in]  tag        Name of the array in the HDF5 file.
+   *                         dimension.
    */
   void read_array(void *data,
                   const HDF5DataType &data_type,
