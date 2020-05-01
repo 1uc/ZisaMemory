@@ -170,12 +170,12 @@ hid_t close(Args &&... args) {
 
 template <class... Args>
 hid_t set_dxpl_mpio(Args &&... args) {
-  HDF5_SAFE_CALL(H5Pset_dxpl_mpio, "Failed to close HDF5 property list. [%d].");
+  HDF5_SAFE_CALL(H5Pset_dxpl_mpio, "Failed `H5Pset_dxpl_mpio. [%d].");
 }
 
 template <class... Args>
 hid_t set_fapl_mpio(Args &&... args) {
-  HDF5_SAFE_CALL(H5Pset_fapl_mpio, "Failed to close HDF5 property list. [%d].");
+  HDF5_SAFE_CALL(H5Pset_fapl_mpio, "Failed `H5Pset_fapl_mpio`. [%d].");
 }
 
 template <class... Args>
