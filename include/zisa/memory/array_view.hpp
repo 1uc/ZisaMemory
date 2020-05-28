@@ -59,11 +59,8 @@ public:
   ANY_DEVICE_INLINE const shape_type &shape() const { return _shape; }
   ANY_DEVICE_INLINE size_type shape(size_type i) const { return _shape(i); }
 
-  ANY_DEVICE_INLINE T *begin() { return _ptr; }
-  ANY_DEVICE_INLINE T *end() { return _ptr + size(); }
-
-  ANY_DEVICE_INLINE T const *begin() const { return _ptr; }
-  ANY_DEVICE_INLINE T const *end() const { return _ptr + size(); }
+  ANY_DEVICE_INLINE T *begin() const { return _ptr; }
+  ANY_DEVICE_INLINE T *end() const { return _ptr + size(); }
 
 private:
   shape_type _shape;
@@ -86,7 +83,11 @@ public:
 
   array_view(std::vector<T> &v) : array_view(shape_t<1>{v.size()}, v.data()) {}
 
-  void copy_data(const array_const_view<T, n_dims, Indexing> &other) {
+  void copy_data(const array_view<T, n_dims, Indexing> &other) const {
+    copy_data(array_const_view(other));
+  }
+
+  void copy_data(const array_const_view<T, n_dims, Indexing> &other) const {
     assert((*this).shape() == other.shape());
 
     if (other.raw() != (*this).raw()) {
