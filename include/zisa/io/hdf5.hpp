@@ -69,7 +69,7 @@ hid_t create(char const *const filename, Args &&... args) {
   auto h5_file = H5Fcreate(filename, std::forward<Args>(args)...);
   LOG_ERR_IF(
       h5_file < 0,
-      string_format("Failed to open file '%s', [%d]", filename, h5_file));
+      string_format("Failed to create file '%s', [%d]", filename, h5_file));
   return h5_file;
 }
 

@@ -97,7 +97,7 @@ public:
 };
 
 template <class T>
-array_view(std::vector<T> &v)->array_view<T, 1, row_major>;
+array_view(std::vector<T> &v) -> array_view<T, 1, row_major>;
 
 template <class T, int n_dims, template <int> class Indexing>
 class array_const_view : public array_view_base<const T, Indexing<n_dims>> {
@@ -124,7 +124,7 @@ public:
 };
 
 template <class T>
-array_const_view(const std::vector<T> &v)->array_const_view<T, 1, row_major>;
+array_const_view(const std::vector<T> &v) -> array_const_view<T, 1, row_major>;
 
 namespace detail {
 template <class T, int n_dims>
