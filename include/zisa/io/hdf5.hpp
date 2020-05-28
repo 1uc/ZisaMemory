@@ -102,6 +102,15 @@ hid_t create(Args &&... args) {
 
 } // namespace H5G
 
+namespace H5L {
+
+template <class... Args>
+herr_t unlink(Args &&... args) {
+  HDF5_SAFE_CALL(H5Ldelete, "Failed to unlink a dataset. [%d]")
+}
+
+}
+
 namespace H5S {
 
 template <class... Args>

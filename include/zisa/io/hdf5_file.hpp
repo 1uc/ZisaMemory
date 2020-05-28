@@ -93,6 +93,11 @@ public:
   /// Human readable description of the current hierarchy.
   std::string hierarchy() const;
 
+  /// Unlink a dataset.
+  void unlink(const std::string &tag) {
+    zisa::H5L::unlink(file.top(), tag.c_str(), H5P_DEFAULT);
+  }
+
 protected:
   hid_t open_dataset(const std::string &tag) const;
   hid_t get_dataspace(const hid_t &dataset) const;
