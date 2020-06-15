@@ -36,33 +36,12 @@ public:
   ANY_DEVICE array_view_base(shape_type shape, T *ptr)
       : _shape(shape), _ptr(ptr) {}
 
-  ANY_DEVICE_INLINE T *raw() { return _ptr; }
-  ANY_DEVICE_INLINE T const *raw() const { return _ptr; }
-
-  ANY_DEVICE_INLINE T &operator[](size_type i) { return _ptr[i]; }
-  ANY_DEVICE_INLINE const T &operator[](size_type i) const { return _ptr[i]; }
-
-  template <class... Ints>
-  ANY_DEVICE_INLINE T &operator()(Ints... ints) {
-    auto l = Indexing::linear_index(shape(), integer_cast<size_type>(ints)...);
-    return (*this)[l];
-  }
-
-  template <class... Ints>
-  ANY_DEVICE_INLINE const T &operator()(Ints... ints) const {
-    auto l = Indexing::linear_index(shape(), integer_cast<size_type>(ints)...);
-    return (*this)[l];
-  }
-
   ANY_DEVICE_INLINE size_type size() const { return product(_shape); }
 
   ANY_DEVICE_INLINE const shape_type &shape() const { return _shape; }
   ANY_DEVICE_INLINE size_type shape(size_type i) const { return _shape(i); }
 
-  ANY_DEVICE_INLINE T *begin() const { return _ptr; }
-  ANY_DEVICE_INLINE T *end() const { return _ptr + size(); }
-
-private:
+protected:
   shape_type _shape;
   T *_ptr;
 };
@@ -71,6 +50,7 @@ template <class T, int n_dims, template <int> class Indexing>
 class array_view : public array_view_base<T, Indexing<n_dims>> {
 private:
   using super = array_view_base<T, Indexing<n_dims>>;
+  using size_type = typename super::size_type;
 
 public:
   ANY_DEVICE_INLINE
@@ -82,6 +62,19 @@ public:
       : array_view(zisa::shape(other), zisa::raw_ptr(other)) {}
 
   array_view(std::vector<T> &v) : array_view(shape_t<1>{v.size()}, v.data()) {}
+
+  ANY_DEVICE_INLINE T *raw() const { return this->_ptr; }
+  ANY_DEVICE_INLINE T &operator[](size_type i) const { return this->_ptr[i]; }
+
+  template <class... Ints>
+  ANY_DEVICE_INLINE T &operator()(Ints... ints) const {
+    auto l = Indexing<n_dims>::linear_index(this->shape(),
+                                            integer_cast<size_type>(ints)...);
+    return (*this)[l];
+  }
+
+  ANY_DEVICE_INLINE T *begin() const { return this->_ptr; }
+  ANY_DEVICE_INLINE T *end() const { return this->_ptr + this->size(); }
 
   void copy_data(const array_view<T, n_dims, Indexing> &other) const {
     copy_data(array_const_view(other));
@@ -104,6 +97,7 @@ class array_const_view : public array_view_base<const T, Indexing<n_dims>> {
 
 private:
   using super = array_view_base<const T, Indexing<n_dims>>;
+  using size_type = typename super::size_type;
 
 public:
   ANY_DEVICE_INLINE
@@ -121,10 +115,25 @@ public:
 
   array_const_view(const std::vector<T> &v)
       : array_const_view(shape_t<1>{v.size()}, v.data()) {}
+
+  ANY_DEVICE_INLINE const T *raw() const { return this->_ptr; }
+  ANY_DEVICE_INLINE const T &operator[](size_type i) const {
+    return this->_ptr[i];
+  }
+
+  template <class... Ints>
+  ANY_DEVICE_INLINE const T &operator()(Ints... ints) const {
+    auto l = Indexing<n_dims>::linear_index(this->shape(),
+                                            integer_cast<size_type>(ints)...);
+    return (*this)[l];
+  }
+
+  ANY_DEVICE_INLINE const T *begin() const { return this->_ptr; }
+  ANY_DEVICE_INLINE const T *end() const { return this->_ptr + this->size(); }
 };
 
 template <class T>
-array_const_view(const std::vector<T> &v) -> array_const_view<T, 1, row_major>;
+array_const_view(const std::vector<T> &) -> array_const_view<T, 1, row_major>;
 
 namespace detail {
 template <class T, int n_dims>
@@ -152,14 +161,14 @@ array_const_view<T, n_dims, row_major> const_slice(
   return detail::slice(arr, i0, i1);
 }
 
-template <class T, class Indexing>
-ANY_DEVICE_INLINE auto raw_ptr(array_view_base<T, Indexing> &a)
+template <class T, int n_dims, template <int> class Indexing>
+ANY_DEVICE_INLINE auto raw_ptr(const array_view<T, n_dims, Indexing> &a)
     -> decltype(a.raw()) {
   return a.raw();
 }
 
-template <class T, class Indexing>
-ANY_DEVICE_INLINE auto raw_ptr(const array_view_base<T, Indexing> &a)
+template <class T, int n_dims, template <int> class Indexing>
+ANY_DEVICE_INLINE auto raw_ptr(const array_const_view<T, n_dims, Indexing> &a)
     -> decltype(a.raw()) {
   return a.raw();
 }
