@@ -55,9 +55,8 @@ public:
                                                         const std::string &tag);
 };
 
-template <class T, int n_dims, template <int N> class Indexing = column_major>
+template <class T, int n_dims, template <int N> class Indexing>
 array<T, n_dims, Indexing> empty_like(const array<T, n_dims, Indexing> &other) {
-
   return array<T, n_dims, Indexing>(other.shape());
 }
 
