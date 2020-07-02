@@ -125,7 +125,7 @@ void HDF5SerialWriter::do_write_string(const std::string &data,
 
 HDF5SerialReader::HDF5SerialReader(const std::string &filename) {
   auto lock = std::lock_guard(hdf5_mutex);
-  hid_t h5_file = H5F::open(filename.c_str(), H5F_ACC_RDWR, H5P_DEFAULT);
+  hid_t h5_file = H5F::open(filename.c_str(), H5F_ACC_RDONLY, H5P_DEFAULT);
 
   file.push(h5_file);
   path.push_back(filename);
