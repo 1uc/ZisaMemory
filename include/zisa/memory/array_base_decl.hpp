@@ -6,8 +6,6 @@
 
 #include <zisa/io/hdf5.hpp>
 #include <zisa/io/hdf5_writer.hpp>
-#include <zisa/loops/for_each.hpp>
-#include <zisa/loops/range.hpp>
 #include <zisa/memory/array_base_fwd.hpp>
 #include <zisa/memory/array_traits.hpp>
 #include <zisa/utils/integer_cast.hpp>
@@ -85,7 +83,11 @@ private:
 
 template <class T, class Indexing, class Array, class Shape>
 void fill(array_base<T, Indexing, Array, Shape> &arr, const T &value) {
-  zisa::for_each(flat_range(arr), [&arr, &value](int_t i) { arr[i] = value; });
+  // TODO move to a library call of some sort.
+  int_t n = arr.size();
+  for(int_t i = 0; i < n; ++i) {
+    arr[i] = value;
+  }
 }
 
 template <class T, class Indexing, class Array, class Shape>
