@@ -36,7 +36,7 @@ target_include_directories(memory PUBLIC
 )
 target_link_libraries(memory PUBLIC memory_dependencies)
 target_link_libraries(memory PUBLIC Zisa::core)
-# target_link_libraries(memory PRIVATE warning_flags)
+# target_link_libraries(memory PRIVATE memory_warning_flags)
 
 # -- clang tidy ----------------------------------------------------------------
 if(CLANG_TIDY_EXE)
@@ -60,7 +60,9 @@ install(
 
 add_library(Zisa::memory ALIAS memory)
 install(
-  TARGETS memory memory_dependencies
+  TARGETS memory
+          memory_dependencies
+          memory_warning_flags
   EXPORT ZisaMemoryTargets
   )
 include(GNUInstallDirs)
@@ -81,7 +83,7 @@ set_target_properties(memory_unit_tests PROPERTIES CXX_STANDARD 17)
 target_include_directories(memory_unit_tests PUBLIC test)
 target_link_libraries(memory_unit_tests PUBLIC Zisa::memory Catch2::Catch2)
 target_link_libraries(memory_unit_tests PUBLIC Catch2::Catch2)
-target_link_libraries(memory_unit_tests PRIVATE warning_flags)
+target_link_libraries(memory_unit_tests PRIVATE memory_warning_flags)
 
 enable_testing()
 add_test(NAME UnitTests COMMAND unit_tests)
