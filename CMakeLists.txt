@@ -28,7 +28,7 @@ endif()
 find_package(ZisaCore)
 
 # -- memory --------------------------------------------------------------------
-add_library(memory STATIC)
+add_library(memory SHARED)
 set_target_properties(memory PROPERTIES CXX_STANDARD 17)
 target_include_directories(memory PUBLIC
   $<BUILD_INTERFACE:${ZisaMemory_SOURCE_DIR}/include>
