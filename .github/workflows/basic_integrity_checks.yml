@@ -45,6 +45,10 @@ jobs:
         run: |
           sudo apt-get install -y openmpi-bin libopenmpi-dev
 
+      - name: Install HDF5
+        run: |
+          sudo apt-get install -y libhdf5-serial-dev
+
       - name: Install conan
         run: |
           pip3 install wheel setuptools
@@ -58,8 +62,7 @@ jobs:
       - name: Configure build
         run: |
           export INSTALL_DIR=$(bin/install_dir.sh ${CC} ${HOME}/${REL_INSTALL_ROOT})
-          mkdir build
-          cd build
+          mkdir build && cd build
           cmake -DCMAKE_INSTALL_PREFIX=${INSTALL_DIR}/zisa \
                 -DCMAKE_PREFIX_PATH=${INSTALL_DIR}/zisa/lib/cmake/zisa \
                 -DCMAKE_PROJECT_ZisaMemory_INCLUDE=${INSTALL_DIR}/conan/conan_paths.cmake \
