@@ -15,8 +15,8 @@ jobs:
 
     strategy:
       matrix:
-        compiler: [[gcc, g++], [clang, clang++]]
-        zisa_has_mpi: [0, 1]
+        compiler: [[gcc, g++]]
+        zisa_has_mpi: [0]
 
     env:
       COMPILER: ${{ matrix.compiler[0] }}
@@ -35,9 +35,8 @@ jobs:
 
         run: |
           mkdir -p ${HOME}/.ssh
-          echo "${ZISA_CI_SSH_KEY}" > ${HOME}/.ssh/id_ed25519
-          chmod 700 ${HOME}/.ssh/id_ed25519
-          cat ${HOME}/.ssh/id_ed25519
+          echo "${ZISA_CORE_SSH_KEY}" > ${HOME}/.ssh/id_ed25519_core
+          chmod 700 ${HOME}/.ssh/id_ed25519_core
 
       - name: Install MPI
         if: matrix.zisa_has_mpi == 1
