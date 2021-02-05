@@ -23,6 +23,13 @@ if(ZISA_LOG_LEVEL)
   target_compile_definitions(memory_dependencies INTERFACE ZISA_LOG_LEVEL=${ZISA_LOG_LEVEL})
 endif()
 
+# This component does not actually require MPI. However, the core header
+# libraries depend on the value of `ZISA_HAS_MPI`.
+if(ZISA_HAS_MPI)
+  target_compile_definitions(memory_dependencies INTERFACE ZISA_HAS_MPI=1)
+endif()
+
+
 # -- Zisa ----------------------------------------------------------------------
 # -- core ----------------------------------------------------------------------
 find_package(ZisaCore)
