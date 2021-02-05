@@ -31,7 +31,7 @@ jobs:
 
       - name: Install SSH key
         env:
-          ZISA_CI_SSH_KEY: ${{ secrets.ZISA_CI_SSH_KEY }}
+          ZISA_CORE_SSH_KEY: ${{ secrets.ZISA_CORE_SSH_KEY }}
 
         run: |
           mkdir -p ${HOME}/.ssh
