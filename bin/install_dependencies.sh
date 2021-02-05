@@ -40,14 +40,11 @@ fi
 mkdir -p ${source_dir}
 for dep in "${zisa_dependencies[@]}"
 do
-    echo ${src_dir}
     src_dir=${source_dir}/$dep
     git clone git@github.com:1uc/${dep}.git ${src_dir}
 
     mkdir -p ${src_dir}/build-dep
     cd ${src_dir}/build-dep
-
-    echo ${install_dir}
 
     cmake -DCMAKE_INSTALL_PREFIX=${install_dir}/zisa \
           -DCMAKE_PREFIX_PATH=${install_dir}/zisa/lib/cmake/zisa \
@@ -59,3 +56,6 @@ do
     cmake --build .
     cmake --install .
 done
+
+echo "The dependencies were installed at"
+echo "    ${install_dir}"
