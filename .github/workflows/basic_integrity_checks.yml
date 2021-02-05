@@ -16,7 +16,7 @@ jobs:
     strategy:
       matrix:
         compiler: [[gcc, g++], [clang, clang++]]
-        zisa_has_mpi: [0]
+        zisa_has_mpi: [0, 1]
 
     env:
       ZISA_COMPONENT: ZisaMemory
