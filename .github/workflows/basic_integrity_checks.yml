@@ -15,7 +15,7 @@ jobs:
 
     strategy:
       matrix:
-        compiler: [[gcc, g++]]
+        compiler: [[gcc, g++], [clang, clang++]]
         zisa_has_mpi: [0]
 
     env:
@@ -29,7 +29,7 @@ jobs:
       # Checks-out the repository.
       - uses: actions/checkout@v2
 
-      - name: Install SSH key
+      - name: Obtain access to private repos.
         env:
           ZISA_CORE_SSH_KEY: ${{ secrets.ZISA_CORE_SSH_KEY }}
 
