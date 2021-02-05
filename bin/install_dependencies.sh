@@ -54,7 +54,7 @@ do
           -DCMAKE_BUILD_TYPE=Release \
           ..
 
-    cmake --build .
+    cmake --build --parallel $(nproc) .
     cmake --install .
 done
 
