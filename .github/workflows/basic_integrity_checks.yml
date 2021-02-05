@@ -21,7 +21,7 @@ jobs:
     env:
       COMPILER: ${{ matrix.compiler[0] }}
       ZISA_HAS_MPI: ${{ matrix.zisa_has_mpi }}
-      INSTALL_ROOT: ${HOME}/zisa_dependencies
+      INSTALL_ROOT: ${{ env.HOME }}/zisa_dependencies
       CC: ${{ matrix.compiler[0] }}
       CXX: ${{ matrix.compiler[1] }}
 
