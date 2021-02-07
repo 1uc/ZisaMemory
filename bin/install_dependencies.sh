@@ -28,7 +28,6 @@ zisa_memory_root=$(realpath $(dirname $(readlink -f $0))/..)
 
 install_dir=$(${zisa_memory_root}/bin/install_dir.sh $1 $2 --zisa_has_mpi=${ZISA_HAS_MPI})
 source_dir=${install_dir}/sources
-
 conan_file=${zisa_memory_root}/conanfile.txt
 
 if [[ -f $conan_file ]]
@@ -41,7 +40,25 @@ mkdir -p ${source_dir}
 for dep in "${zisa_dependencies[@]}"
 do
     src_dir=${source_dir}/$dep
-    git clone git@github.com:1uc/${dep}.git ${src_dir}
+    repo_url=git@github.com:1uc/${dep}.git
+
+    # If necessary and reasonable remove ${src_dir}.
+    if [[ -d ${src_dir} ]]
+    then
+        cd ${src_dir}
+
+        if [[ -z $(git remote -v 2>/dev/null | grep ${repo_url}) ]]
+        then
+            echo "Failed to install ${dep} to ${src_dir}"
+            exit -1
+
+        else
+            cd ${HOME}
+            rm -rf ${src_dir}
+        fi
+    fi
+
+    git clone ${repo_url} ${src_dir}
 
     mkdir -p ${src_dir}/build-dep
     cd ${src_dir}/build-dep
