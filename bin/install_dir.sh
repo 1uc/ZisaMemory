@@ -1,5 +1,7 @@
 #! /usr/bin/env bash
 
+set -e
+
 if [[ "$#" -lt 2 ]]
 then
     echo "Usage: $0 COMPILER DESTINATION [--zisa_has_mpi=ZISA_HAS_MPI]"
@@ -21,16 +23,13 @@ then
     ZISA_HAS_MPI=0
 fi
 
+compiler="$1"
+compiler_id="$(basename "${compiler}")"
+compiler_version="$("$compiler" -dumpversion)"
 
-component_name="ZisaMemory"
+build_sha="$(echo "${compiler}__${compiler_version}__ZISA_HAS_MPI=${ZISA_HAS_MPI}" | sha1sum | head -c 6)"
 
-compiler=$1
-compiler_id=$(basename ${compiler})
-compiler_version=$($compiler -dumpversion)
-
-read -r build_sha junk <<< "$(echo "${compiler}__${compiler_version}__ZISA_HAS_MPI=${ZISA_HAS_MPI}" | sha1sum)"
-
-install_root=$2
-install_dir=${install_root}/${component_name}/${build_sha}
+install_root="${PWD}/$2"
+install_dir="${install_root}/${build_sha}"
 
 echo ${install_dir}

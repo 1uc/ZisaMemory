@@ -26,6 +26,11 @@ zisa_dependencies=("ZisaCore")
 
 zisa_memory_root=$(realpath $(dirname $(readlink -f $0))/..)
 
+CC="$1"
+CXX="$(${zisa_memory_root}/bin/cc2cxx.sh $CC)"
+compiler_version=$("${CC}" -dumpversion)
+short_compiler_version=${compiler_version%.[0-9]*}
+
 install_dir=$(${zisa_memory_root}/bin/install_dir.sh $1 $2 --zisa_has_mpi=${ZISA_HAS_MPI})
 source_dir=${install_dir}/sources
 conan_file=${zisa_memory_root}/conanfile.txt
@@ -33,7 +38,9 @@ conan_file=${zisa_memory_root}/conanfile.txt
 if [[ -f $conan_file ]]
 then
    mkdir -p ${install_dir}/conan && cd ${install_dir}/conan
-   conan install $conan_file -s compiler.libcxx=libstdc++11
+   conan install $conan_file \
+         -s compiler=$(basename "${CC}") \
+         -s compiler.libcxx=libstdc++11
 fi
 
 mkdir -p ${source_dir}
@@ -67,6 +74,8 @@ do
           -DCMAKE_PREFIX_PATH=${install_dir}/zisa/lib/cmake/zisa \
           -DCMAKE_MODULE_PATH=${install_dir}/conan \
           -DCMAKE_PROJECT_${dep}_INCLUDE=${install_dir}/conan/conan_paths.cmake \
+          -DCMAKE_C_COMPILER=${CC} \
+          -DCMAKE_CXX_COMPILER=${CXX} \
           -DZISA_HAS_MPI=${ZISA_HAS_MPI} \
           -DCMAKE_BUILD_TYPE=Release \
           ..
@@ -76,4 +85,13 @@ do
 done
 
 echo "The dependencies were installed at"
-echo "    ${install_dir}"
+echo "    export DEP_DIR=${install_dir}"
+echo ""
+echo "Use"
+echo "    cmake -DCMAKE_PROJECT_${component_name}_INCLUDE=${install_dir}/conan/conan_paths.cmake \\ "
+echo "          -DCMAKE_MODULE_PATH=${install_dir}/conan \\ "
+echo "          -DCMAKE_PREFIX_PATH=${install_dir}/zisa/lib/cmake/zisa \\ "
+echo "          -DCMAKE_C_COMPILER=${CC} \\ "
+echo "          -DCMAKE_CXX_COMPILER=${CXX} \\ "
+echo "          -DZISA_HAS_MPI=${ZISA_HAS_MPI} \\ "
+echo "          REMAINING_ARGS "
