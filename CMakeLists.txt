@@ -32,6 +32,10 @@ if(ZISA_HAS_MPI)
   target_compile_definitions(memory_dependencies INTERFACE ZISA_HAS_MPI=1)
 endif()
 
+if(ZISA_HAS_CUDA)
+  target_compile_definitions(memory_dependencies INTERFACE ZISA_HAS_CUDA=1)
+endif()
+
 
 # -- Zisa ----------------------------------------------------------------------
 # -- core ----------------------------------------------------------------------
@@ -69,6 +73,7 @@ target_sources(memory PRIVATE $<TARGET_OBJECTS:memory_generic_obj>)
 
 if(ZISA_HAS_CUDA)
   target_sources(memory PRIVATE $<TARGET_OBJECTS:memory_cuda_obj>)
+  set_target_properties(memory PROPERTIES CUDA_RESOLVE_DEVICE_SYMBOLS ON)
 endif()
 
 
@@ -122,6 +127,9 @@ find_package(Catch2 REQUIRED)
 add_executable(memory_unit_tests "")
 set_target_properties(memory_unit_tests PROPERTIES OUTPUT_NAME unit_tests)
 set_target_properties(memory_unit_tests PROPERTIES CXX_STANDARD 17)
+if(ZISA_HAS_CUDA)
+  set_target_properties(memory_unit_tests PROPERTIES CUDA_STANDARD 11)
+endif()
 target_include_directories(memory_unit_tests PUBLIC test)
 target_link_libraries(memory_unit_tests PUBLIC Zisa::memory Catch2::Catch2)
 target_link_libraries(memory_unit_tests PUBLIC Catch2::Catch2)
