@@ -93,7 +93,7 @@ public:
   ANY_DEVICE_INLINE T *end() const { return this->_ptr + this->size(); }
 
   void copy_data(const array_view<T, n_dims, Indexing> &other) const {
-    copy_data(array_const_view(other));
+    copy_data(array_const_view<T, n_dims, Indexing>(other));
   }
 
   void copy_data(const array_const_view<T, n_dims, Indexing> &other) const {
@@ -106,8 +106,10 @@ public:
   }
 };
 
+#ifndef __CUDACC__
 template <class T>
 array_view(std::vector<T> &v) -> array_view<T, 1, row_major>;
+#endif
 
 template <class T, int n_dims, template <int> class Indexing>
 class array_const_view : public array_view_base<const T, Indexing<n_dims>> {
@@ -153,8 +155,10 @@ public:
   ANY_DEVICE_INLINE const T *end() const { return this->_ptr + this->size(); }
 };
 
+#ifndef __CUDACC__
 template <class T>
 array_const_view(const std::vector<T> &) -> array_const_view<T, 1, row_major>;
+#endif
 
 namespace detail {
 template <class T, int n_dims>
@@ -172,7 +176,8 @@ slice(const array_const_view<T, n_dims, row_major> &arr, int_t i0, int_t i1) {
 template <class T, int n_dims>
 array_view<T, n_dims, row_major>
 slice(const array_view<T, n_dims, row_major> &arr, int_t i0, int_t i1) {
-  auto const_view = detail::slice(array_const_view(arr), i0, i1);
+  auto const_view
+      = detail::slice(array_const_view<T, n_dims, row_major>(arr), i0, i1);
   return {const_view.shape(), const_cast<T *>(const_view.raw())};
 }
 
