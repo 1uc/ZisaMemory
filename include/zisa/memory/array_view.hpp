@@ -33,18 +33,28 @@ protected:
   using shape_type = shape_t<indexing_traits<Indexing>::n_dims, size_type>;
 
 public:
-  ANY_DEVICE array_view_base(shape_type shape, T *ptr)
-      : _shape(shape), _ptr(ptr) {}
+  ANY_DEVICE array_view_base(shape_type shape, T *ptr, device_type mem_location)
+      : _shape(shape), _ptr(ptr), _mem_location(mem_location) {}
 
   ANY_DEVICE_INLINE size_type size() const { return product(_shape); }
 
   ANY_DEVICE_INLINE const shape_type &shape() const { return _shape; }
   ANY_DEVICE_INLINE size_type shape(size_type i) const { return _shape(i); }
 
+  ANY_DEVICE_INLINE device_type memory_location() const {
+    return _mem_location;
+  }
+
 protected:
   shape_type _shape;
   T *_ptr;
+  device_type _mem_location;
 };
+
+template <class T, class Indexing>
+device_type memory_location(const array_view_base<T, Indexing> &view) {
+  return view.memory_location();
+}
 
 template <class T, int n_dims, template <int> class Indexing>
 class array_view : public array_view_base<T, Indexing<n_dims>> {
@@ -54,14 +64,20 @@ private:
 
 public:
   ANY_DEVICE_INLINE
-  array_view(const shape_t<n_dims> &shape, T *ptr) : super(shape, ptr) {}
+  array_view(const shape_t<n_dims> &shape,
+             T *ptr,
+             device_type mem_location = device_type::unknown)
+      : super(shape, ptr, mem_location) {}
 
   template <class Array, class Shape>
   ANY_DEVICE_INLINE
   array_view(array_base<T, Indexing<n_dims>, Array, Shape> &other)
-      : array_view(zisa::shape(other), zisa::raw_ptr(other)) {}
+      : array_view(zisa::shape(other),
+                   zisa::raw_ptr(other),
+                   zisa::memory_location(other)) {}
 
-  array_view(std::vector<T> &v) : array_view(shape_t<1>{v.size()}, v.data()) {}
+  array_view(std::vector<T> &v)
+      : array_view(shape_t<1>{v.size()}, v.data(), device_type::cpu) {}
 
   ANY_DEVICE_INLINE T *raw() const { return this->_ptr; }
   ANY_DEVICE_INLINE T &operator[](size_type i) const { return this->_ptr[i]; }
@@ -82,6 +98,7 @@ public:
 
   void copy_data(const array_const_view<T, n_dims, Indexing> &other) const {
     assert((*this).shape() == other.shape());
+    LOG_ERR_IF(this->memory_location() != device_type::cpu, "Implement this.");
 
     if (other.raw() != (*this).raw()) {
       std::copy(other.begin(), other.end(), (*this).begin());
@@ -101,20 +118,24 @@ private:
 
 public:
   ANY_DEVICE_INLINE
-  array_const_view(const shape_t<n_dims> &shape, T const *ptr)
-      : super(shape, ptr) {}
+  array_const_view(const shape_t<n_dims> &shape,
+                   T const *ptr,
+                   device_type mem_location = device_type::unknown)
+      : super(shape, ptr, mem_location) {}
 
   template <class Array, class Shape>
   ANY_DEVICE_INLINE
   array_const_view(const array_base<T, Indexing<n_dims>, Array, Shape> &other)
-      : array_const_view(zisa::shape(other), zisa::raw_ptr(other)) {}
+      : array_const_view(zisa::shape(other),
+                         zisa::raw_ptr(other),
+                         zisa::memory_location(other)) {}
 
   ANY_DEVICE_INLINE
   array_const_view(const array_view<T, n_dims, Indexing> &other)
-      : super(other.shape(), other.raw()) {}
+      : super(other.shape(), other.raw(), zisa::memory_location(other)) {}
 
   array_const_view(const std::vector<T> &v)
-      : array_const_view(shape_t<1>{v.size()}, v.data()) {}
+      : array_const_view(shape_t<1>{v.size()}, v.data(), device_type::cpu) {}
 
   ANY_DEVICE_INLINE const T *raw() const { return this->_ptr; }
   ANY_DEVICE_INLINE const T &operator[](size_type i) const {
