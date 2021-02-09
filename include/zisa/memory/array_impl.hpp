@@ -54,7 +54,7 @@ template <class T, int n_dims, template <int N> class Indexing>
 array<T, n_dims, Indexing> &array<T, n_dims, Indexing>::operator=(
     const array_view<T, n_dims, Indexing> &other) {
 
-  (*this) = array_const_view(other);
+  (*this) = array_const_view<T, n_dims, Indexing>(other);
   return *this;
 }
 
