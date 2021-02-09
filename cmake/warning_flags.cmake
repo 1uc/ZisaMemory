@@ -3,15 +3,15 @@
 macro(host_compiler_flags)
   target_compile_options(memory_warning_flags
     INTERFACE
-    $<$<BUILD_INTERFACE:$<COMPILE_LANGUAGE:CXX>>:${ARGV1}>
-    $<$<BUILD_INTERFACE:$<COMPILE_LANGUAGE:CUDA>>:-Xcompiler=${ARGV1}>
+    $<BUILD_INTERFACE:$<$<COMPILE_LANGUAGE:CXX>:${ARGV}>>
+    $<BUILD_INTERFACE:$<$<COMPILE_LANGUAGE:CUDA>:-Xcompiler=${ARGV}>>
     )
 endmacro()
 
 macro(nvcc_compiler_flags)
   target_compile_options(memory_warning_flags
     INTERFACE
-    $<$<BUILD_INTERFACE:$<COMPILE_LANGUAGE:CUDA>>:${ARGV1}>
+    $<$<BUILD_INTERFACE:$<COMPILE_LANGUAGE:CUDA>>:${ARGV}>
     )
 endmacro()
 
@@ -27,13 +27,13 @@ if(NOT TARGET warning_flags)
     if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
       host_compiler_flags(-fmax-errors=${ZISA_MAX_ERRORS})
     elseif(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
-      assert(ZISA_HAS_CUDA == 0)
+      assert(${ZISA_HAS_CUDA} == 0)
       target_compile_options(memory_warning_flags INTERFACE -ferror-limit=${ZISA_MAX_ERRORS})
     endif()
   endif()
 
   if(ZISA_HAS_CUDA)
-    nvcc_compiler_flags("--Werror cross-execution-space-call")
+    nvcc_compiler_flags(-Werror cross-execution-space-call)
   endif()
 else()
   target_link_libraries(memory_warning_flags INTERFACE warning_flags)
