@@ -34,6 +34,10 @@ endif()
 
 if(ZISA_HAS_CUDA)
   target_compile_definitions(memory_dependencies INTERFACE ZISA_HAS_CUDA=1)
+  target_compile_options(memory_dependencies INTERFACE
+    $<BUILD_INTERFACE:$<$<COMPILE_LANGUAGE:CUDA>:--expt-relaxed-constexpr>>
+  )
+
 endif()
 
 
