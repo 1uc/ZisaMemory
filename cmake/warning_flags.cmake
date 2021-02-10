@@ -1,5 +1,4 @@
 # -- Flags ---------------------------------------------------------------------
-
 macro(host_compiler_flags)
   target_compile_options(memory_warning_flags
     INTERFACE

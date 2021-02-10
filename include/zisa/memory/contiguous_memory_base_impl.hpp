@@ -5,6 +5,7 @@
 
 #include "zisa/config.hpp"
 #include "zisa/memory/device_type.hpp"
+#include "zisa/memory/fill.hpp"
 #include "zisa/memory/memory_location.hpp"
 
 namespace zisa {
@@ -89,8 +90,9 @@ contiguous_memory_base<T, Allocator>::~contiguous_memory_base() {
 
 template <class T, class Allocator>
 template <class A>
-contiguous_memory_base<T, Allocator> &contiguous_memory_base<T, Allocator>::
-operator=(const contiguous_memory_base<T, A> &other) {
+contiguous_memory_base<T, Allocator> &
+contiguous_memory_base<T, Allocator>::operator=(
+    const contiguous_memory_base<T, A> &other) {
 
   if (other._raw_data == nullptr) {
     this->free();
@@ -103,8 +105,9 @@ operator=(const contiguous_memory_base<T, A> &other) {
 }
 
 template <class T, class Allocator>
-contiguous_memory_base<T, Allocator> &contiguous_memory_base<T, Allocator>::
-operator=(const contiguous_memory_base &other) {
+contiguous_memory_base<T, Allocator> &
+contiguous_memory_base<T, Allocator>::operator=(
+    const contiguous_memory_base &other) {
   if (other._raw_data == nullptr) {
     this->free();
     return *this;
@@ -116,8 +119,9 @@ operator=(const contiguous_memory_base &other) {
 }
 
 template <class T, class Allocator>
-contiguous_memory_base<T, Allocator> &contiguous_memory_base<T, Allocator>::
-operator=(contiguous_memory_base &&other) noexcept {
+contiguous_memory_base<T, Allocator> &
+contiguous_memory_base<T, Allocator>::operator=(
+    contiguous_memory_base &&other) noexcept {
   this->free();
 
   _raw_data = other._raw_data;
@@ -132,15 +136,15 @@ operator=(contiguous_memory_base &&other) noexcept {
 }
 
 template <class T, class Allocator>
-ANY_DEVICE_INLINE T &contiguous_memory_base<T, Allocator>::
-operator[](size_type i) {
+ANY_DEVICE_INLINE T &
+contiguous_memory_base<T, Allocator>::operator[](size_type i) {
   assert(i < size());
   return _raw_data[i];
 }
 
 template <class T, class Allocator>
-ANY_DEVICE_INLINE const T &contiguous_memory_base<T, Allocator>::
-operator[](size_type i) const {
+ANY_DEVICE_INLINE const T &
+contiguous_memory_base<T, Allocator>::operator[](size_type i) const {
   assert(i < size());
   return _raw_data[i];
 }
@@ -207,6 +211,24 @@ bool contiguous_memory_base<T, Allocator>::resize(
 }
 template <class T, class Allocator>
 void contiguous_memory_base<T, Allocator>::default_construct() {
+  if constexpr (std::is_trivially_copyable<T>::value) {
+    trivial_default_construct();
+  } else {
+    full_default_construct();
+  }
+}
+
+template <class T, class Allocator>
+void contiguous_memory_base<T, Allocator>::trivial_default_construct() {
+  static_assert(std::is_trivially_copyable<T>::value,
+                "Is not trivially copyable.");
+
+  zisa::fill(this->raw(), this->device(), this->size(), T{});
+}
+
+template <class T, class Allocator>
+void contiguous_memory_base<T, Allocator>::full_default_construct() {
+
   auto alloc = allocator();
 
   for (size_type i = 0; i < size(); ++i) {
@@ -225,6 +247,12 @@ bool contiguous_memory_base<T, Allocator>::resize(const size_type &n_elements) {
 
   return true;
 }
+
+template <class T, class Allocator>
+device_type contiguous_memory_base<T, Allocator>::device() const {
+  return memory_location(*allocator());
+}
+
 } // namespace zisa
 
 #endif /* end of include guard */

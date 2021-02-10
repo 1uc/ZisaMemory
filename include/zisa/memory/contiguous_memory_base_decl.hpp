@@ -55,7 +55,7 @@ public:
 
   ANY_DEVICE_INLINE size_type size() const { return n_elements; }
 
-  inline device_type device() const { return memory_location(*allocator()); }
+  inline device_type device() const;
 
 private:
   void allocate(size_type n_elements, Allocator allocator);
@@ -77,6 +77,8 @@ private:
                              const contiguous_memory_base<TT, A2> &src);
 
   void default_construct();
+  void trivial_default_construct();
+  void full_default_construct();
 
   template <class A>
   bool resize(const contiguous_memory_base<T, A> &other);
@@ -89,19 +91,23 @@ private:
   Allocator *_allocator;
 };
 
+// clang-format off
 template <class T, class Allocator>
 ANY_DEVICE_INLINE
-    typename array_traits<contiguous_memory_base<T, Allocator>>::pointer
-    raw_ptr(contiguous_memory_base<T, Allocator> &a) {
+typename array_traits<contiguous_memory_base<T, Allocator>>::pointer
+raw_ptr(contiguous_memory_base<T, Allocator> &a) {
   return a.raw();
 }
+// clang-format on
 
+// clang-format off
 template <class T, class Allocator>
 ANY_DEVICE_INLINE
-    typename array_traits<contiguous_memory_base<T, Allocator>>::const_pointer
-    raw_ptr(const contiguous_memory_base<T, Allocator> &a) {
+typename array_traits<contiguous_memory_base<T, Allocator>>::const_pointer
+raw_ptr(const contiguous_memory_base<T, Allocator> &a) {
   return a.raw();
 }
+// clang-format on
 
 template <class T, class Allocator>
 device_type device(const contiguous_memory_base<T, Allocator> &a) {

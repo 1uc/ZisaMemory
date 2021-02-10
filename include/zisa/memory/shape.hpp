@@ -14,7 +14,7 @@ template <int n_dims, class Int = int_t>
 struct shape_t {
 public:
   ANY_DEVICE shape_t() {
-    for(int k = 0; k < n_dims; ++k){
+    for (int k = 0; k < n_dims; ++k) {
       _raw_data[k] = 0;
     }
   }
@@ -28,7 +28,8 @@ public:
   template <class... Ints,
             class SFINAE
             = typename std::enable_if<all_integral<Ints...>::value, void>::type>
-  ANY_DEVICE_INLINE shape_t(Ints... ints) : _raw_data{integer_cast<Int>(ints)...} {}
+  ANY_DEVICE_INLINE shape_t(Ints... ints)
+      : _raw_data{integer_cast<Int>(ints)...} {}
 
   ANY_DEVICE_INLINE
   Int operator[](int_t dim) const {
