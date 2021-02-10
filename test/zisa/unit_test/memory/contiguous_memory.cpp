@@ -13,7 +13,7 @@ zisa::contiguous_memory<bool> check_equal(const zisa::contiguous_memory<T> &a,
 
   auto is_equal = zisa::contiguous_memory<bool>(a.size());
 
-  for (int i = 0; i < a.size(); ++i) {
+  for (zisa::int_t i = 0; i < a.size(); ++i) {
     is_equal[i] = (a[i] == b[i]);
   }
 
@@ -53,7 +53,7 @@ void check_move_construction(SRC src) {
 }
 
 TEST_CASE("contiguous_memory") {
-  int n_elements = 15;
+  zisa::int_t n_elements = 15;
 
   auto a = zisa::contiguous_memory<double>(n_elements);
   std::fill(a.begin(), a.end(), 0.0);
@@ -89,12 +89,12 @@ TEST_CASE("contiguous_memory; initialization", "[memory]") {
   }
 
   for (zisa::int_t i = 0; i < n_arrays; ++i) {
-    elem[0] = 42.0 + 0.1 * i;
+    elem[0] = 42.0 + 0.1 * double(i);
     seq[i] = elem;
   }
 
   for (zisa::int_t i = 0; i < n_arrays; ++i) {
-    elem[0] = 42.0 + 0.1 * i;
+    elem[0] = 42.0 + 0.1 * double(i);
     REQUIRE(std::equal(seq[i].begin(), seq[i].end(), elem.begin(), elem.end()));
   }
 }
