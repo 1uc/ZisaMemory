@@ -33,11 +33,13 @@ if(ZISA_HAS_MPI)
 endif()
 
 if(ZISA_HAS_CUDA)
+  find_package(CUDAToolkit REQUIRED)
   target_compile_definitions(memory_dependencies INTERFACE ZISA_HAS_CUDA=1)
+
   target_compile_options(memory_dependencies INTERFACE
     $<BUILD_INTERFACE:$<$<COMPILE_LANGUAGE:CUDA>:--expt-relaxed-constexpr>>
   )
-
+  target_link_libraries(memory_dependencies INTERFACE CUDA::cudart)
 endif()
 
 
@@ -73,13 +75,13 @@ if(ZISA_HAS_CUDA)
 endif()
 
 add_library(memory STATIC)
+set_target_properties(memory PROPERTIES OUTPUT_NAME zisa_memory)
 target_sources(memory PRIVATE $<TARGET_OBJECTS:memory_generic_obj>)
 
 if(ZISA_HAS_CUDA)
   target_sources(memory PRIVATE $<TARGET_OBJECTS:memory_cuda_obj>)
   set_target_properties(memory PROPERTIES CUDA_RESOLVE_DEVICE_SYMBOLS ON)
 endif()
-
 
 target_include_directories(memory PUBLIC
   $<BUILD_INTERFACE:${ZisaMemory_SOURCE_DIR}/include>

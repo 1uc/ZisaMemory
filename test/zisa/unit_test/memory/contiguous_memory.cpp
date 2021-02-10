@@ -98,3 +98,23 @@ TEST_CASE("contiguous_memory; initialization", "[memory]") {
     REQUIRE(std::equal(seq[i].begin(), seq[i].end(), elem.begin(), elem.end()));
   }
 }
+
+#if (ZISA_HAS_CUDA == 1)
+
+namespace zisa {
+
+static void check_allocation_cuda() {
+  int_t n_elements = 10;
+  auto device = device_type::cuda;
+  auto d_mem = zisa::contiguous_memory<double>(n_elements, device);
+
+  REQUIRE(d_mem.raw() != nullptr);
+}
+
+}
+
+TEST_CASE("contiguous_memory; on-device", "[cuda][memory]") {
+  zisa::check_allocation_cuda();
+}
+
+#endif

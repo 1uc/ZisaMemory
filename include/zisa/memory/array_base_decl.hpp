@@ -8,6 +8,7 @@
 #include <zisa/io/hdf5_writer.hpp>
 #include <zisa/memory/array_base_fwd.hpp>
 #include <zisa/memory/array_traits.hpp>
+#include <zisa/memory/device_type.hpp>
 #include <zisa/utils/integer_cast.hpp>
 
 namespace zisa {
@@ -46,8 +47,12 @@ public:
   ANY_DEVICE_INLINE T &operator[](size_type i) { return _array[i]; }
   ANY_DEVICE_INLINE const T &operator[](size_type i) const { return _array[i]; }
 
-  ANY_DEVICE_INLINE T &operator[](int i) { return _array[integer_cast<size_type>(i)]; }
-  ANY_DEVICE_INLINE const T &operator[](int i) const { return _array[integer_cast<size_type>(i)]; }
+  ANY_DEVICE_INLINE T &operator[](int i) {
+    return _array[integer_cast<size_type>(i)];
+  }
+  ANY_DEVICE_INLINE const T &operator[](int i) const {
+    return _array[integer_cast<size_type>(i)];
+  }
 
   template <class... Ints>
   ANY_DEVICE_INLINE T &operator()(Ints... ints) {
@@ -76,16 +81,25 @@ public:
   ANY_DEVICE_INLINE const_pointer end() const { return _array.end(); }
   ANY_DEVICE_INLINE const_pointer cend() const { return _array.cend(); }
 
+  ANY_DEVICE_INLINE device_type device() const {
+    return array_traits<Array>::device(_array);
+  }
+
 private:
   Shape _shape;
   Array _array;
 };
 
 template <class T, class Indexing, class Array, class Shape>
+device_type memory_location(const array_base<T, Indexing, Array, Shape> &arr) {
+  return arr.device();
+}
+
+template <class T, class Indexing, class Array, class Shape>
 void fill(array_base<T, Indexing, Array, Shape> &arr, const T &value) {
   // TODO move to a library call of some sort.
   int_t n = arr.size();
-  for(int_t i = 0; i < n; ++i) {
+  for (int_t i = 0; i < n; ++i) {
     arr[i] = value;
   }
 }

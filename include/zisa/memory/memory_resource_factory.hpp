@@ -4,6 +4,9 @@
 #include <memory>
 
 #include "zisa/memory/host_memory_resource.hpp"
+#if ZISA_HAS_CUDA == 1
+#include "zisa/cuda/memory/cuda_memory_resource.hpp"
+#endif
 #include "zisa/memory/memory_resource.hpp"
 
 namespace zisa {
@@ -16,7 +19,15 @@ make_memory_resource(const device_type &device) {
     return std::make_shared<host_memory_resource<T>>();
   }
 
-  return nullptr;
+  if (device == device_type::cuda) {
+#if (ZISA_HAS_CUDA == 1)
+    return std::make_shared<host_memory_resource<T>>();
+#else
+    LOG_ERR("`device_type::cuda` requires `ZISA_HAS_CUDA == 1`.");
+#endif
+  }
+
+  LOG_ERR("Implement the missing memory resource.");
 }
 
 } // namespace zisa
