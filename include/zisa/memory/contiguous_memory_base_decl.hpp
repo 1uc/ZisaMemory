@@ -10,7 +10,7 @@
 
 namespace zisa {
 
-template <class T, class Allocator>
+template <class T, class Allocator, class Equivalence, class Construction>
 class contiguous_memory_base {
 public:
   using const_pointer =
@@ -20,11 +20,11 @@ public:
 
 public:
   contiguous_memory_base()
-      : _raw_data(nullptr), n_elements(0), _allocator(nullptr) {}
+      : _raw_data(nullptr), _n_elements(0), _allocator(nullptr) {}
+
   explicit contiguous_memory_base(size_type n_elements,
                                   const Allocator &allocator = Allocator());
-  template <class A>
-  contiguous_memory_base(const contiguous_memory_base<T, A> &other);
+
   contiguous_memory_base(const contiguous_memory_base &other);
   contiguous_memory_base(contiguous_memory_base &&other) noexcept;
 
@@ -32,10 +32,6 @@ public:
 
   contiguous_memory_base &operator=(const contiguous_memory_base &other);
   contiguous_memory_base &operator=(contiguous_memory_base &&other) noexcept;
-
-  template <class A>
-  inline contiguous_memory_base<T, Allocator> &
-  operator=(const contiguous_memory_base<T, A> &other);
 
   ANY_DEVICE_INLINE T &operator[](size_type i);
   ANY_DEVICE_INLINE const T &operator[](size_type i) const;
@@ -47,13 +43,15 @@ public:
   ANY_DEVICE_INLINE const_pointer begin() const { return _raw_data; }
   ANY_DEVICE_INLINE const_pointer cbegin() const { return _raw_data; }
 
-  ANY_DEVICE_INLINE pointer end() { return _raw_data + n_elements; }
-  ANY_DEVICE_INLINE const_pointer end() const { return _raw_data + n_elements; }
+  ANY_DEVICE_INLINE pointer end() { return _raw_data + _n_elements; }
+  ANY_DEVICE_INLINE const_pointer end() const {
+    return _raw_data + _n_elements;
+  }
   ANY_DEVICE_INLINE const_pointer cend() const {
-    return _raw_data + n_elements;
+    return _raw_data + _n_elements;
   }
 
-  ANY_DEVICE_INLINE size_type size() const { return n_elements; }
+  ANY_DEVICE_INLINE size_type size() const { return _n_elements; }
 
   inline device_type device() const;
 
@@ -68,49 +66,38 @@ private:
   Allocator *allocator();
   Allocator const *allocator() const;
 
-  template <class TT, class A1, class A2>
-  friend void copy(contiguous_memory_base<TT, A1> &dst,
-                   const contiguous_memory_base<TT, A2> &src);
-
-  template <class TT, class A1, class A2>
-  friend void copy_construct(contiguous_memory_base<TT, A1> &dst,
-                             const contiguous_memory_base<TT, A2> &src);
-
   void default_construct();
-  void trivial_default_construct();
-  void full_default_construct();
+  void copy_construct(const contiguous_memory_base &other);
 
-  template <class A>
-  bool resize(const contiguous_memory_base<T, A> &other);
   bool resize(const size_type &n_elements);
 
 private:
   pointer _raw_data;
-  size_type n_elements;
+  size_type _n_elements;
 
   Allocator *_allocator;
 };
 
 // clang-format off
-template <class T, class Allocator>
+template <class ...Args>
 ANY_DEVICE_INLINE
-typename array_traits<contiguous_memory_base<T, Allocator>>::pointer
-raw_ptr(contiguous_memory_base<T, Allocator> &a) {
+typename contiguous_memory_base<Args...>::pointer
+raw_ptr(contiguous_memory_base<Args...> &a) {
   return a.raw();
 }
 // clang-format on
 
 // clang-format off
-template <class T, class Allocator>
+template <class ...Args>
 ANY_DEVICE_INLINE
-typename array_traits<contiguous_memory_base<T, Allocator>>::const_pointer
-raw_ptr(const contiguous_memory_base<T, Allocator> &a) {
+typename contiguous_memory_base<Args...>::const_pointer
+raw_ptr(const contiguous_memory_base<Args...> &a) {
   return a.raw();
 }
 // clang-format on
 
-template <class T, class Allocator>
-device_type device(const contiguous_memory_base<T, Allocator> &a) {
+template <class... Args>
+device_type device(const contiguous_memory_base<Args...> &a) {
   return a.device();
 }
 

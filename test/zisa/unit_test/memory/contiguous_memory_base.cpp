@@ -1,17 +1,23 @@
 #include <iostream>
 #include <memory>
-
-#include "zisa/memory/contiguous_memory_base.hpp"
 #include <zisa/testing/testing_framework.hpp>
 
+#include <zisa/memory/contiguous_memory_base.hpp>
+#include <zisa/memory/scientific_constructor.hpp>
+#include <zisa/memory/std_allocator_equivalence.hpp>
+
 TEST_CASE("array; STL allocator") {
-  int n_elements = 15;
+  zisa::int_t n_elements = 15;
+
+  using cmb
+      = zisa::contiguous_memory_base<double,
+                                     std::allocator<double>,
+                                     zisa::STDAllocatorEquivalence<double>,
+                                     zisa::ScientificConstructor<double>>;
 
   auto alloc = std::allocator<double>();
-  auto a = zisa::contiguous_memory_base<double, decltype(alloc)>(n_elements,
-                                                                 alloc);
-  auto b = zisa::contiguous_memory_base<double, decltype(alloc)>(n_elements,
-                                                                 alloc);
+  auto a = cmb(n_elements, alloc);
+  auto b = cmb(n_elements, alloc);
 
   a[2] = 42;
 
