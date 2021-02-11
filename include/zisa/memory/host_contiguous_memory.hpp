@@ -8,6 +8,7 @@
 
 namespace zisa {
 
+/// TODO deprecate.
 template <class T>
 class host_contiguous_memory : public contiguous_memory<T> {
 private:
@@ -19,13 +20,6 @@ public:
   host_contiguous_memory(const host_contiguous_memory &other) : super(other) {}
   host_contiguous_memory(host_contiguous_memory &&other)
       : super(std::move(other)) {}
-
-  template <class A>
-  host_contiguous_memory(const contiguous_memory_base<T, A> &other)
-      : super(other.size(), allocator<T>(device_type::cpu)) {
-
-    (*this) = other;
-  }
 
   using super::operator=;
 };

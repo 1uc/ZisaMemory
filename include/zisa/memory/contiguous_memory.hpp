@@ -3,11 +3,15 @@
 
 #include "zisa/memory/allocator.hpp"
 #include "zisa/memory/contiguous_memory_base.hpp"
+#include "zisa/memory/scientific_constructor.hpp"
 
 namespace zisa {
 
 template <class T>
-using contiguous_memory = contiguous_memory_base<T, allocator<T>>;
+using contiguous_memory = contiguous_memory_base<T,
+                                                 allocator<T>,
+                                                 AllocatorEquivalence<T>,
+                                                 ScientificConstructor<T>>;
 
 } // namespace zisa
 

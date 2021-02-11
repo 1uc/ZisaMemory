@@ -28,7 +28,7 @@ public:
   }
 
   template <class... Args>
-  inline void construct(T *const xptr, Args &&... args) {
+  inline void construct(T *const xptr, Args &&...args) {
     *xptr = T(std::forward<Args>(args)...);
   }
 
@@ -44,6 +44,13 @@ template <class T>
 device_type memory_location(const allocator<T> &alloc) {
   return alloc.device();
 }
+
+template <class T>
+struct AllocatorEquivalence {
+  static bool are_equivalent(const allocator<T> &a, const allocator<T> &b) {
+    return a.device() == b.device();
+  }
+};
 
 } // namespace zisa
 #endif /* end of include guard */
