@@ -6,9 +6,15 @@
 
 TEST_CASE("allocator; memory_location", "[array][allocator]") {
 
-  auto host_alloc = zisa::allocator<double>(zisa::device_type::cpu);
-  auto cuda_alloc = zisa::allocator<double>(zisa::device_type::cuda);
+  SECTION("host") {
+    auto host_alloc = zisa::allocator<double>(zisa::device_type::cpu);
+    REQUIRE(zisa::memory_location(host_alloc) == zisa::device_type::cpu);
+  }
 
-  REQUIRE(zisa::memory_location(host_alloc) == zisa::device_type::cpu);
-  REQUIRE(zisa::memory_location(cuda_alloc) == zisa::device_type::cuda);
+#if ZISA_HAS_CUDA == 1
+  SECTION("cuda") {
+    auto cuda_alloc = zisa::allocator<double>(zisa::device_type::cuda);
+    REQUIRE(zisa::memory_location(cuda_alloc) == zisa::device_type::cuda);
+  }
+#endif
 }
