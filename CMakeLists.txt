@@ -142,7 +142,7 @@ target_link_libraries(memory_unit_tests PUBLIC Catch2::Catch2)
 target_link_libraries(memory_unit_tests PRIVATE memory_warning_flags)
 
 enable_testing()
-add_test(NAME UnitTests COMMAND unit_tests)
+add_test(NAME ZisaMemoryUnitTests COMMAND unit_tests)
 
 # -- Subdirectories ------------------------------------------------------------
 add_subdirectory(src)
