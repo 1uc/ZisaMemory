@@ -3,7 +3,6 @@
 #include <memory>
 
 #include <zisa/memory/contiguous_memory.hpp>
-#include <zisa/memory/host_contiguous_memory.hpp>
 #include <zisa/testing/testing_framework.hpp>
 
 template <class T>
