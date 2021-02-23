@@ -8,6 +8,7 @@
 #include <zisa/memory/array_view_fwd.hpp>
 #include <zisa/memory/column_major.hpp>
 #include <zisa/memory/contiguous_memory.hpp>
+#include <zisa/memory/copy.hpp>
 #include <zisa/memory/shape.hpp>
 #include <zisa/meta/add_const_if.hpp>
 #include <zisa/meta/if_t.hpp>
@@ -197,6 +198,25 @@ template <class T, int n_dims, template <int> class Indexing>
 ANY_DEVICE_INLINE auto raw_ptr(const array_const_view<T, n_dims, Indexing> &a)
     -> decltype(a.raw()) {
   return a.raw();
+}
+
+template <class T, int n_dims, template <int> class Indexing>
+void copy(const array_view<T, n_dims, Indexing> &dst,
+          const array_const_view<T, n_dims, Indexing> &src) {
+
+  zisa::internal::copy(dst.raw(),
+                       memory_location(dst),
+                       src.raw(),
+                       memory_location(src),
+                       src.size());
+}
+
+template <class T, int n_dims, template <int> class Indexing>
+void copy(array<T, n_dims, Indexing> &dst,
+          const array<T, n_dims, Indexing> &src) {
+
+  return zisa::copy(array_view<T, n_dims, Indexing>(dst),
+                    array_const_view<T, n_dims, Indexing>(src));
 }
 
 } // namespace zisa
