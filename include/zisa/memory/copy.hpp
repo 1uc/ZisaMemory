@@ -1,5 +1,5 @@
-#ifndef COPY_HPP
-#define COPY_HPP
+#ifndef COPY_HPP_VNYWO
+#define COPY_HPP_VNYWO
 
 #include <zisa/config.hpp>
 #include <zisa/memory/copy_bytes.hpp>
@@ -27,9 +27,6 @@ void copy(T *const dst,
 
 #if ZISA_HAS_CUDA == 1
   else {
-    LOG_ERR_IF(!std::is_trivially_copyable<T>::value,
-               "Can't safely copy the bytes.");
-
     zisa::copy_bytes(
         (void *)dst, dst_loc, (void *)src, src_loc, size * sizeof(T));
   }
