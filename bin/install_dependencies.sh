@@ -20,10 +20,18 @@ do
         --zisa_has_cuda=*)
             ZISA_HAS_CUDA=${arg#*=}
             ;;
+        --cmake=*)
+            CMAKE=$(realpath ${arg#*=})
+            ;;
         *)
             ;;
     esac
 done
+
+if [[ -z "${CMAKE}" ]]
+then
+    CMAKE=cmake
+fi
 
 if [[ -z "${ZISA_HAS_MPI}" ]]
 then
@@ -32,7 +40,7 @@ fi
 
 if [[ -z "${ZISA_HAS_CUDA}" ]]
 then
-    ZISA_HAS_CUDA=1
+    ZISA_HAS_CUDA=0
 fi
 
 zisa_root="$(realpath "$(dirname "$(readlink -f "$0")")"/..)"
@@ -76,7 +84,7 @@ do
     mkdir -p "${src_dir}/build-dep"
     cd "${src_dir}/build-dep"
 
-    cmake -DCMAKE_INSTALL_PREFIX="${install_dir}/zisa" \
+    ${CMAKE} -DCMAKE_INSTALL_PREFIX="${install_dir}/zisa" \
           -DCMAKE_PREFIX_PATH="${install_dir}/zisa/lib/cmake/zisa" \
           -DCMAKE_MODULE_PATH="${install_dir}/conan" \
           -DCMAKE_PROJECT_${dep}_INCLUDE="${install_dir}/conan/conan_paths.cmake" \
@@ -86,18 +94,18 @@ do
           -DCMAKE_BUILD_TYPE="Release" \
           ..
 
-    cmake --build . --parallel $(nproc)
-    cmake --install .
+    ${CMAKE} --build . --parallel $(nproc)
+    ${CMAKE} --install .
 done
 
 echo "The dependencies were installed at"
 echo "    export DEP_DIR=${install_dir}"
 echo ""
 echo "Use"
-echo "    cmake -DCMAKE_PROJECT_${component_name}_INCLUDE=${install_dir}/conan/conan_paths.cmake \\ "
-echo "          -DCMAKE_MODULE_PATH=${install_dir}/conan \\ "
-echo "          -DCMAKE_PREFIX_PATH=${install_dir}/zisa/lib/cmake/zisa \\ "
-echo "          -DCMAKE_C_COMPILER=${CC} \\ "
-echo "          -DCMAKE_CXX_COMPILER=${CXX} \\ "
-echo "          -DZISA_HAS_MPI=${ZISA_HAS_MPI} \\ "
-echo "          REMAINING_ARGS "
+echo "    ${CMAKE} -DCMAKE_PROJECT_${component_name}_INCLUDE=${install_dir}/conan/conan_paths.cmake \\ "
+echo "             -DCMAKE_MODULE_PATH=${install_dir}/conan \\ "
+echo "             -DCMAKE_PREFIX_PATH=${install_dir}/zisa/lib/cmake/zisa \\ "
+echo "             -DCMAKE_C_COMPILER=${CC} \\ "
+echo "             -DCMAKE_CXX_COMPILER=${CXX} \\ "
+echo "             -DZISA_HAS_MPI=${ZISA_HAS_MPI} \\ "
+echo "             REMAINING_ARGS "
