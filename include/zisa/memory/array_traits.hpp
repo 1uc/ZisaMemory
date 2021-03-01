@@ -32,7 +32,7 @@ struct array_traits {
   using const_pointer = typename Array::const_pointer;
   using size_type = typename Array::size_type;
 
-  static device_type device(const Array &array) {
+  static ANY_DEVICE_INLINE device_type device(const Array &array) {
     return detail::memory_location_<Array>(array);
   }
 };
