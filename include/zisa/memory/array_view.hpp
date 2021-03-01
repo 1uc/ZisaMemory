@@ -219,5 +219,17 @@ void copy(array<T, n_dims, Indexing> &dst,
                     array_const_view<T, n_dims, Indexing>(src));
 }
 
+template <class T, int n_dims, template <int> class Indexing>
+void copy(const array_view<T, n_dims, Indexing> &dst,
+          const array<T, n_dims, Indexing> &src) {
+  return zisa::copy(dst, array_const_view<T, n_dims, Indexing>(src));
+}
+
+template <class T, int n_dims, template <int> class Indexing>
+void copy(array<T, n_dims, Indexing> &dst,
+          const array_const_view<T, n_dims, Indexing> &src) {
+  return zisa::copy(array_view<T, n_dims, Indexing>(dst), src);
+}
+
 } // namespace zisa
 #endif /* end of include guard */
