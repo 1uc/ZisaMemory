@@ -1,7 +1,8 @@
 #ifndef MEMORY_RESOURCE_H_DH9EB
 #define MEMORY_RESOURCE_H_DH9EB
 
-#include "zisa/memory/device_type.hpp"
+#include <zisa/config.hpp>
+#include <zisa/memory/device_type.hpp>
 
 namespace zisa {
 

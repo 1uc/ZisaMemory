@@ -71,7 +71,6 @@ public:
       : super(shape, ptr, mem_location) {}
 
   template <class Array, class Shape>
-  ANY_DEVICE_INLINE
   array_view(array_base<T, Indexing<n_dims>, Array, Shape> &other)
       : array_view(zisa::shape(other),
                    zisa::raw_ptr(other),
