@@ -20,6 +20,10 @@ array<T, n_dims, Indexing>::array(const shape_type &shape, device_type device)
     : super(shape, contiguous_memory<T>(product(shape), device)) {}
 
 template <class T, int n_dims, template <int N> class Indexing>
+array<T, n_dims, Indexing>::array(const shape_type &shape, const allocator<T> &alloc)
+    : super(shape, contiguous_memory<T>(product(shape), alloc)) {}
+
+template <class T, int n_dims, template <int N> class Indexing>
 array<T, n_dims, Indexing>::array(
     const array_const_view<T, n_dims, Indexing> &other)
     : super(shape, contiguous_memory<T>(product(other.shape()))) {
