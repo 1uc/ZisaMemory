@@ -44,6 +44,7 @@ public:
   array(T *raw_ptr, const shape_type &shape);
   explicit array(const shape_type &shape,
                  device_type device = device_type::cpu);
+  array(const shape_type &shape, const allocator<T> &alloc);
 
   array &operator=(const array &) = default;
   array &operator=(array &&) noexcept = default;
