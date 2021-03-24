@@ -50,6 +50,11 @@ inline hid_t get_hdf5_data_type<double>() {
 }
 
 template <>
+inline hid_t get_hdf5_data_type<float>() {
+  return H5T_NATIVE_FLOAT;
+}
+
+template <>
 inline hid_t get_hdf5_data_type<int>() {
   return H5T_NATIVE_INT;
 }
