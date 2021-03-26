@@ -32,6 +32,29 @@ HDF5DataType make_hdf5_data_type(const hid_t &hdf5_data_type, size_t size) {
   return HDF5DataType(h5_type, size);
 }
 
+#define ZISA_REGISTER_ERASED_DATA_TYPE(type, TYPE)                             \
+  if (data_type == ErasedBasicDataType::TYPE) {                                \
+    return make_hdf5_data_type<type>();                                        \
+  }
+
+HDF5DataType make_hdf5_data_type(const ErasedBasicDataType &data_type) {
+  ZISA_REGISTER_ERASED_DATA_TYPE(double, DOUBLE);
+  ZISA_REGISTER_ERASED_DATA_TYPE(float, FLOAT);
+  ZISA_REGISTER_ERASED_DATA_TYPE(unsigned long, UNSIGNED_LONG);
+  ZISA_REGISTER_ERASED_DATA_TYPE(int, INT);
+  ZISA_REGISTER_ERASED_DATA_TYPE(char, CHAR);
+
+  LOG_ERR("Implement missing case.");
+}
+
+#undef ZISA_REGISTER_ERASED_DATA_TYPE
+
+std::vector<hsize_t> make_hdf5_dims(std::size_t const *const dims, int rank) {
+  auto hdf5_dims = std::vector<hsize_t>(zisa::integer_cast<std::size_t>(rank));
+  std::copy(dims, dims + rank, hdf5_dims.begin());
+  return hdf5_dims;
+}
+
 HDF5File::~HDF5File() {
   auto lock = std::lock_guard(hdf5_mutex);
 
@@ -46,7 +69,7 @@ HDF5File::~HDF5File() {
   file.pop();
 }
 
-void HDF5File::open_group(const std::string &group_name) {
+void HDF5File::do_open_group(const std::string &group_name) {
   auto lock = std::lock_guard(hdf5_mutex);
 
   hid_t h5_group = -1;
@@ -72,7 +95,7 @@ void HDF5File::open_group(const std::string &group_name) {
   path.push_back(group_name);
 }
 
-void HDF5File::close_group() {
+void HDF5File::do_close_group() {
   auto lock = std::lock_guard(hdf5_mutex);
 
   if (file.size() == 1) {
@@ -87,15 +110,19 @@ void HDF5File::close_group() {
   path.pop_back();
 }
 
-void HDF5File::switch_group(const std::string &group_name) {
+void HDF5File::do_switch_group(const std::string &group_name) {
   auto lock = std::lock_guard(hdf5_mutex);
   close_group();
   open_group(group_name);
 }
 
-bool HDF5File::group_exists(const std::string &group_name) const {
+bool HDF5File::do_group_exists(const std::string &group_name) const {
   auto lock = std::lock_guard(hdf5_mutex);
   return H5Lexists(file.top(), group_name.c_str(), H5P_DEFAULT);
+}
+
+std::string HDF5File::do_hierarchy() const {
+  return zisa::concatenate(path.begin(), path.end(), "/");
 }
 
 hid_t HDF5File::open_dataset(const std::string &tag) const {
@@ -120,10 +147,6 @@ hid_t HDF5File::get_dataspace(const hid_t &dataset) const {
   }
 
   return dataspace;
-}
-
-std::string HDF5File::hierarchy() const {
-  return zisa::concatenate(path.begin(), path.end(), "/");
 }
 
 } // namespace zisa
