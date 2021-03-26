@@ -19,7 +19,7 @@ void HDF5SerialWriter::do_write_array(const void *data,
                                       const HDF5DataType &data_type,
                                       const std::string &tag,
                                       int rank,
-                                      const hsize_t *dims) const {
+                                      const hsize_t *dims) {
   assert(data_type() > 0);
   assert(rank > 0);
 
@@ -75,7 +75,7 @@ void HDF5SerialWriter::do_write_array(const void *data,
 
 void HDF5SerialWriter::do_write_scalar(const void *data,
                                        const HDF5DataType &data_type,
-                                       const std::string &tag) const {
+                                       const std::string &tag) {
   // create a scalar data space.
   hid_t dataspace = H5S::create(H5S_SCALAR);
 
@@ -97,7 +97,7 @@ void HDF5SerialWriter::do_write_scalar(const void *data,
 }
 
 void HDF5SerialWriter::do_write_string(const std::string &data,
-                                       const std::string &tag) const {
+                                       const std::string &tag) {
   // strings can be stored as 1d-arrays of characters.
   // don't forget the null-character at the end of 'data.c_str()'.
   hsize_t dims[1] = {data.size() + 1};
@@ -131,7 +131,8 @@ HDF5SerialReader::HDF5SerialReader(const std::string &filename) {
   path.push_back(filename);
 }
 
-std::vector<hsize_t> HDF5SerialReader::do_dims(const std::string &tag) const {
+std::vector<hsize_t>
+HDF5SerialReader::do_hdf5_dims(const std::string &tag) const {
   hid_t dataset = open_dataset(tag);
   hid_t dataspace = get_dataspace(dataset);
 
@@ -166,12 +167,12 @@ void HDF5SerialReader::do_read_scalar(void *data,
 }
 
 std::string HDF5SerialReader::do_read_string(const std::string &tag) const {
-  HDF5DataType data_type = make_hdf5_data_type<char>();
+  HDF5DataType hdf5_data_type = make_hdf5_data_type<char>();
 
   auto length = dims(tag)[0];
 
   std::vector<char> buf(length);
-  read_array(&buf[0], data_type, tag);
+  do_read_array(&buf[0], hdf5_data_type, tag);
 
   return std::string(&buf[0], buf.size());
 }

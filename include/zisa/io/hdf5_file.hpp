@@ -7,6 +7,8 @@
 #include <vector>
 
 #include <zisa/io/hdf5.hpp>
+#include <zisa/io/hierarchical_file.hpp>
+#include <zisa/utils/integer_cast.hpp>
 
 namespace zisa {
 
@@ -78,28 +80,23 @@ HDF5DataType make_hdf5_data_type() {
   return make_hdf5_data_type(get_hdf5_data_type<T>(), sizeof(T));
 }
 
+/// Return the HDF5 native data-type an erased data type identifier.
+HDF5DataType make_hdf5_data_type(const ErasedBasicDataType &data_type);
+
+std::vector<hsize_t> make_hdf5_dims(std::size_t const *const dims, int rank);
+
 /// Representation of the current branch of the opened HDF5 file.
-class HDF5File {
+class HDF5File : public virtual HierarchicalFile {
 public:
-  virtual ~HDF5File();
+  virtual ~HDF5File() override;
 
-  /// Open HDF5 group.
-  void open_group(const std::string &group_name);
-
-  /// Close HDF5 group.
-  void close_group();
-
-  /// Switch HDF5 group.
-  void switch_group(const std::string &group_name);
-
-  /// Does this group exist in the file?
-  bool group_exists(const std::string &group_name) const;
-
-  /// Human readable description of the current hierarchy.
-  std::string hierarchy() const;
-
-  /// Unlink a dataset.
-  void unlink(const std::string &tag) {
+protected:
+  void do_open_group(const std::string &group_name) override;
+  void do_close_group() override;
+  void do_switch_group(const std::string &group_name) override;
+  bool do_group_exists(const std::string &group_name) const override;
+  std::string do_hierarchy() const override;
+  void do_unlink(const std::string &tag) override {
     zisa::H5L::unlink(file.top(), tag.c_str(), H5P_DEFAULT);
   }
 

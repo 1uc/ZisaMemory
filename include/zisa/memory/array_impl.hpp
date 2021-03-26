@@ -69,16 +69,16 @@ void save(HDF5Writer &writer,
           default_dispatch_tag) {
 
   T const *const data = arr.raw();
-  const auto &dims = arr.shape();
+  const auto &shape = arr.shape();
 
-  HDF5DataType data_type = make_hdf5_data_type<T>();
+  auto data_type = erase_data_type<T>();
 
-  hsize_t h5_dims[n_dims];
+  std::size_t dims[n_dims];
   for (int_t i = 0; i < n_dims; ++i) {
-    h5_dims[i] = hsize_t(dims(i)); // size of (i, j, k) axes
+    dims[i] = hsize_t(shape(i)); // size of (i, j, k) axes
   }
 
-  writer.write_array(data, data_type, tag, n_dims, h5_dims);
+  writer.write_array(data, data_type, tag, n_dims, dims);
 }
 
 template <class T, int n_dims>
@@ -88,16 +88,16 @@ void save(HDF5Writer &writer,
           split_array_dispatch_tag) {
 
   using scalar_type = typename array_save_traits<T>::scalar_type;
-  HDF5DataType data_type = make_hdf5_data_type<scalar_type>();
+  auto data_type = erase_data_type<scalar_type>();
 
   constexpr int_t rank = n_dims + 1;
-  hsize_t h5_dims[rank];
+  std::size_t dims[rank];
   for (int_t i = 0; i < rank - 1; ++i) {
-    h5_dims[i] = hsize_t(arr.shape(i));
+    dims[i] = hsize_t(arr.shape(i));
   }
-  h5_dims[rank - 1] = T::size();
+  dims[rank - 1] = T::size();
 
-  writer.write_array(arr.raw(), data_type, tag, rank, h5_dims);
+  writer.write_array(arr.raw(), data_type, tag, rank, dims);
 }
 
 template <int n_dims>
@@ -138,8 +138,8 @@ void load_impl(HDF5Reader &reader,
                const std::string &tag,
                default_dispatch_tag) {
 
-  auto h5_datatype = make_hdf5_data_type<T>();
-  reader.read_array(arr.raw(), h5_datatype, tag);
+  auto datatype = erase_data_type<T>();
+  reader.read_array(arr.raw(), datatype, tag);
 }
 
 template <class T, int n_dims>
