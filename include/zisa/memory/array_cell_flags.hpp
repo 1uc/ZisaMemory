@@ -14,7 +14,7 @@ struct array_save_traits<CellFlags> {
 };
 
 template <int n_dims>
-void save(HDF5Writer &writer,
+void save(HierarchicalWriter &writer,
           const array<CellFlags, n_dims, row_major> &arr,
           const std::string &tag,
           cell_flags_dispatch_tag) {

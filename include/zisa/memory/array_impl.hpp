@@ -63,7 +63,7 @@ array<T, n_dims, Indexing> &array<T, n_dims, Indexing>::operator=(
 }
 
 template <class T, int n_dims>
-void save(HDF5Writer &writer,
+void save(HierarchicalWriter &writer,
           const array<T, n_dims, row_major> &arr,
           const std::string &tag,
           default_dispatch_tag) {
@@ -82,7 +82,7 @@ void save(HDF5Writer &writer,
 }
 
 template <class T, int n_dims>
-void save(HDF5Writer &writer,
+void save(HierarchicalWriter &writer,
           const array<T, n_dims, row_major> &arr,
           const std::string &tag,
           split_array_dispatch_tag) {
@@ -101,7 +101,7 @@ void save(HDF5Writer &writer,
 }
 
 template <int n_dims>
-void save(HDF5Writer &writer,
+void save(HierarchicalWriter &writer,
           const array<bool, n_dims, row_major> &arr,
           const std::string &tag,
           bool_dispatch_tag) {
@@ -114,7 +114,7 @@ void save(HDF5Writer &writer,
 }
 
 template <class T, int n_dims, template <int> class Indexing>
-void save(HDF5Writer &writer,
+void save(HierarchicalWriter &writer,
           const array<T, n_dims, Indexing> &arr,
           const std::string &tag) {
 
@@ -122,18 +122,18 @@ void save(HDF5Writer &writer,
 }
 
 template <class T, int n_dims>
-void load_impl(HDF5Reader &reader,
+void load_impl(HierarchicalReader &reader,
                array<T, n_dims, row_major> &arr,
                const std::string &tag,
                split_array_dispatch_tag) {
 
   using scalar_type = typename array_save_traits<T>::scalar_type;
-  auto h5_datatype = make_hdf5_data_type<scalar_type>();
-  reader.read_array(arr.raw(), h5_datatype, tag);
+  auto datatype = erase_data_type<scalar_type>();
+  reader.read_array(arr.raw(), datatype, tag);
 }
 
 template <class T, int n_dims>
-void load_impl(HDF5Reader &reader,
+void load_impl(HierarchicalReader &reader,
                array<T, n_dims, row_major> &arr,
                const std::string &tag,
                default_dispatch_tag) {
@@ -143,23 +143,23 @@ void load_impl(HDF5Reader &reader,
 }
 
 template <class T, int n_dims>
-void load_impl(HDF5Reader &reader,
+void load_impl(HierarchicalReader &reader,
                array<T, n_dims, row_major> &arr,
                const std::string &tag,
                bool_dispatch_tag) {
 
   using scalar_type = typename array_save_traits<T>::scalar_type;
-  auto h5_datatype = make_hdf5_data_type<scalar_type>();
+  auto datatype = erase_data_type<scalar_type>();
 
   auto int_arr = array<scalar_type, n_dims, row_major>(arr.shape());
-  reader.read_array(int_arr.raw(), h5_datatype, tag);
+  reader.read_array(int_arr.raw(), datatype, tag);
 
   std::copy(int_arr.cbegin(), int_arr.cend(), arr.begin());
 }
 
 template <class T, int n_dims, template <int N> class Indexing>
 array<T, n_dims, row_major>
-array<T, n_dims, Indexing>::load(HDF5Reader &reader, const std::string &tag) {
+array<T, n_dims, Indexing>::load(HierarchicalReader &reader, const std::string &tag) {
 
   static_assert(std::is_same<row_major<n_dims>, Indexing<n_dims>>::value,
                 "This has only been implemented for row-major index order.");

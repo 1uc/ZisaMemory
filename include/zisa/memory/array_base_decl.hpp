@@ -4,8 +4,8 @@
 #include <iostream>
 #include <utility>
 
-#include <zisa/io/hdf5.hpp>
-#include <zisa/io/hdf5_writer.hpp>
+#include <zisa/io/hierarchical_writer.hpp>
+#include <zisa/io/hierarchical_reader.hpp>
 #include <zisa/memory/array_base_fwd.hpp>
 #include <zisa/memory/array_traits.hpp>
 #include <zisa/memory/device_type.hpp>

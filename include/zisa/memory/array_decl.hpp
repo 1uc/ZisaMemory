@@ -52,7 +52,7 @@ public:
   array &operator=(const array_const_view<T, n_dims, Indexing> &);
   array &operator=(const array_view<T, n_dims, Indexing> &);
 
-  [[nodiscard]] static array<T, n_dims, row_major> load(HDF5Reader &reader,
+  [[nodiscard]] static array<T, n_dims, row_major> load(HierarchicalReader &reader,
                                                         const std::string &tag);
 };
 
@@ -62,7 +62,7 @@ array<T, n_dims, Indexing> empty_like(const array<T, n_dims, Indexing> &other) {
 }
 
 template <class T, int n_dims, template <int N> class Indexing>
-void save(HDF5Writer &writer,
+void save(HierarchicalWriter &writer,
           const array<T, n_dims, Indexing> &arr,
           const std::string &tag);
 
