@@ -14,7 +14,6 @@ namespace zisa {
 class HDF5SerialWriter : public virtual HDF5Writer {
 public:
   explicit HDF5SerialWriter(const std::string &filename);
-  virtual ~HDF5SerialWriter() = default;
 
 protected:
   virtual void do_write_array(const void *data,
@@ -40,7 +39,6 @@ private:
 
 public:
   explicit HDF5SerialReader(const std::string &filename);
-  virtual ~HDF5SerialReader() = default;
 
 protected:
   virtual std::vector<hsize_t>
