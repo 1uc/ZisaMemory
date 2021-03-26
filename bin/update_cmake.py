@@ -12,7 +12,7 @@ def find_files(folder, suffixes):
 
 
 def find_source_files(folder):
-    suffixes = [".c", ".C", ".cpp", ".c++", ".cu"]
+    suffixes = [".c", ".C", ".cpp", ".c++", ".cu", ".h", ".hpp", ".cuh"]
     return find_files(folder, suffixes)
 
 
@@ -124,13 +124,13 @@ target_sources({}
 
 
 if __name__ == "__main__":
-    cmake_file = "src/CMakeLists.txt"
-    remove_file(cmake_file)
+    for base_directory in ["src/", "include/"]:
+        cmake_file = f"{base_directory}/CMakeLists.txt"
+        remove_file(cmake_file)
 
-    base_directory = "src/"
-    for d in find_subdirectories(base_directory):
-        recurse(d, {"generic": "memory_generic_obj", "cuda": "memory_cuda_obj"})
-        append_to_file(cmake_file, add_subdirectory(base_directory + d))
+        for d in find_subdirectories(base_directory):
+            recurse(d, {"generic": "memory_generic_obj", "cuda": "memory_cuda_obj"})
+            append_to_file(cmake_file, add_subdirectory(base_directory + d))
 
     recurse("test/", {"generic": "memory_unit_tests"})
     # recurse("benchmarks/", {"generic": "micro_benchmarks"})
