@@ -55,8 +55,9 @@ protected:
   virtual std::string do_read_string(const std::string &tag) const override;
 };
 
+// TODO deprecate.
 template <class T, class... Args>
-T load_serial(const std::string &filename, Args &&... args) {
+T load_serial(const std::string &filename, Args &&...args) {
   auto reader = HDF5SerialReader(filename);
   return T::load(reader, std::forward<Args>(args)...);
 }
