@@ -151,5 +151,6 @@ enable_testing()
 add_test(NAME ZisaMemoryUnitTests COMMAND unit_tests)
 
 # -- Subdirectories ------------------------------------------------------------
+add_subdirectory(include)
 add_subdirectory(src)
 add_subdirectory(test)
