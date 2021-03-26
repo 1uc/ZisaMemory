@@ -28,6 +28,12 @@ if(ZISA_LOG_LEVEL)
 endif()
 
 if(ZISA_HAS_MPI)
+  # MPI adds `-Wl,-rpath` and more to the linker flags.
+  # This then gets translated as `-Xcompiler=-Wl,-rpath`. Which ends in an error
+  # along the lines of
+  #   gcc: error: unrecognized command-line option ‘-Wl’; did you mean ‘-W’?
+  cmake_policy(SET CMP0105 OLD)
+
   find_package(MPI REQUIRED COMPONENTS CXX)
   target_compile_definitions(memory_dependencies INTERFACE ZISA_HAS_MPI=1)
 endif()
