@@ -5,6 +5,9 @@ if(ZISA_HAS_CUDA)
   enable_language(CUDA)
 endif()
 
+# Enables local find modules, e.g. for NetCDF.
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${PROJECT_SOURCE_DIR}/cmake)
+
 include("cmake/has_build_type.cmake")
 include("cmake/warning_flags.cmake")
 include("cmake/fast_debug.cmake")
@@ -46,6 +49,11 @@ if(ZISA_HAS_CUDA)
     $<BUILD_INTERFACE:$<$<COMPILE_LANGUAGE:CUDA>:--expt-relaxed-constexpr>>
   )
   target_link_libraries(memory_dependencies INTERFACE CUDA::cudart)
+endif()
+
+if(ZISA_HAS_NETCDF)
+  find_package(NetCDF REQUIRED)
+  target_link_libraries(memory_dependencies INTERFACE NetCDF::NetCDF)
 endif()
 
 
