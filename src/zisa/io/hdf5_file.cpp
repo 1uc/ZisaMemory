@@ -33,11 +33,11 @@ HDF5DataType make_hdf5_data_type(const hid_t &hdf5_data_type, size_t size) {
 }
 
 #define ZISA_REGISTER_ERASED_DATA_TYPE(type, TYPE)                             \
-  if (data_type == ErasedBasicDataType::TYPE) {                                \
+  if (data_type == ErasedDataType::TYPE) {                                     \
     return make_hdf5_data_type<type>();                                        \
   }
 
-HDF5DataType make_hdf5_data_type(const ErasedBasicDataType &data_type) {
+HDF5DataType make_hdf5_data_type(const ErasedDataType &data_type) {
   ZISA_REGISTER_ERASED_DATA_TYPE(double, DOUBLE);
   ZISA_REGISTER_ERASED_DATA_TYPE(float, FLOAT);
   ZISA_REGISTER_ERASED_DATA_TYPE(unsigned long, UNSIGNED_LONG);

@@ -18,7 +18,7 @@ extern std::recursive_mutex hdf5_mutex;
 /// Abstraction of the HDF5 data-type macros.
 /** More direct approaches using templates exist, however we intend to
  *  pass the data-type into several functions that would in that case need
- *  do be turned into templates aswell.
+ *  do be turned into templates as well.
  *
  *  @see make_hdf5_data_type
  */
@@ -81,7 +81,7 @@ HDF5DataType make_hdf5_data_type() {
 }
 
 /// Return the HDF5 native data-type an erased data type identifier.
-HDF5DataType make_hdf5_data_type(const ErasedBasicDataType &data_type);
+HDF5DataType make_hdf5_data_type(const ErasedDataType &data_type);
 
 std::vector<hsize_t> make_hdf5_dims(std::size_t const *const dims, int rank);
 

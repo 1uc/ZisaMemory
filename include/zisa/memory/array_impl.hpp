@@ -76,7 +76,7 @@ void save(HierarchicalWriter &writer,
 
   std::size_t dims[n_dims];
   for (int_t i = 0; i < n_dims; ++i) {
-    dims[i] = hsize_t(shape(i)); // size of (i, j, k) axes
+    dims[i] = shape(i); // size of (i, j, k) axes
   }
 
   writer.write_array(data, data_type, tag, n_dims, dims);
@@ -160,7 +160,8 @@ void load_impl(HierarchicalReader &reader,
 
 template <class T, int n_dims, template <int N> class Indexing>
 array<T, n_dims, row_major>
-array<T, n_dims, Indexing>::load(HierarchicalReader &reader, const std::string &tag) {
+array<T, n_dims, Indexing>::load(HierarchicalReader &reader,
+                                 const std::string &tag) {
 
   static_assert(std::is_same<row_major<n_dims>, Indexing<n_dims>>::value,
                 "This has only been implemented for row-major index order.");

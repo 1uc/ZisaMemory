@@ -3,25 +3,23 @@
 
 #include <netcdf.h>
 #include <string>
+#include <vector>
+
 #include <zisa/config.hpp>
+#include <zisa/utils/integer_cast.hpp>
 
 namespace zisa::io::netcdf {
 
-int create(std::string filename, int cmode) {
-  int ncid = -1;
-  auto status = nc_create(filename.c_str(), cmode, &ncid);
+int create(std::string filename, int cmode);
 
-  LOG_ERR_IF(status != NC_NOERR, "Could not create file.");
-  return ncid;
-}
+int def_dim(int file_id, const std::string &name, std::size_t extent);
 
-int def_dim(int file_id, const std::string &name, int extent) {
-  int id = -1;
-  auto status = nc_def_dim(file_id, name.c_str(), extent, &id);
-  LOG_ERR_IF(status != NC_NOERR, "Failed to create dimension.");
+int def_var(int file_id,
+            const std::string &name,
+            int type_id,
+            const std::vector<int> &dims);
 
-  return id;
-}
+void put_var(int file_id, int var_id, void const *data);
 
 } // namespace zisa::io::netcdf
 
