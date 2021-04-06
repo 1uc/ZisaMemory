@@ -57,7 +57,7 @@ jobs:
       - name: Install NetCDF
         if: matrix.zisa_has_netcdf == 1
         run: |
-          sudo apt-get install -y netcdf
+          sudo apt-get install -y libnetcdf-dev
 
       - name: Install conan
         run: |
