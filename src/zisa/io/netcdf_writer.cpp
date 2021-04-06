@@ -1,3 +1,5 @@
+#if ZISA_HAS_NETCDF == 1
+
 #include <zisa/io/netcdf_writer.hpp>
 
 namespace zisa {
@@ -20,3 +22,5 @@ void NetCDFWriter::do_write_string(const std::string & /* data */,
   LOG_ERR("Implement first.");
 }
 }
+
+#endif

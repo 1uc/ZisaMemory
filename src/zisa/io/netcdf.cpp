@@ -1,3 +1,5 @@
+#if ZISA_HAS_NETCDF == 1
+
 #include <zisa/io/netcdf.hpp>
 
 namespace zisa::io::netcdf {
@@ -37,3 +39,5 @@ void put_var(int file_id, int var_id, void const *data) {
   LOG_ERR_IF(status != NC_NOERR, "Failed to write variable.");
 }
 }
+
+#endif
