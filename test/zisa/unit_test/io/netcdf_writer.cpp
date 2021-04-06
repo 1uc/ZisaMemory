@@ -1,3 +1,5 @@
+#if ZISA_HAS_NETCDF == 1
+
 #include <zisa/testing/testing_framework.hpp>
 
 #include <zisa/io/netcdf_file.hpp>
@@ -86,3 +88,5 @@ void check_netcdf_writer() {
 TEST_CASE("NetCDF; write a file", "[io][netcdf]") {
   zisa::check_netcdf_writer();
 }
+
+#endif

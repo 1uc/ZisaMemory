@@ -53,6 +53,7 @@ endif()
 
 if(ZISA_HAS_NETCDF)
   find_package(NetCDF REQUIRED)
+  target_compile_definitions(memory_dependencies INTERFACE ZISA_HAS_NETCDF=1)
   target_link_libraries(memory_dependencies INTERFACE NetCDF::NetCDF)
 endif()
 

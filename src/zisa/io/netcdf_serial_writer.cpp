@@ -1,3 +1,5 @@
+#if ZISA_HAS_NETCDF == 1
+
 #include <zisa/io/netcdf_serial_writer.hpp>
 
 namespace zisa {
@@ -15,3 +17,5 @@ void NetCDFSerialWriter::do_write_scalar(void const *addr,
 }
 
 }
+
+#endif

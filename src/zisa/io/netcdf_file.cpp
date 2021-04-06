@@ -1,3 +1,4 @@
+#if ZISA_HAS_NETCDF == 1
 #include <zisa/io/netcdf_file.hpp>
 
 namespace zisa {
@@ -108,3 +109,5 @@ void NetCDFFile::do_unlink(const std::string & /* tag */) {
   LOG_ERR("Implement this first.");
 }
 }
+
+#endif

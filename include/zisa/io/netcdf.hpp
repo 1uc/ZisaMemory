@@ -1,6 +1,10 @@
 #ifndef NETCDF_H
 #define NETCDF_H
 
+#if ZISA_HAS_NETCDF == 0
+#error "Must be compiled with `ZISA_HAS_NETCDF == 1`".
+#endif
+
 #include <netcdf.h>
 #include <string>
 #include <vector>
