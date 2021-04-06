@@ -1,9 +1,6 @@
+# The license for this file:
 #[==[
 /*=========================================================================
-
-  Program:   Visualization Toolkit
-  Module:    Copyright.txt
-
 Copyright (c) 1993-2015 Ken Martin, Will Schroeder, Bill Lorensen
 All rights reserved.
 
@@ -34,6 +31,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 =========================================================================*/
 #]==]
+# End of license.
 
 # This file originates from
 # https://github.com/Kitware/VTK/blob/master/CMake/FindNetCDF.cmake
