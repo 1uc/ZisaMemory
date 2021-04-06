@@ -6,17 +6,17 @@
 
 namespace zisa {
 
-enum class ErasedBasicDataType { DOUBLE, FLOAT, INT, UNSIGNED_LONG, CHAR };
+enum class ErasedDataType { DOUBLE, FLOAT, INT, UNSIGNED_LONG, CHAR };
 
 namespace detail {
 
 template <class T>
-struct ErasedBasicDataTypeFactory {};
+struct ErasedDataTypeFactory {};
 
 #define ZISA_CREATE_DATA_TYPE_FACTORY(type, TYPE)                              \
   template <>                                                                  \
-  struct ErasedBasicDataTypeFactory<type> {                                    \
-    static ErasedBasicDataType create() { return ErasedBasicDataType::TYPE; }  \
+  struct ErasedDataTypeFactory<type> {                                         \
+    static ErasedDataType create() { return ErasedDataType::TYPE; }            \
   };
 
 ZISA_CREATE_DATA_TYPE_FACTORY(double, DOUBLE);
@@ -29,13 +29,13 @@ ZISA_CREATE_DATA_TYPE_FACTORY(char, CHAR);
 }
 
 template <class T>
-ErasedBasicDataType erase_data_type() {
-  return detail::ErasedBasicDataTypeFactory<T>::create();
+ErasedDataType erase_data_type() {
+  return detail::ErasedDataTypeFactory<T>::create();
 }
 
 class HierarchicalFile {
 public:
-  using DataType = ErasedBasicDataType;
+  using DataType = ErasedDataType;
 
 public:
   virtual ~HierarchicalFile() = default;

@@ -9,6 +9,8 @@ target_sources(memory_generic_obj
   PRIVATE ${CMAKE_CURRENT_LIST_DIR}/hierarchical_writer.hpp
   PRIVATE ${CMAKE_CURRENT_LIST_DIR}/netcdf.hpp
   PRIVATE ${CMAKE_CURRENT_LIST_DIR}/netcdf_file.hpp
+  PRIVATE ${CMAKE_CURRENT_LIST_DIR}/netcdf_serial_writer.hpp
+  PRIVATE ${CMAKE_CURRENT_LIST_DIR}/netcdf_writer.hpp
 )
 
 if(ZISA_HAS_CUDA)
