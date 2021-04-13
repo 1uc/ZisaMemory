@@ -94,7 +94,7 @@ void save(HierarchicalWriter &writer,
   constexpr int_t rank = n_dims + 1;
   std::size_t dims[rank];
   for (int_t i = 0; i < rank - 1; ++i) {
-    dims[i] = hsize_t(arr.shape(i));
+    dims[i] = arr.shape(i);
   }
   dims[rank - 1] = T::size();
 
