@@ -1,4 +1,13 @@
-cmake_minimum_required(VERSION 3.18 FATAL_ERROR)
+if(ZISA_HAS_CUDA)
+  # The CUDA related stuff was *massively* improved in
+  # 3.17 and 3.18. Therefore, if CUDA is requested, we
+  # absolutely need the modern versions.
+  cmake_minimum_required(VERSION 3.18 FATAL_ERROR)
+else()
+  # If we're not building with CUDA something old suffices.
+  cmake_minimum_required(VERSION 3.14 FATAL_ERROR)
+endif()
+
 project(ZisaMemory VERSION 0.1 LANGUAGES C CXX)
 
 if(ZISA_HAS_CUDA)
@@ -31,17 +40,20 @@ if(ZISA_LOG_LEVEL)
 endif()
 
 if(ZISA_HAS_MPI)
-  # MPI adds `-Wl,-rpath` and more to the linker flags.
-  # This then gets translated as `-Xcompiler=-Wl,-rpath`. Which ends in an error
-  # along the lines of
-  #   gcc: error: unrecognized command-line option ‘-Wl’; did you mean ‘-W’?
-  cmake_policy(SET CMP0105 OLD)
-
   find_package(MPI REQUIRED COMPONENTS CXX)
   target_compile_definitions(memory_dependencies INTERFACE ZISA_HAS_MPI=1)
 endif()
 
 if(ZISA_HAS_CUDA)
+  if(ZISA_HAS_MPI)
+    # MPI adds `-Wl,-rpath` and more to the linker flags.
+    # This then gets translated to `-Xcompiler=-Wl,-rpath`. Which results in an
+    # error along the lines of
+    #   gcc: error: unrecognized command-line option ‘-Wl’; did you mean ‘-W’?
+    # The old policy prevent these flags to be passed on automatically.
+    cmake_policy(SET CMP0105 OLD)
+  endif()
+
   find_package(CUDAToolkit REQUIRED)
   target_compile_definitions(memory_dependencies INTERFACE ZISA_HAS_CUDA=1)
 
