@@ -62,6 +62,6 @@ protected:
       = 0;
 };
 
-}
+} // namespace zisa
 
 #endif // HIERARCHICAL_WRITER_HPP

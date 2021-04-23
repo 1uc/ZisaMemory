@@ -16,4 +16,9 @@ void HierarchicalWriter::write_scalar(const void *addr,
   do_write_scalar(addr, data_type, tag);
 }
 
+void HierarchicalWriter::write_string(const std::string &data,
+                                      const std::string &tag) {
+  do_write_string(data, tag);
 }
+
+} // namespace zisa
