@@ -243,5 +243,123 @@ void copy(const array_view<T, n_dims, Indexing> &dst,
   return zisa::copy(dst, array_const_view<T, n_dims, Indexing>(src));
 }
 
+template <class T, int n_dims>
+void save(HierarchicalWriter &writer,
+          const array_view<T, n_dims, row_major> &arr,
+          const std::string &tag,
+          default_dispatch_tag) {
+
+  T const *const data = arr.raw();
+  const auto &shape = arr.shape();
+
+  auto data_type = erase_data_type<T>();
+
+  std::size_t dims[n_dims];
+  for (int_t i = 0; i < n_dims; ++i) {
+    dims[i] = shape(i); // size of (i, j, k) axes
+  }
+
+  writer.write_array(data, data_type, tag, n_dims, dims);
+}
+
+template <class T, int n_dims>
+void save(HierarchicalWriter &writer,
+          const array_view<T, n_dims, row_major> &arr,
+          const std::string &tag,
+          split_array_dispatch_tag) {
+
+  using scalar_type = typename array_save_traits<T>::scalar_type;
+  auto data_type = erase_data_type<scalar_type>();
+
+  constexpr int_t rank = n_dims + 1;
+  std::size_t dims[rank];
+  for (int_t i = 0; i < rank - 1; ++i) {
+    dims[i] = hsize_t(arr.shape(i));
+  }
+  dims[rank - 1] = T::size();
+
+  writer.write_array(arr.raw(), data_type, tag, rank, dims);
+}
+
+template <int n_dims>
+void save(HierarchicalWriter &writer,
+          const array_view<bool, n_dims, row_major> &arr,
+          const std::string &tag,
+          bool_dispatch_tag) {
+
+  using scalar_type = typename array_save_traits<bool>::scalar_type;
+  auto int_arr = array<scalar_type, n_dims>(arr.shape());
+  std::copy(arr.cbegin(), arr.cend(), int_arr.begin());
+
+  save(writer, int_arr, tag);
+}
+
+template <class T, int n_dims, template <int> class Indexing>
+void save(HierarchicalWriter &writer,
+          const array_view<T, n_dims, Indexing> &arr,
+          const std::string &tag) {
+
+  save(writer, arr, tag, typename array_save_traits<T>::dispatch_tag{});
+}
+
+template <class T, int n_dims>
+void save(HierarchicalWriter &writer,
+          const array_const_view<T, n_dims, row_major> &arr,
+          const std::string &tag,
+          default_dispatch_tag) {
+
+  T const *const data = arr.raw();
+  const auto &shape = arr.shape();
+
+  auto data_type = erase_data_type<T>();
+
+  std::size_t dims[n_dims];
+  for (int_t i = 0; i < n_dims; ++i) {
+    dims[i] = shape(i); // size of (i, j, k) axes
+  }
+
+  writer.write_array(data, data_type, tag, n_dims, dims);
+}
+
+template <class T, int n_dims>
+void save(HierarchicalWriter &writer,
+          const array_const_view<T, n_dims, row_major> &arr,
+          const std::string &tag,
+          split_array_dispatch_tag) {
+
+  using scalar_type = typename array_save_traits<T>::scalar_type;
+  auto data_type = erase_data_type<scalar_type>();
+
+  constexpr int_t rank = n_dims + 1;
+  std::size_t dims[rank];
+  for (int_t i = 0; i < rank - 1; ++i) {
+    dims[i] = hsize_t(arr.shape(i));
+  }
+  dims[rank - 1] = T::size();
+
+  writer.write_array(arr.raw(), data_type, tag, rank, dims);
+}
+
+template <int n_dims>
+void save(HierarchicalWriter &writer,
+          const array_const_view<bool, n_dims, row_major> &arr,
+          const std::string &tag,
+          bool_dispatch_tag) {
+
+  using scalar_type = typename array_save_traits<bool>::scalar_type;
+  auto int_arr = array<scalar_type, n_dims>(arr.shape());
+  std::copy(arr.cbegin(), arr.cend(), int_arr.begin());
+
+  save(writer, int_arr, tag);
+}
+
+template <class T, int n_dims, template <int> class Indexing>
+void save(HierarchicalWriter &writer,
+          const array_const_view<T, n_dims, Indexing> &arr,
+          const std::string &tag) {
+
+  save(writer, arr, tag, typename array_save_traits<T>::dispatch_tag{});
+}
+
 } // namespace zisa
 #endif /* end of include guard */
