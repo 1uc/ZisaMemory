@@ -1,3 +1,4 @@
+#if ZISA_HAS_HDF5 == 1
 #include <zisa/testing/testing_framework.hpp>
 
 #include <zisa/io/hdf5_serial_writer.hpp>
@@ -44,3 +45,4 @@ TEST_CASE("hdf5; read/write", "[array][hdf5]") {
     }
   }
 }
+#endif

@@ -3,6 +3,7 @@
  * Authors: Luc Grosheintz <forbugrep@zoho.com>
  *    Date: 2016-06-11
  */
+#if ZISA_HAS_HDF5 == 1
 #include "zisa/io/hdf5_serial_writer.hpp"
 
 namespace zisa {
@@ -178,3 +179,4 @@ std::string HDF5SerialReader::do_read_string(const std::string &tag) const {
 }
 
 } // namespace zisa
+#endif
