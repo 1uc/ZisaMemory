@@ -4,6 +4,8 @@
  *    Date: 2014-09-03
  */
 
+#if ZISA_HAS_HDF5 == 1
+
 #include <zisa/io/hdf5_file.hpp>
 
 #include <zisa/io/concatenate.hpp>
@@ -150,3 +152,5 @@ hid_t HDF5File::get_dataspace(const hid_t &dataset) const {
 }
 
 } // namespace zisa
+
+#endif

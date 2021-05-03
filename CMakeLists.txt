@@ -27,10 +27,6 @@ include("cmake/clang_tidy.cmake")
 # -- Dependencies --------------------------------------------------------------
 add_library(memory_dependencies INTERFACE)
 
-find_package(HDF5 REQUIRED)
-target_include_directories(memory_dependencies INTERFACE ${HDF5_INCLUDE_DIRS})
-target_link_libraries(memory_dependencies INTERFACE ${HDF5_LIBRARIES})
-
 # experimental/filesystem
 target_link_libraries(memory_dependencies INTERFACE stdc++fs)
 
@@ -63,10 +59,17 @@ if(ZISA_HAS_CUDA)
   target_link_libraries(memory_dependencies INTERFACE CUDA::cudart)
 endif()
 
+if(ZISA_HAS_HDF5)
+  find_package(HDF5 REQUIRED)
+  target_include_directories(memory_dependencies INTERFACE ${HDF5_INCLUDE_DIRS})
+  target_link_libraries(memory_dependencies INTERFACE ${HDF5_LIBRARIES})
+  target_compile_definitions(memory_dependencies INTERFACE ZISA_HAS_HDF5=1)
+endif()
+
 if(ZISA_HAS_NETCDF)
   find_package(NetCDF REQUIRED)
-  target_compile_definitions(memory_dependencies INTERFACE ZISA_HAS_NETCDF=1)
   target_link_libraries(memory_dependencies INTERFACE NetCDF::NetCDF)
+  target_compile_definitions(memory_dependencies INTERFACE ZISA_HAS_NETCDF=1)
 endif()
 
 

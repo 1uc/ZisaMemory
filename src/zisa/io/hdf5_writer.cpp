@@ -1,3 +1,4 @@
+#if ZISA_HAS_HDF5 == 1
 #include <zisa/io/hdf5_writer.hpp>
 
 namespace zisa {
@@ -47,3 +48,4 @@ void HDF5Reader::do_read_scalar(void *data,
   do_read_scalar(data, make_hdf5_data_type(data_type), tag);
 }
 }
+#endif

@@ -1,8 +1,11 @@
-#include <zisa/io/hdf5_serial_writer.hpp>
 #include <zisa/memory/array.hpp>
 #include <zisa/memory/array_view.hpp>
 #include <zisa/memory/column_major.hpp>
 #include <zisa/testing/testing_framework.hpp>
+
+#if ZISA_HAS_HDF5 == 1
+#include <zisa/io/hdf5_serial_writer.hpp>
+#endif
 
 using namespace zisa;
 
@@ -34,6 +37,7 @@ TEST_CASE("array; basics", "[array]") {
   REQUIRE(implicit_conversion(a, a.raw()));
 }
 
+#if ZISA_HAS_HDF5 == 1
 TEST_CASE("array; write to file", "[array]") {
 
   auto filename = "__unit_tests--array-to-hdf5.h5";
@@ -63,6 +67,7 @@ TEST_CASE("array; write to file", "[array]") {
     REQUIRE(b == a);
   }
 }
+#endif
 
 TEST_CASE("array; builds for general Indexing.", "[array]") {
 

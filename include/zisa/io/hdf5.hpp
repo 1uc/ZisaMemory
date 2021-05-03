@@ -5,6 +5,10 @@
 #ifndef HDF5_H_XC8WA
 #define HDF5_H_XC8WA
 
+#if ZISA_HAS_HDF5 != 1
+#warning "Included <zisa/io/hdf5.hpp> with HDF5 support."
+#else
+
 #include <hdf5.h>
 
 #include <zisa/config.hpp>
@@ -200,4 +204,6 @@ hid_t set_deflate(Args &&... args) {
 } // namespace H5P
 
 } // namespace zisa
+
+#endif
 #endif /* end of include guard */
