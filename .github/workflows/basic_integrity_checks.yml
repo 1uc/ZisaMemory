@@ -17,7 +17,7 @@ jobs:
       matrix:
         compiler: [[gcc, g++], [clang, clang++]]
         zisa_has_mpi: [0, 1]
-        zisa_has_netcdf: [0]
+        zisa_has_netcdf: [0, 1]
         zisa_has_hdf5: [0, 1]
 
     env:
