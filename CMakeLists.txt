@@ -35,9 +35,23 @@ if(ZISA_LOG_LEVEL)
   target_compile_definitions(memory_dependencies INTERFACE ZISA_LOG_LEVEL=${ZISA_LOG_LEVEL})
 endif()
 
+# ZISA_HAS_MPI == 1
+#   * set ZISA_HAS_MPI=1
+#   * call `find_package`
+#   * call `target_link_libraries`
+#
+# ZISA_HAS_MPI == 2
+#   Sometimes (Piz Daint) the compiler activates MPI by default.
+#   * set ZISA_HAS_MPI=2
+#   * do nothing else, i.e. don't `find_package`,
+#                           don't `target_link_libraries`
 if(ZISA_HAS_MPI)
-  find_package(MPI REQUIRED COMPONENTS CXX)
   target_compile_definitions(memory_dependencies INTERFACE ZISA_HAS_MPI=1)
+
+  if(NOT ZISA_HAS_MPI EQUAL 2)
+    find_package(MPI REQUIRED COMPONENTS CXX)
+    target_link_libraries(memory_dependencies INTERFACE MPI::MPI_CXX)
+  endif()
 endif()
 
 if(ZISA_HAS_CUDA)
