@@ -1,4 +1,4 @@
-#if ZISA_HAS_HDF5 == 1
+#if ZISA_HAS_HDF5
 #include <zisa/io/hdf5_writer.hpp>
 
 namespace zisa {

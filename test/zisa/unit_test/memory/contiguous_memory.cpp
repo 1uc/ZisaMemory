@@ -106,7 +106,7 @@ TEST_CASE("contiguous_memory; initialization", "[memory]") {
   //  }
 }
 
-#if (ZISA_HAS_CUDA == 1)
+#if ZISA_HAS_CUDA
 
 namespace zisa {
 

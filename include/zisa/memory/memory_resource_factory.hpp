@@ -4,7 +4,7 @@
 #include <memory>
 
 #include "zisa/memory/host_memory_resource.hpp"
-#if ZISA_HAS_CUDA == 1
+#if ZISA_HAS_CUDA
 #include "zisa/cuda/memory/cuda_memory_resource.hpp"
 #endif
 #include "zisa/memory/memory_resource.hpp"
@@ -20,7 +20,7 @@ make_memory_resource(const device_type &device) {
   }
 
   if (device == device_type::cuda) {
-#if (ZISA_HAS_CUDA == 1)
+#if ZISA_HAS_CUDA
     return std::make_shared<cuda_memory_resource<T>>();
 #else
     LOG_ERR("`device_type::cuda` requires `ZISA_HAS_CUDA == 1`.");

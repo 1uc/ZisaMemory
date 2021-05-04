@@ -11,7 +11,7 @@ TEST_CASE("allocator; memory_location", "[array][allocator]") {
     REQUIRE(zisa::memory_location(host_alloc) == zisa::device_type::cpu);
   }
 
-#if ZISA_HAS_CUDA == 1
+#if ZISA_HAS_CUDA
   SECTION("cuda") {
     auto cuda_alloc = zisa::allocator<double>(zisa::device_type::cuda);
     REQUIRE(zisa::memory_location(cuda_alloc) == zisa::device_type::cuda);

@@ -4,7 +4,7 @@
  *    Date: 2014-09-03
  */
 
-#if ZISA_HAS_HDF5 == 1
+#if ZISA_HAS_HDF5
 
 #include <zisa/io/hdf5_file.hpp>
 

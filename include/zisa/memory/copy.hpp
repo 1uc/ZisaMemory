@@ -25,7 +25,7 @@ void copy(T *const dst,
     std::copy(src, src + size, dst);
   }
 
-#if ZISA_HAS_CUDA == 1
+#if ZISA_HAS_CUDA
   else {
     zisa::copy_bytes(
         (void *)dst, dst_loc, (void *)src, src_loc, size * sizeof(T));

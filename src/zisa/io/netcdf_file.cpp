@@ -1,4 +1,4 @@
-#if ZISA_HAS_NETCDF == 1
+#if ZISA_HAS_NETCDF
 #include <zisa/io/netcdf_file.hpp>
 
 namespace zisa {

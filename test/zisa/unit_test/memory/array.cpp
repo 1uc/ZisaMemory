@@ -3,7 +3,7 @@
 #include <zisa/memory/column_major.hpp>
 #include <zisa/testing/testing_framework.hpp>
 
-#if ZISA_HAS_HDF5 == 1
+#if ZISA_HAS_HDF5
 #include <zisa/io/hdf5_serial_writer.hpp>
 #endif
 
@@ -37,7 +37,7 @@ TEST_CASE("array; basics", "[array]") {
   REQUIRE(implicit_conversion(a, a.raw()));
 }
 
-#if ZISA_HAS_HDF5 == 1
+#if ZISA_HAS_HDF5
 TEST_CASE("array; write to file", "[array]") {
 
   auto filename = "__unit_tests--array-to-hdf5.h5";
@@ -83,7 +83,7 @@ TEST_CASE("array; builds for general Indexing.", "[array]") {
   }
 }
 
-#if ZISA_HAS_CUDA == 1
+#if ZISA_HAS_CUDA
 
 TEST_CASE("array; array_view (cuda)", "[cuda][array]") {
   auto a = array<double, 3>({3, 3, 2}, device_type::cuda);

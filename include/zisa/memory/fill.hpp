@@ -3,7 +3,7 @@
 
 #include <zisa/config.hpp>
 
-#if ZISA_HAS_CUDA == 1
+#if ZISA_HAS_CUDA
 #include <zisa/cuda/memory/fill_cuda.hpp>
 #endif
 
