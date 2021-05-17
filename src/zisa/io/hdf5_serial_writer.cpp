@@ -1,8 +1,3 @@
-/* Interface for serial HDF5.
- *
- * Authors: Luc Grosheintz <forbugrep@zoho.com>
- *    Date: 2016-06-11
- */
 #if ZISA_HAS_HDF5
 #include "zisa/io/hdf5_serial_writer.hpp"
 

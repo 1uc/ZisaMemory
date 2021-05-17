@@ -1,8 +1,3 @@
-/* File I/O with HDF5.
- *
- * Authors: Luc Grosheintz <forbugrep@zoho.com>
- *    Date: 2014-09-03
- */
 #ifndef HDF5_WRITER_H_2GZ8LVPI
 #define HDF5_WRITER_H_2GZ8LVPI
 #include <string>

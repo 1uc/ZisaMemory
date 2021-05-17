@@ -1,8 +1,3 @@
-/* Interface for serial HDF5.
- *
- * Authors: Luc Grosheintz <forbugrep@zoho.com>
- *    Date: 2016-06-11
- */
 #ifndef HDF5_SERIAL_WRITER_H_RVN8KWYI
 #define HDF5_SERIAL_WRITER_H_RVN8KWYI
 
