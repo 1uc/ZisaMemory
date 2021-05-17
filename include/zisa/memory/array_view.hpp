@@ -98,7 +98,7 @@ public:
 
   void copy_data(const array_const_view<T, n_dims, Indexing> &other) const {
     assert((*this).shape() == other.shape());
-    LOG_ERR_IF(this->memory_location() != device_type::cpu, "Implement this.");
+    LOG_ERR_IF(this->memory_location() == device_type::cuda, "Implement this.");
 
     if (other.raw() != (*this).raw()) {
       std::copy(other.begin(), other.end(), (*this).begin());
