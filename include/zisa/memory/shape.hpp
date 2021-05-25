@@ -5,8 +5,9 @@
 #include <initializer_list>
 #include <iostream>
 
-#include "zisa/config.hpp"
-#include "zisa/meta/all_integral.hpp"
+#include <zisa/config.hpp>
+#include <zisa/meta/all_integral.hpp>
+#include <zisa/utils/integer_cast.hpp>
 
 namespace zisa {
 

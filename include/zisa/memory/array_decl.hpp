@@ -9,7 +9,7 @@
 #include <zisa/memory/row_major.hpp>
 #include <zisa/memory/shape.hpp>
 
-#include <zisa/memory/array_view_fwd.hpp>
+#include <zisa/memory/array_view.hpp>
 
 namespace zisa {
 
@@ -52,8 +52,16 @@ public:
   array &operator=(const array_const_view<T, n_dims, Indexing> &);
   array &operator=(const array_view<T, n_dims, Indexing> &);
 
-  [[nodiscard]] static array<T, n_dims, row_major> load(HierarchicalReader &reader,
-                                                        const std::string &tag);
+  array_view<T, n_dims, Indexing> view() {
+    return array_view<T, n_dims, Indexing>(*this);
+  }
+
+  array_const_view<T, n_dims, Indexing> const_view() const {
+    return array_const_view<T, n_dims, Indexing>(*this);
+  }
+
+  [[nodiscard]] static array<T, n_dims, row_major>
+  load(HierarchicalReader &reader, const std::string &tag);
 };
 
 template <class T, int n_dims, template <int N> class Indexing>
@@ -65,6 +73,33 @@ template <class T, int n_dims, template <int N> class Indexing>
 void save(HierarchicalWriter &writer,
           const array<T, n_dims, Indexing> &arr,
           const std::string &tag);
+
+template <class T, int n_dims, template <int> class Indexing>
+void copy(array<T, n_dims, Indexing> &dst,
+          const array<T, n_dims, Indexing> &src) {
+
+  return zisa::copy(array_view<T, n_dims, Indexing>(dst),
+                    array_const_view<T, n_dims, Indexing>(src));
+}
+
+template <class T, int n_dims, template <int> class Indexing>
+void copy(array<T, n_dims, Indexing> &dst,
+          const array_view<T, n_dims, Indexing> &src) {
+  return zisa::copy(array_view<T, n_dims, Indexing>(dst),
+                    array_const_view<T, n_dims, Indexing>(src));
+}
+
+template <class T, int n_dims, template <int> class Indexing>
+void copy(array<T, n_dims, Indexing> &dst,
+          const array_const_view<T, n_dims, Indexing> &src) {
+  return zisa::copy(array_view<T, n_dims, Indexing>(dst), src);
+}
+
+template <class T, int n_dims, template <int> class Indexing>
+void copy(const array_view<T, n_dims, Indexing> &dst,
+          const array<T, n_dims, Indexing> &src) {
+  return zisa::copy(dst, array_const_view<T, n_dims, Indexing>(src));
+}
 
 } // namespace zisa
 #endif /* end of include guard */

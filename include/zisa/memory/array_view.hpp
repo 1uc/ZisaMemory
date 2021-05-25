@@ -3,7 +3,8 @@
 
 #include <zisa/config.hpp>
 
-#include <zisa/memory/array.hpp>
+#include <zisa/io/hierarchical_writer.hpp>
+#include <zisa/memory/array_base.hpp>
 #include <zisa/memory/array_traits.hpp>
 #include <zisa/memory/array_view_fwd.hpp>
 #include <zisa/memory/column_major.hpp>
@@ -56,6 +57,9 @@ template <class T, class Indexing>
 device_type memory_location(const array_view_base<T, Indexing> &view) {
   return view.memory_location();
 }
+
+template <class T, int n_dims, template <int> class Indexing>
+class array;
 
 template <class T, int n_dims, template <int> class Indexing>
 class array_view : public array_view_base<T, Indexing<n_dims>> {
@@ -211,87 +215,9 @@ void copy(const array_view<T, n_dims, Indexing> &dst,
 }
 
 template <class T, int n_dims, template <int> class Indexing>
-void copy(array<T, n_dims, Indexing> &dst,
-          const array<T, n_dims, Indexing> &src) {
-
-  return zisa::copy(array_view<T, n_dims, Indexing>(dst),
-                    array_const_view<T, n_dims, Indexing>(src));
-}
-
-template <class T, int n_dims, template <int> class Indexing>
-void copy(array<T, n_dims, Indexing> &dst,
-          const array_view<T, n_dims, Indexing> &src) {
-  return zisa::copy(array_view<T, n_dims, Indexing>(dst),
-                    array_const_view<T, n_dims, Indexing>(src));
-}
-
-template <class T, int n_dims, template <int> class Indexing>
-void copy(array<T, n_dims, Indexing> &dst,
-          const array_const_view<T, n_dims, Indexing> &src) {
-  return zisa::copy(array_view<T, n_dims, Indexing>(dst), src);
-}
-
-template <class T, int n_dims, template <int> class Indexing>
-void copy(const array_view<T, n_dims, Indexing> &dst,
-          const array<T, n_dims, Indexing> &src) {
-  return zisa::copy(dst, array_const_view<T, n_dims, Indexing>(src));
-}
-
-template <class T, int n_dims, template <int> class Indexing>
 void copy(const array_view<T, n_dims, Indexing> &dst,
           const array_view<T, n_dims, Indexing> &src) {
   return zisa::copy(dst, array_const_view<T, n_dims, Indexing>(src));
-}
-
-template <class T, int n_dims>
-void save(HierarchicalWriter &writer,
-          const array_view<T, n_dims, row_major> &arr,
-          const std::string &tag,
-          default_dispatch_tag) {
-
-  T const *const data = arr.raw();
-  const auto &shape = arr.shape();
-
-  auto data_type = erase_data_type<T>();
-
-  std::size_t dims[n_dims];
-  for (int_t i = 0; i < n_dims; ++i) {
-    dims[i] = shape(i); // size of (i, j, k) axes
-  }
-
-  writer.write_array(data, data_type, tag, n_dims, dims);
-}
-
-template <class T, int n_dims>
-void save(HierarchicalWriter &writer,
-          const array_view<T, n_dims, row_major> &arr,
-          const std::string &tag,
-          split_array_dispatch_tag) {
-
-  using scalar_type = typename array_save_traits<T>::scalar_type;
-  auto data_type = erase_data_type<scalar_type>();
-
-  constexpr int_t rank = n_dims + 1;
-  std::size_t dims[rank];
-  for (int_t i = 0; i < rank - 1; ++i) {
-    dims[i] = hsize_t(arr.shape(i));
-  }
-  dims[rank - 1] = T::size();
-
-  writer.write_array(arr.raw(), data_type, tag, rank, dims);
-}
-
-template <int n_dims>
-void save(HierarchicalWriter &writer,
-          const array_view<bool, n_dims, row_major> &arr,
-          const std::string &tag,
-          bool_dispatch_tag) {
-
-  using scalar_type = typename array_save_traits<bool>::scalar_type;
-  auto int_arr = array<scalar_type, n_dims>(arr.shape());
-  std::copy(arr.cbegin(), arr.cend(), int_arr.begin());
-
-  save(writer, int_arr, tag);
 }
 
 template <class T, int n_dims, template <int> class Indexing>
@@ -299,7 +225,7 @@ void save(HierarchicalWriter &writer,
           const array_view<T, n_dims, Indexing> &arr,
           const std::string &tag) {
 
-  save(writer, arr, tag, typename array_save_traits<T>::dispatch_tag{});
+  save(writer, array_const_view<T, n_dims, Indexing>(arr), tag);
 }
 
 template <class T, int n_dims>
@@ -347,10 +273,13 @@ void save(HierarchicalWriter &writer,
           bool_dispatch_tag) {
 
   using scalar_type = typename array_save_traits<bool>::scalar_type;
-  auto int_arr = array<scalar_type, n_dims>(arr.shape());
+  auto int_arr = std::vector<scalar_type>(arr.size());
   std::copy(arr.cbegin(), arr.cend(), int_arr.begin());
 
-  save(writer, int_arr, tag);
+  auto int_arr_view = array_const_view<scalar_type, n_dims, row_major>(
+      int_arr.data(), arr.shape());
+
+  save(writer, int_arr_view, tag);
 }
 
 template <class T, int n_dims, template <int> class Indexing>
