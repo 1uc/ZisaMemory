@@ -81,7 +81,7 @@ public:
   ANY_DEVICE_INLINE const_pointer end() const { return _array.end(); }
   ANY_DEVICE_INLINE const_pointer cend() const { return _array.cend(); }
 
-  ANY_DEVICE_INLINE device_type device() const {
+  inline device_type device() const {
     return array_traits<Array>::device(_array);
   }
 
