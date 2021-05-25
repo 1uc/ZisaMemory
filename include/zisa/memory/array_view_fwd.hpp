@@ -1,6 +1,8 @@
 #ifndef ZISA_ARRAY_VIEW_FWD_HPP_UEIWQ
 #define ZISA_ARRAY_VIEW_FWD_HPP_UEIWQ
 
+#include <zisa/memory/row_major.hpp>
+
 namespace zisa {
 
 template <class T, int n_dims, template <int> class Indexing = row_major>
