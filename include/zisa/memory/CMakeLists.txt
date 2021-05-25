@@ -4,10 +4,8 @@ target_sources(memory_generic_obj
   PRIVATE ${CMAKE_CURRENT_LIST_DIR}/array_base.hpp
   PRIVATE ${CMAKE_CURRENT_LIST_DIR}/array_base_decl.hpp
   PRIVATE ${CMAKE_CURRENT_LIST_DIR}/array_base_fwd.hpp
-  PRIVATE ${CMAKE_CURRENT_LIST_DIR}/array_cell_flags.hpp
   PRIVATE ${CMAKE_CURRENT_LIST_DIR}/array_decl.hpp
   PRIVATE ${CMAKE_CURRENT_LIST_DIR}/array_impl.hpp
-  PRIVATE ${CMAKE_CURRENT_LIST_DIR}/array_stencil_family.hpp
   PRIVATE ${CMAKE_CURRENT_LIST_DIR}/array_traits.hpp
   PRIVATE ${CMAKE_CURRENT_LIST_DIR}/array_view.hpp
   PRIVATE ${CMAKE_CURRENT_LIST_DIR}/array_view_fwd.hpp
