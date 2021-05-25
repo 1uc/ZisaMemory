@@ -20,7 +20,7 @@ TEST_CASE("array; basics", "[array]") {
   REQUIRE(a.raw() != static_cast<const decltype(b) &>(b).raw());
   REQUIRE(a.shape() == b.shape());
 
-  auto b_view = array_view<double, 3>(b);
+  auto b_view = array_view(b);
   auto bb_view = array_view<double, 3>(shape(b), raw_ptr(b));
   auto bc_view = array_const_view<double, 3>(shape(b), raw_ptr(b));
 
