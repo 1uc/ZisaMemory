@@ -265,7 +265,7 @@ void save(HierarchicalWriter &writer,
   constexpr int_t rank = n_dims + 1;
   std::size_t dims[rank];
   for (int_t i = 0; i < rank - 1; ++i) {
-    dims[i] = hsize_t(arr.shape(i));
+    dims[i] = arr.shape(i);
   }
   dims[rank - 1] = T::size();
 
@@ -283,7 +283,7 @@ void save(HierarchicalWriter &writer,
   std::copy(arr.cbegin(), arr.cend(), int_arr.begin());
 
   auto int_arr_view = array_const_view<scalar_type, n_dims, row_major>(
-      int_arr.data(), arr.shape());
+      arr.shape(), int_arr.data());
 
   save(writer, int_arr_view, tag);
 }

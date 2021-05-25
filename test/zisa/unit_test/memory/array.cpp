@@ -38,16 +38,17 @@ TEST_CASE("array; basics", "[array]") {
 }
 
 #if ZISA_HAS_HDF5
-TEST_CASE("array; write to file", "[array]") {
 
+template <class T>
+void check_array() {
   auto filename = "__unit_tests--array-to-hdf5.h5";
   auto label = "a";
 
   auto shape = zisa::shape_t<3>{3ul, 4ul, 2ul};
 
-  auto a = array<double, 3>(shape);
+  auto a = array<T, 3>(shape);
   for (zisa::int_t i = 0; i < a.size(); ++i) {
-    a[i] = double(i);
+    a[i] = T(i);
   }
 
   {
@@ -63,10 +64,16 @@ TEST_CASE("array; write to file", "[array]") {
       REQUIRE(shape[0] == static_cast<zisa::int_t>(dims[0]));
     }
 
-    auto b = zisa::array<double, 3>::load(reader, label);
+    auto b = zisa::array<T, 3>::load(reader, label);
     REQUIRE(b == a);
   }
 }
+
+TEST_CASE("array; write to file", "[array]") {
+  check_array<double>();
+  check_array<bool>();
+}
+
 #endif
 
 TEST_CASE("array; builds for general Indexing.", "[array]") {
