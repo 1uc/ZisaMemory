@@ -89,6 +89,9 @@ public:
   ANY_DEVICE_INLINE T *begin() const { return this->_ptr; }
   ANY_DEVICE_INLINE T *end() const { return this->_ptr + this->size(); }
 
+  ANY_DEVICE_INLINE T const *cbegin() const { return this->_ptr; }
+  ANY_DEVICE_INLINE T const *cend() const { return this->_ptr + this->size(); }
+
   void copy_data(const array_view<T, n_dims, Indexing> &other) const {
     copy_data(array_const_view<T, n_dims, Indexing>(other));
   }
@@ -141,8 +144,11 @@ public:
     return (*this)[l];
   }
 
-  ANY_DEVICE_INLINE const T *begin() const { return this->_ptr; }
-  ANY_DEVICE_INLINE const T *end() const { return this->_ptr + this->size(); }
+  ANY_DEVICE_INLINE T const *begin() const { return this->_ptr; }
+  ANY_DEVICE_INLINE T const *end() const { return this->_ptr + this->size(); }
+
+  ANY_DEVICE_INLINE T const *cbegin() const { return this->_ptr; }
+  ANY_DEVICE_INLINE T const *cend() const { return this->_ptr + this->size(); }
 };
 
 #ifndef __CUDACC__
