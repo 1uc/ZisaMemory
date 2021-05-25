@@ -52,6 +52,12 @@ public:
   array &operator=(const array_const_view<T, n_dims, Indexing> &);
   array &operator=(const array_view<T, n_dims, Indexing> &);
 
+  operator array_view<T, n_dims, Indexing>() { return this->view(); }
+
+  operator array_const_view<T, n_dims, Indexing>() const {
+    return this->const_view();
+  }
+
   array_view<T, n_dims, Indexing> view() {
     return array_view<T, n_dims, Indexing>(*this);
   }

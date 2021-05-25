@@ -4,7 +4,6 @@
 #include <zisa/config.hpp>
 
 #include <zisa/io/hierarchical_writer.hpp>
-#include <zisa/memory/array_base.hpp>
 #include <zisa/memory/array_traits.hpp>
 #include <zisa/memory/array_view_fwd.hpp>
 #include <zisa/memory/column_major.hpp>
@@ -74,12 +73,6 @@ public:
              device_type mem_location = device_type::unknown)
       : super(shape, ptr, mem_location) {}
 
-  template <class Array, class Shape>
-  array_view(array_base<T, Indexing<n_dims>, Array, Shape> &other)
-      : array_view(zisa::shape(other),
-                   zisa::raw_ptr(other),
-                   zisa::memory_location(other)) {}
-
   array_view(std::vector<T> &v)
       : array_view(shape_t<1>{v.size()}, v.data(), device_type::cpu) {}
 
@@ -128,13 +121,6 @@ public:
                    T const *ptr,
                    device_type mem_location = device_type::unknown)
       : super(shape, ptr, mem_location) {}
-
-  template <class Array, class Shape>
-  ANY_DEVICE_INLINE
-  array_const_view(const array_base<T, Indexing<n_dims>, Array, Shape> &other)
-      : array_const_view(zisa::shape(other),
-                         zisa::raw_ptr(other),
-                         zisa::memory_location(other)) {}
 
   ANY_DEVICE_INLINE
   array_const_view(const array_view<T, n_dims, Indexing> &other)
