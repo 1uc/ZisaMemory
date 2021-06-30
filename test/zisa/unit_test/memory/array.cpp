@@ -2,6 +2,7 @@
 #include <zisa/memory/array_view.hpp>
 #include <zisa/memory/column_major.hpp>
 #include <zisa/testing/testing_framework.hpp>
+#include <zisa/utils/type_name.hpp>
 
 #if ZISA_HAS_HDF5
 #include <zisa/io/hdf5_serial_writer.hpp>
@@ -39,9 +40,9 @@ TEST_CASE("array; basics", "[array]") {
 
 #if ZISA_HAS_HDF5
 
-template <class T>
-void check_array() {
-  auto filename = "__unit_tests--array-to-hdf5.h5";
+template <class T> void check_array() {
+  auto filename = string_format("__unit_tests--array-to-hdf5-%s.h5",
+                                zisa::type_name<T>().c_str());
   auto label = "a";
 
   auto shape = zisa::shape_t<3>{3ul, 4ul, 2ul};
