@@ -59,6 +59,9 @@ hid_t close(Args &&... args) {
 namespace H5F {
 template <class... Args>
 hid_t open(char const *const filename, Args &&... args) {
+  LOG_ERR_IF(!zisa::file_exists(filename),
+             string_format("File doesn't exist. [%s]", filename));
+
   auto h5_file = H5Fopen(filename, std::forward<Args>(args)...);
   LOG_ERR_IF(
       h5_file < 0,
@@ -68,6 +71,9 @@ hid_t open(char const *const filename, Args &&... args) {
 
 template <class... Args>
 hid_t create(char const *const filename, Args &&... args) {
+  LOG_ERR_IF(zisa::file_exists(filename),
+             string_format("File already exists. [%s]", filename));
+
   zisa::ensure_directory_exists(filename);
 
   auto h5_file = H5Fcreate(filename, std::forward<Args>(args)...);
