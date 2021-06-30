@@ -21,7 +21,7 @@ public:
   }
 
   ANY_DEVICE shape_t(const shape_t &rhs) {
-    for (int k = 0; k < n_dims; ++k) {
+    for (int_t k = 0; k < n_dims; ++k) {
       _raw_data[k] = rhs[k];
     }
   }
