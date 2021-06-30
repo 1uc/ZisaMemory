@@ -48,7 +48,8 @@ private:
 
 public:
 protected:
-  std::vector<std::size_t> do_dims(const std::string &tag) const;
+  virtual std::vector<std::size_t>
+  do_dims(const std::string &tag) const override;
 
   virtual std::vector<hsize_t> do_hdf5_dims(const std::string &tag) const = 0;
 
