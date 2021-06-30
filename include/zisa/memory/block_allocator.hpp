@@ -82,7 +82,7 @@ public:
   }
 
   template <class... Args>
-  locked_ptr<T> allocate(Args &&... args) {
+  locked_ptr<T> allocate(Args &&...args) {
     auto [index, allocated] = acquire();
 
     if (!allocated) {

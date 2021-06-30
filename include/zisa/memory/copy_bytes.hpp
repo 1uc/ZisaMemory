@@ -6,7 +6,11 @@
 
 namespace zisa {
 
-void copy_bytes(void * dst, const device_type &dst_loc, void * src, const device_type &src_loc, std::size_t n_bytes);
+void copy_bytes(void *dst,
+                const device_type &dst_loc,
+                void *src,
+                const device_type &src_loc,
+                std::size_t n_bytes);
 
 }
 

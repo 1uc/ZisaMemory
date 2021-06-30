@@ -4,8 +4,8 @@
 namespace zisa {
 
 enum class device_type {
-  cpu, // CPU
-  cuda, // NVIDIA GPU through CUDA
+  cpu,    // CPU
+  cuda,   // NVIDIA GPU through CUDA
   unknown // If it's unclear where the memory resides.
 };
 

@@ -5,11 +5,9 @@
 
 namespace zisa {
 
-template<class T>
+template <class T>
 struct STDAllocatorEquivalence {
-  bool are_equivalent(std::allocator<T> &, std::allocator<T> &) {
-    return true;
-  }
+  bool are_equivalent(std::allocator<T> &, std::allocator<T> &) { return true; }
 };
 
 }

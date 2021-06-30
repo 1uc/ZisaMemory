@@ -5,7 +5,7 @@
 
 namespace zisa {
 
-template<class T, int n_dims>
+template <class T, int n_dims>
 array<T, n_dims> cuda_array(const shape_t<n_dims> &shape) {
   return array<T, n_dims>(shape, device_type::cuda);
 }

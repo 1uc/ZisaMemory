@@ -40,7 +40,8 @@ TEST_CASE("array; basics", "[array]") {
 
 #if ZISA_HAS_HDF5
 
-template <class T> void check_array() {
+template <class T>
+void check_array() {
   auto filename = string_format("__unit_tests--array-to-hdf5-%s.h5",
                                 zisa::type_name<T>().c_str());
   auto label = "a";

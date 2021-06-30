@@ -4,11 +4,11 @@
 #include <mpi.h>
 #endif
 
-int main( int argc, char* argv[] ) {
+int main(int argc, char *argv[]) {
 #if ZISA_HAS_MPI
   MPI_Init(&argc, &argv);
 #endif
-  int result = Catch::Session().run( argc, argv );
+  int result = Catch::Session().run(argc, argv);
 #if ZISA_HAS_MPI
   MPI_Finalize();
 #endif
