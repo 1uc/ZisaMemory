@@ -8,6 +8,7 @@ if [[ "$#" -lt 2 ]]
 then
     echo "Usage: $0 COMPILER DESTINATION [--zisa_has_mpi=ZISA_HAS_MPI]"
     echo "                               [--zisa_has_cuda=ZISA_HAS_CUDA]"
+    echo "                               [--cmake=CMAKE]"
     exit -1
 fi
 
@@ -85,15 +86,15 @@ do
     cd "${src_dir}/build-dep"
 
     ${CMAKE} -DCMAKE_INSTALL_PREFIX="${install_dir}/zisa" \
-          -DCMAKE_PREFIX_PATH="${install_dir}/zisa/lib/cmake/zisa" \
-          -DCMAKE_MODULE_PATH="${install_dir}/conan" \
-          -DCMAKE_PROJECT_${dep}_INCLUDE="${install_dir}/conan/conan_paths.cmake" \
-          -DCMAKE_C_COMPILER="${CC}" \
-          -DCMAKE_CXX_COMPILER="${CXX}" \
-          -DZISA_HAS_MPI="${ZISA_HAS_MPI}" \
-          -DZISA_HAS_CUDA="${ZISA_HAS_CUDA}" \
-          -DCMAKE_BUILD_TYPE="Release" \
-          ..
+             -DCMAKE_PREFIX_PATH="${install_dir}/zisa/lib/cmake/zisa" \
+             -DCMAKE_MODULE_PATH="${install_dir}/conan" \
+             -DCMAKE_PROJECT_${dep}_INCLUDE="${install_dir}/conan/conan_paths.cmake" \
+             -DCMAKE_C_COMPILER="${CC}" \
+             -DCMAKE_CXX_COMPILER="${CXX}" \
+             -DZISA_HAS_MPI="${ZISA_HAS_MPI}" \
+             -DZISA_HAS_CUDA="${ZISA_HAS_CUDA}" \
+             -DCMAKE_BUILD_TYPE="Release" \
+             ..
 
     ${CMAKE} --build . --parallel $(nproc)
     ${CMAKE} --install .
