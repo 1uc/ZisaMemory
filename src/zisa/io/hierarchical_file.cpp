@@ -12,7 +12,7 @@ void HierarchicalFile::switch_group(const std::string &group_name) {
   do_switch_group(group_name);
 }
 
-bool zisa::HierarchicalFile::group_exists(const std::string &group_name) const {
+bool HierarchicalFile::group_exists(const std::string &group_name) const {
   return do_group_exists(group_name);
 }
 
