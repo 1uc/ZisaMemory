@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: MIT
+// Copyright (c) 2021 ETH Zurich, Luc Grosheintz-Laval
+
 #ifndef CONTIGUOUS_MEMORY_BASE_INL_H_23KMR
 #define CONTIGUOUS_MEMORY_BASE_INL_H_23KMR
 

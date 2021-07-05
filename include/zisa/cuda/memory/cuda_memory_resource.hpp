@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: MIT
+// Copyright (c) 2021 ETH Zurich, Luc Grosheintz-Laval
+
 #ifndef CUDA_MEMORY_RESOURCE_HPP_VUEIW
 #define CUDA_MEMORY_RESOURCE_HPP_VUEIW
 

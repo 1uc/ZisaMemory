@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: MIT
+// Copyright (c) 2021 ETH Zurich, Luc Grosheintz-Laval
+
 #ifndef HIERARCHICAL_FILE_HPP_VNUEIW
 #define HIERARCHICAL_FILE_HPP_VNUEIW
 

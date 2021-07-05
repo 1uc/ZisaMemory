@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: MIT
+// Copyright (c) 2021 ETH Zurich, Luc Grosheintz-Laval
+
 #ifndef HIERARCHICAL_WRITER_HPP
 #define HIERARCHICAL_WRITER_HPP
 

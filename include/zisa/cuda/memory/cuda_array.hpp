@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: MIT
+// Copyright (c) 2021 ETH Zurich, Luc Grosheintz-Laval
+
 #ifndef CUDA_ARRAY_HPP_QPEUJ
 #define CUDA_ARRAY_HPP_QPEUJ
 

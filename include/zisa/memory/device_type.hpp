@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: MIT
+// Copyright (c) 2021 ETH Zurich, Luc Grosheintz-Laval
+
 #ifndef DEVICE_TYPE_H_SK3UI
 #define DEVICE_TYPE_H_SK3UI
 

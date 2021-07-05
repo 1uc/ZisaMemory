@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: MIT
+// Copyright (c) 2021 ETH Zurich, Luc Grosheintz-Laval
+
 #include <zisa/cuda/memory/fill_cuda.hpp>
 
 #include <zisa/cuda/memory/fill_cuda_impl.cuh>

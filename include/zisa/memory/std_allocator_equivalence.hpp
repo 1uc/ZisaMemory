@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: MIT
+// Copyright (c) 2021 ETH Zurich, Luc Grosheintz-Laval
+
 #ifndef STD_ALLOCATOR_EQUIVALENCE_HPP_OQXUN
 #define STD_ALLOCATOR_EQUIVALENCE_HPP_OQXUN
 

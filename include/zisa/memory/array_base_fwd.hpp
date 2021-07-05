@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: MIT
+// Copyright (c) 2021 ETH Zurich, Luc Grosheintz-Laval
+
 #ifndef ARRAY_BASE_FWD_H_G0VLK
 #define ARRAY_BASE_FWD_H_G0VLK
 

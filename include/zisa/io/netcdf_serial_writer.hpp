@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: MIT
+// Copyright (c) 2021 ETH Zurich, Luc Grosheintz-Laval
+
 #ifndef NETCDF_SERIAL_WRITER_HPP_XWYKVGMU
 #define NETCDF_SERIAL_WRITER_HPP_XWYKVGMU
 

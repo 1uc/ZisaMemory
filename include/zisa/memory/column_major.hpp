@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: MIT
+// Copyright (c) 2021 ETH Zurich, Luc Grosheintz-Laval
+
 #ifndef COLUMN_MAJOR_H_5W1YS
 #define COLUMN_MAJOR_H_5W1YS
 

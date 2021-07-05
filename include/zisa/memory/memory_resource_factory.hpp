@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: MIT
+// Copyright (c) 2021 ETH Zurich, Luc Grosheintz-Laval
+
 #ifndef MEMORY_RESOURCE_FACTORY_H_GYHK3
 #define MEMORY_RESOURCE_FACTORY_H_GYHK3
 

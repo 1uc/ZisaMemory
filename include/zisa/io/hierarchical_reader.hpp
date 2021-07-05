@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: MIT
+// Copyright (c) 2021 ETH Zurich, Luc Grosheintz-Laval
+
 #ifndef HIERARCHICAL_READER_HPP_XEIQO
 #define HIERARCHICAL_READER_HPP_XEIQO
 

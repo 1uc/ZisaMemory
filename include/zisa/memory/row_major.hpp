@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: MIT
+// Copyright (c) 2021 ETH Zurich, Luc Grosheintz-Laval
+
 #ifndef ROW_MAJOR_H_5W1YS
 #define ROW_MAJOR_H_5W1YS
 

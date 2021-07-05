@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: MIT
+// Copyright (c) 2021 ETH Zurich, Luc Grosheintz-Laval
+
 #ifndef ARRAY_VIEW_H_NPPW3
 #define ARRAY_VIEW_H_NPPW3
 

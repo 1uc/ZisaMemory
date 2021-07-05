@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: MIT
+// Copyright (c) 2021 ETH Zurich, Luc Grosheintz-Laval
+
 #ifndef ZISAMEMORY_COPY_BYTES_HPP
 #define ZISAMEMORY_COPY_BYTES_HPP
 

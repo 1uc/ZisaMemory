@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: MIT
+// Copyright (c) 2021 ETH Zurich, Luc Grosheintz-Laval
+
 #ifndef MEMORY_LOCATION_H_W181H
 #define MEMORY_LOCATION_H_W181H
 

@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: MIT
+// Copyright (c) 2021 ETH Zurich, Luc Grosheintz-Laval
+
 #ifndef HDF5_FILE_H_QYUAX
 #define HDF5_FILE_H_QYUAX
 

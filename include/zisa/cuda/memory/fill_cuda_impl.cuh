@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: MIT
+// Copyright (c) 2021 ETH Zurich, Luc Grosheintz-Laval
+
 #ifndef FILL_CUDA_IMPL_CUH_VEQOI
 #define FILL_CUDA_IMPL_CUH_VEQOI
 
