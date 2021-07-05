@@ -42,8 +42,7 @@ TEST_CASE("array; basics", "[array]") {
 
 template <class T>
 void check_array() {
-  auto filename = string_format("__unit_tests--array-to-hdf5-%s.h5",
-                                zisa::type_name<T>().c_str());
+  auto filename = std::string("__unit_tests--array-to-hdf5.h5");
   auto label = "a";
 
   auto shape = zisa::shape_t<3>{3ul, 4ul, 2ul};
@@ -69,6 +68,8 @@ void check_array() {
     auto b = zisa::array<T, 3>::load(reader, label);
     REQUIRE(b == a);
   }
+
+  zisa::delete_file(filename);
 }
 
 TEST_CASE("array; write to file", "[array]") {
