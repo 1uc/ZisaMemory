@@ -79,3 +79,16 @@ done, you should be able to open the project as a CMake project.
 
 ### Installing
 The library can be installed by a `make install`.
+
+
+## Contributing
+Please note that Zisa libraries are not stable and are distributed as source
+code. The motivation is that I've written code that solves a reoccuring problem
+in scientific computing. If this variant of the solution works for you, you're
+most welcome to incorporate this code, or parts of it, into your project. If you
+want to share bug fixes please use pull requests. Maybe this library almost
+works for you and you need to perform destructive or otherwise unmergeable
+changes, you can do this for example in your own fork.
+
+In summary please treat this library as code which you can use and modify to
+solve your problems.
