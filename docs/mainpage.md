@@ -1,14 +1,11 @@
-# ZisaCore                                                           {#mainpage}
-ZisaCore is a minimal collection of functionality without which the other
-libraries can't be written. Most notably it includes logging, file and string
-related functions. As well as abstractions for the CUDA related function
-decorations (`__device__` and friends). In and of itself it is of little
-interest to anyone.
+# ZisaMemory                                                         {#mainpage}
+ZisaMemory is provides multidimensional arrays and array views. Along with the
+code required to write arrays to HDF5 or NetCDF files.
 
 ## Quickstart
 Start by cloning the repository
 
-    $ git clone https://github.com/1uc/ZisaCore.git
+    $ git clone https://github.com/1uc/ZisaMemory.git
 
 and change into the newly created directory. Then proceed to install the
 dependencies:
