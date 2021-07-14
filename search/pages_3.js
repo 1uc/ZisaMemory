@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['zisacore_550',['ZisaCore',['../index.html',1,'']]]
+  ['zisamemory_550',['ZisaMemory',['../index.html',1,'']]]
 ];

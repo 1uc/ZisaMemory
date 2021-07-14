@@ -25,9 +25,7 @@
 var NAVTREE =
 [
   [ "ZisaMemory", "index.html", [
-    [ "ZisaCore", "index.html", [
-      [ "Quickstart", "index.html#autotoc_md0", null ]
-    ] ],
+    [ "Quickstart", "index.html#autotoc_md0", null ],
     [ "Dependencies", "md_dependencies.html", [
       [ "Automated dependencies", "md_dependencies.html#autotoc_md2", null ],
       [ "Overview of dependencies", "md_dependencies.html#autotoc_md3", [
@@ -89,7 +87,7 @@ var NAVTREEINDEX =
 [
 "allocator_8hpp.html",
 "classzisa_1_1array__view.html#ab3954ec3658d6b2776040bf08a5c90da",
-"memory__location_8hpp_source.html"
+"memory__resource_8hpp.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
