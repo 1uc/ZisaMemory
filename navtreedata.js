@@ -24,7 +24,7 @@
 */
 var NAVTREE =
 [
-  [ "ZisaGeneric", "index.html", [
+  [ "ZisaMemory", "index.html", [
     [ "ZisaMemory", "md_mainpage.html", [
       [ "Quickstart", "md_mainpage.html#autotoc_md1", null ]
     ] ],
