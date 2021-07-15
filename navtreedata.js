@@ -25,32 +25,30 @@
 var NAVTREE =
 [
   [ "ZisaMemory", "index.html", [
-    [ "ZisaMemory", "md_mainpage.html", [
-      [ "Quickstart", "md_mainpage.html#autotoc_md1", null ]
-    ] ],
+    [ "Quickstart", "index.html#autotoc_md0", null ],
     [ "Dependencies", "md_dependencies.html", [
-      [ "Automated dependencies", "md_dependencies.html#autotoc_md3", null ],
-      [ "Overview of dependencies", "md_dependencies.html#autotoc_md4", [
-        [ "System dependencies", "md_dependencies.html#autotoc_md5", null ],
-        [ "Common dependencies", "md_dependencies.html#autotoc_md6", null ],
-        [ "Internal dependencies", "md_dependencies.html#autotoc_md7", null ],
-        [ "Scientific dependencies", "md_dependencies.html#autotoc_md8", null ]
+      [ "Automated dependencies", "md_dependencies.html#autotoc_md2", null ],
+      [ "Overview of dependencies", "md_dependencies.html#autotoc_md3", [
+        [ "System dependencies", "md_dependencies.html#autotoc_md4", null ],
+        [ "Common dependencies", "md_dependencies.html#autotoc_md5", null ],
+        [ "Internal dependencies", "md_dependencies.html#autotoc_md6", null ],
+        [ "Scientific dependencies", "md_dependencies.html#autotoc_md7", null ]
       ] ]
     ] ],
     [ "Building", "md_cmake.html", [
-      [ "CMake Primer", "md_cmake.html#autotoc_md10", [
-        [ "Globbing source files", "md_cmake.html#autotoc_md11", null ],
-        [ "Deleting build folders", "md_cmake.html#autotoc_md12", null ]
+      [ "CMake Primer", "md_cmake.html#autotoc_md9", [
+        [ "Globbing source files", "md_cmake.html#autotoc_md10", null ],
+        [ "Deleting build folders", "md_cmake.html#autotoc_md11", null ]
       ] ],
       [ "Project specific flags", "md_cmake.html#cmake_flags", null ],
-      [ "IDEs", "md_cmake.html#autotoc_md13", null ]
+      [ "IDEs", "md_cmake.html#autotoc_md12", null ]
     ] ],
     [ "Conan", "md_conan.html", [
-      [ "Quick Conan Primer", "md_conan.html#autotoc_md15", [
-        [ "Conan Profiles", "md_conan.html#autotoc_md16", null ],
-        [ "C++11 Standard Library", "md_conan.html#autotoc_md17", null ]
+      [ "Quick Conan Primer", "md_conan.html#autotoc_md14", [
+        [ "Conan Profiles", "md_conan.html#autotoc_md15", null ],
+        [ "C++11 Standard Library", "md_conan.html#autotoc_md16", null ]
       ] ],
-      [ "Combining CMake and Conan", "md_conan.html#autotoc_md18", null ]
+      [ "Combining CMake and Conan", "md_conan.html#autotoc_md17", null ]
     ] ],
     [ "Contributing", "md_contributing.html", null ],
     [ "Namespaces", "namespaces.html", [
@@ -89,7 +87,7 @@ var NAVTREEINDEX =
 [
 "allocator_8hpp.html",
 "classzisa_1_1array__view.html#ab3954ec3658d6b2776040bf08a5c90da",
-"memory__location_8hpp_source.html"
+"memory__resource_8hpp.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

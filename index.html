@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>ZisaMemory: Main Page</title>
+<title>ZisaMemory: ZisaMemory</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -81,11 +81,21 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 </iframe>
 </div>
 
-<div class="header">
+<div class="PageDoc"><div class="header">
   <div class="headertitle">
-<div class="title">ZisaMemory Documentation</div>  </div>
+<div class="title">ZisaMemory </div>  </div>
 </div><!--header-->
 <div class="contents">
+<div class="textblock"><p><a class="anchor" id="mainpage"></a>ZisaMemory is provides multidimensional arrays and array views. Along with the code required to write arrays to HDF5 or NetCDF files.</p>
+<h1><a class="anchor" id="autotoc_md0"></a>
+Quickstart</h1>
+<p>Start by cloning the repository </p><pre class="fragment">$ git clone https://github.com/1uc/ZisaMemory.git
+</pre><p> and change into the newly created directory. Then proceed to install the dependencies: </p><pre class="fragment">$ bin/install_dir.sh COMPILER DIRECTORY       \
+                     [--zisa_has_mpi={0,1}]   \
+                     [--zisa_has_cuda={0,1}]
+</pre><p> they will be placed into a subdirectory of <code>DIRECTORY</code> and print part of the CMake command needed to include the dependencies. <code>COMPILER</code> must be replaced with the compiler you want to use.</p>
+<p>If this worked continue by adding <a class="el" href="md_cmake.html#cmake_flags">project specific flags</a> to the CMake command. If not it's not going to be a quick start. Please read <a class="el" href="md_dependencies.html">Dependencies</a> and then <a class="el" href="md_cmake.html">Building</a>. </p>
+</div></div><!-- PageDoc -->
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
