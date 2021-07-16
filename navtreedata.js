@@ -79,7 +79,8 @@ var NAVTREE =
         [ "All", "globals.html", null ],
         [ "Macros", "globals_defs.html", null ]
       ] ]
-    ] ]
+    ] ],
+    [ "Github Page", "^https://github.com/1uc/ZisaMemory", null ]
   ] ]
 ];
 
