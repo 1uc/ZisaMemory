@@ -13,6 +13,7 @@ then
     echo "Usage: $0 COMPILER DESTINATION [--zisa_has_mpi=ZISA_HAS_MPI]"
     echo "                               [--zisa_has_cuda=ZISA_HAS_CUDA]"
     echo "                               [--cmake=CMAKE]"
+    echo "                               [--print_install_dir]"
     exit -1
 fi
 
@@ -27,6 +28,9 @@ do
             ;;
         --cmake=*)
             CMAKE=$(realpath ${arg#*=})
+            ;;
+        --print_install_dir)
+            PRINT_INSTALL_PATH=1
             ;;
         *)
             ;;
@@ -54,8 +58,19 @@ CC="$1"
 CXX="$(${zisa_root}/bin/cc2cxx.sh $CC)"
 
 install_dir="$("${zisa_root}/bin/install_dir.sh" "$1" "$2" --zisa_has_mpi=${ZISA_HAS_MPI})"
+install_dir="$(
+    "${zisa_root}/bin/install_dir.sh" "$1" "$2" \
+        --zisa_has_mpi=${ZISA_HAS_MPI} \
+        --zisa_has_cuda=${ZISA_HAS_CUDA} \
+)"
 source_dir="${install_dir}/sources"
 conan_file="${zisa_root}/conanfile.txt"
+
+if [[ ${PRINT_INSTALL_PATH} -eq 1 ]]
+then
+  echo $install_dir
+  exit 0
+fi
 
 mkdir -p "${install_dir}/conan" && cd "${install_dir}/conan"
 conan install "$conan_file" \
@@ -107,11 +122,12 @@ echo "The dependencies were installed at"
 echo "    export DEP_DIR=${install_dir}"
 echo ""
 echo "Use"
-echo "    ${CMAKE} -DCMAKE_PROJECT_${component_name}_INCLUDE=${install_dir}/conan/conan_paths.cmake \ "
-echo "          -DCMAKE_PREFIX_PATH=${install_dir}/zisa/lib/cmake/zisa \ "
-echo "          -DZISA_HAS_CUDA=${ZISA_HAS_CUDA} \ "
-echo "          -DCMAKE_C_COMPILER=${CC} \ "
-echo "          -DCMAKE_CXX_COMPILER=${CXX} \ "
-echo "          -DCMAKE_BUILD_TYPE=FastDebug \ "
-echo "          -B build "
+echo "    ${CMAKE} \ "
+echo "        -DCMAKE_PROJECT_${component_name}_INCLUDE=${install_dir}/conan/conan_paths.cmake \ "
+echo "        -DCMAKE_PREFIX_PATH=${install_dir}/zisa/lib/cmake/zisa \ "
+echo "        -DZISA_HAS_CUDA=${ZISA_HAS_CUDA} \ "
+echo "        -DCMAKE_C_COMPILER=${CC} \ "
+echo "        -DCMAKE_CXX_COMPILER=${CXX} \ "
+echo "        -DCMAKE_BUILD_TYPE=FastDebug \ "
+echo "        -B build "
 
