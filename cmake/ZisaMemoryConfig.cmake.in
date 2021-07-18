@@ -1,0 +1,14 @@
+include(CMakeFindDependencyMacro)
+
+set(ZISA_HAS_HDF5 @ZISA_HAS_HDF5@ CACHE STRING "Does Zisa support HDF5?")
+set(ZISA_HAS_NETCDF @ZISA_HAS_NETCDF@ CACHE STRING "Does Zisa support NetCDF?")
+
+if(ZISA_HAS_HDF5)
+  find_dependency(HDF5 REQUIRED)
+endif()
+
+if(ZISA_HAS_NETCDF)
+  find_dependency(NetCDF REQUIRED)
+endif()
+
+include("${CMAKE_CURRENT_LIST_DIR}/ZisaMemoryTargets.cmake")

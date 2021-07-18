@@ -9,7 +9,6 @@ else()
 endif()
 
 project(ZisaMemory VERSION 0.1 LANGUAGES C CXX)
-
 if(ZISA_HAS_CUDA)
   enable_language(CUDA)
 endif()
@@ -33,44 +32,6 @@ target_link_libraries(memory_dependencies INTERFACE stdc++fs)
 # Logging
 if(ZISA_LOG_LEVEL)
   target_compile_definitions(memory_dependencies INTERFACE ZISA_LOG_LEVEL=${ZISA_LOG_LEVEL})
-endif()
-
-# ZISA_HAS_MPI == 1
-#   * set ZISA_HAS_MPI=1
-#   * call `find_package`
-#   * call `target_link_libraries`
-#
-# ZISA_HAS_MPI == 2
-#   Sometimes (Piz Daint) the compiler activates MPI by default.
-#   * set ZISA_HAS_MPI=2
-#   * do nothing else, i.e. don't `find_package`,
-#                           don't `target_link_libraries`
-if(ZISA_HAS_MPI)
-  target_compile_definitions(memory_dependencies INTERFACE ZISA_HAS_MPI=1)
-
-  if(NOT ZISA_HAS_MPI EQUAL 2)
-    find_package(MPI REQUIRED COMPONENTS CXX)
-    target_link_libraries(memory_dependencies INTERFACE MPI::MPI_CXX)
-  endif()
-endif()
-
-if(ZISA_HAS_CUDA)
-  if(ZISA_HAS_MPI)
-    # MPI adds `-Wl,-rpath` and more to the linker flags.
-    # This then gets translated to `-Xcompiler=-Wl,-rpath`. Which results in an
-    # error along the lines of
-    #   gcc: error: unrecognized command-line option ‘-Wl’; did you mean ‘-W’?
-    # The old policy prevent these flags to be passed on automatically.
-    cmake_policy(SET CMP0105 OLD)
-  endif()
-
-  find_package(CUDAToolkit REQUIRED)
-  target_compile_definitions(memory_dependencies INTERFACE ZISA_HAS_CUDA=1)
-
-  target_compile_options(memory_dependencies INTERFACE
-    $<BUILD_INTERFACE:$<$<COMPILE_LANGUAGE:CUDA>:--expt-relaxed-constexpr>>
-  )
-  target_link_libraries(memory_dependencies INTERFACE CUDA::cudart)
 endif()
 
 if(ZISA_HAS_HDF5)
@@ -148,9 +109,15 @@ write_basic_package_version_file(
   COMPATIBILITY SameMajorVersion
   )
 
+configure_file(
+  "${CMAKE_CURRENT_LIST_DIR}/cmake/ZisaMemoryConfig.cmake.in"
+  "${CMAKE_CURRENT_BINARY_DIR}/ZisaMemoryConfig.cmake"
+  @ONLY
+)
+
 install(
   FILES
-  "cmake/ZisaMemoryConfig.cmake"
+  "${CMAKE_CURRENT_BINARY_DIR}/ZisaMemoryConfig.cmake"
   "${CMAKE_CURRENT_BINARY_DIR}/ZisaMemoryConfigVersion.cmake"
   DESTINATION lib/cmake/zisa
   )
