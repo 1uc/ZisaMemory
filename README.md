@@ -1,6 +1,6 @@
 # ZisaMemory
-[![Build Status](https://github.com/1uc/ZisaMemory/actions/workflows/basic_integrity_checks.yml/badge.svg)](https://github.com/1uc/ZisaMemory/actions)
-[![Docs Status](https://github.com/1uc/ZisaMemory/actions/workflows/publish_docs.yml/badge.svg)](https://1uc.github.io/ZisaMemory)
+[![Build Status](https://github.com/1uc/ZisaMemory/actions/workflows/basic_integrity_checks.yml/badge.svg?branch=main)](https://github.com/1uc/ZisaMemory/actions)
+[![Docs Status](https://github.com/1uc/ZisaMemory/actions/workflows/publish_docs.yml/badge.svg?branch=main)](https://1uc.github.io/ZisaMemory)
 
 ZisaMemory most notably contains multidimensional arrays and array views. Along
 with the wrappers for HDF5 and NetCDF required to write these arrays to disk.
