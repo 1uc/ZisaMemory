@@ -119,6 +119,7 @@ install(
   FILES
   "${CMAKE_CURRENT_BINARY_DIR}/ZisaMemoryConfig.cmake"
   "${CMAKE_CURRENT_BINARY_DIR}/ZisaMemoryConfigVersion.cmake"
+  "${CMAKE_CURRENT_LIST_DIR}/cmake/FindNetCDF.cmake"
   DESTINATION lib/cmake/zisa
   )
 
