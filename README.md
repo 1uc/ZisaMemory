@@ -40,4 +40,4 @@ If this succeded the script will suggest part of the CMake command needed to
 configure the build. Head over to the [project specific flags] for a list of
 available flags.
 
-[project specific flags]: https://1uc.github.io/ZisaMemory/md_cmake.html#cmake_flags
+[project specific flags]: https://1uc.github.io/ZisaMemory/md_building.html#cmake_flags
