@@ -5,7 +5,7 @@ var searchData=
   ['char_40',['CHAR',['../namespacezisa.html#abadee0513c88a753aea861c770e0444ea027acd3aa6b1dd7f26119d3cf0f9a063',1,'zisa']]],
   ['check_5fcuda_2ehpp_41',['check_cuda.hpp',['../check__cuda_8hpp.html',1,'']]],
   ['close_5fgroup_42',['close_group',['../classzisa_1_1HierarchicalFile.html#aa711787ab9c15740f1601baffd6c4e60',1,'zisa::HierarchicalFile']]],
-  ['cmake_43',['CMake',['../md_cmake.html',1,'']]],
+  ['cmake_20usage_43',['CMake Usage',['../cmake_usage.html',1,'']]],
   ['cmake_2emd_44',['cmake.md',['../cmake_8md.html',1,'']]],
   ['column_5fmajor_45',['column_major',['../structzisa_1_1column__major.html',1,'zisa']]],
   ['column_5fmajor_2ehpp_46',['column_major.hpp',['../column__major_8hpp.html',1,'']]],
