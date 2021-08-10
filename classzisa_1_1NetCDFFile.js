@@ -1,6 +1,7 @@
 var classzisa_1_1NetCDFFile =
 [
     [ "NetCDFFile", "classzisa_1_1NetCDFFile.html#af35729a7f38b9dd58793a5d626f464d6", null ],
+    [ "~NetCDFFile", "classzisa_1_1NetCDFFile.html#ade004452b951883308f7fe8f96a1378b", null ],
     [ "do_close_group", "classzisa_1_1NetCDFFile.html#ab8f3eb08296aa1e380d52a796e801677", null ],
     [ "do_group_exists", "classzisa_1_1NetCDFFile.html#aef06a54aef71805a3a2c856fabb8b1e1", null ],
     [ "do_hierarchy", "classzisa_1_1NetCDFFile.html#a71ca316d817ed55d149ea69815dffa40", null ],
