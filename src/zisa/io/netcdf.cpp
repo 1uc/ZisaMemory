@@ -15,6 +15,11 @@ int create(std::string filename, int cmode) {
   return ncid;
 }
 
+void close(int ncid) {
+  auto status = nc_close(ncid);
+  LOG_ERR_IF(status != NC_NOERR, "Could not close file.");
+}
+
 int def_dim(int file_id, const std::string &name, std::size_t extent) {
   int id = -1;
   auto status = nc_def_dim(file_id, name.c_str(), extent, &id);
