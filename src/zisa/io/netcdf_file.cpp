@@ -76,8 +76,10 @@ NetCDFFile::NetCDFFile(const std::string &filename,
 }
 
 NetCDFFile::~NetCDFFile() {
-  while (!file_ids_.empty()) {
-    int ncid = file_ids_.top();
+  LOG_ERR_IF(file_ids_.size() >= 2, "Can't properly close the `NetCDFFile`.");
+
+  if (!file_ids_.empty()) {
+    auto ncid = file_ids_.top();
     file_ids_.pop();
     zisa::io::netcdf::close(ncid);
   }
