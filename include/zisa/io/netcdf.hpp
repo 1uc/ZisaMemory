@@ -16,6 +16,8 @@ namespace zisa::io::netcdf {
 
 int create(std::string filename, int cmode);
 
+void close(int ncid);
+
 int def_dim(int file_id, const std::string &name, std::size_t extent);
 
 int def_var(int file_id,

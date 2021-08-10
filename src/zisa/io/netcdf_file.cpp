@@ -75,6 +75,14 @@ NetCDFFile::NetCDFFile(const std::string &filename,
   }
 }
 
+NetCDFFile::~NetCDFFile() {
+  while (!file_ids_.empty()) {
+    int ncid = file_ids_.top();
+    file_ids_.pop();
+    zisa::io::netcdf::close(ncid);
+  }
+}
+
 void NetCDFFile::do_open_group(const std::string & /* group_name */) {
   // This has strong ties to defining variables.
   LOG_ERR("Implement first.");

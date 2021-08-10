@@ -57,6 +57,8 @@ class NetCDFFile : public virtual HierarchicalFile {
 public:
   NetCDFFile(const std::string &filename, const NetCDFFileStructure &structure);
 
+  virtual ~NetCDFFile() override;
+
 protected:
   virtual void do_open_group(const std::string & /* group_name */) override;
   virtual void do_close_group() override;
