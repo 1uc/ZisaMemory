@@ -17,13 +17,13 @@ namespace zisa {
 template <int n_dims, class Int = int_t>
 struct shape_t {
 public:
-  ANY_DEVICE shape_t() {
+  ANY_DEVICE shape_t() noexcept {
     for (int k = 0; k < n_dims; ++k) {
       _raw_data[k] = 0;
     }
   }
 
-  ANY_DEVICE shape_t(const shape_t &rhs) {
+  ANY_DEVICE shape_t(const shape_t &rhs) noexcept {
     for (int_t k = 0; k < n_dims; ++k) {
       _raw_data[k] = rhs[k];
     }
@@ -32,8 +32,11 @@ public:
   template <class... Ints,
             class SFINAE
             = typename std::enable_if<all_integral<Ints...>::value, void>::type>
-  ANY_DEVICE_INLINE shape_t(Ints... ints)
+  ANY_DEVICE_INLINE shape_t(Ints... ints) noexcept
       : _raw_data{integer_cast<Int>(ints)...} {}
+
+  shape_t &operator=(const shape_t &) noexcept = default;
+  shape_t &operator=(shape_t &&) noexcept = default;
 
   ANY_DEVICE_INLINE
   Int operator[](int_t dim) const {
