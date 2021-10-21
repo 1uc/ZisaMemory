@@ -1,11 +1,13 @@
 var structzisa_1_1shape__t =
 [
-    [ "shape_t", "structzisa_1_1shape__t.html#a29eb710e156293dbd3fce88ce7351171", null ],
-    [ "shape_t", "structzisa_1_1shape__t.html#a6554fe3f26caf96afb173c5ab33240ed", null ],
-    [ "shape_t", "structzisa_1_1shape__t.html#a9de55fea42060c1baf07bb22b3befc03", null ],
+    [ "shape_t", "structzisa_1_1shape__t.html#a541dc4ac2051d2cfe00e423a96b45933", null ],
+    [ "shape_t", "structzisa_1_1shape__t.html#a335b6501583f612938a4c3bde4353c9e", null ],
+    [ "shape_t", "structzisa_1_1shape__t.html#ac1d4c64b3d837f7c3d56a1fece1cbd33", null ],
     [ "operator!=", "structzisa_1_1shape__t.html#a6b1cb30ec870388c6ebede35a78ced93", null ],
     [ "operator()", "structzisa_1_1shape__t.html#a2c8c247bff3abdc6688bcdb68375bdb9", null ],
     [ "operator()", "structzisa_1_1shape__t.html#ac330dae183d13116bb45c22b15f69622", null ],
+    [ "operator=", "structzisa_1_1shape__t.html#a74b1aeb8cbd35c8c7214872a6c519376", null ],
+    [ "operator=", "structzisa_1_1shape__t.html#a42de97e4d66ff7a75e7993b804269fc8", null ],
     [ "operator==", "structzisa_1_1shape__t.html#a8a3ebd0015518071d3c1938b77672be5", null ],
     [ "operator[]", "structzisa_1_1shape__t.html#a41dc56207bb1eef78bb3c48d98055acf", null ],
     [ "operator[]", "structzisa_1_1shape__t.html#aef48b1cee538fb3f8b5633dc620f7eba", null ],
