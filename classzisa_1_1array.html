@@ -109,6 +109,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a95b481511d77cc80d5aff3a7d26d97a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad514869663b35ea02f1aa87a6e2a0e15"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classzisa_1_1array.html#ad514869663b35ea02f1aa87a6e2a0e15">array</a> (<a class="el" href="classzisa_1_1array.html">array</a> &amp;&amp;) noexcept=default</td></tr>
 <tr class="separator:ad514869663b35ea02f1aa87a6e2a0e15"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48f5c6a02800afad58662f5742fa997b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classzisa_1_1array.html#a48f5c6a02800afad58662f5742fa997b">array</a> (const <a class="el" href="classzisa_1_1array__const__view.html">array_const_view</a>&lt; T, <a class="el" href="classzisa_1_1array__base.html#adc0f965cabe667bf5dd187df5c0dba49">n_dims</a>, Indexing &gt; &amp;other, <a class="el" href="namespacezisa.html#a08e677d0a5f62bf6c89f205262e44c99">device_type</a> mem_loc)</td></tr>
+<tr class="separator:a48f5c6a02800afad58662f5742fa997b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af5c211713d0e8f53c0fd017328fedd6e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classzisa_1_1array.html#af5c211713d0e8f53c0fd017328fedd6e">array</a> (const <a class="el" href="classzisa_1_1array__const__view.html">array_const_view</a>&lt; T, <a class="el" href="classzisa_1_1array__base.html#adc0f965cabe667bf5dd187df5c0dba49">n_dims</a>, Indexing &gt; &amp;other)</td></tr>
 <tr class="separator:af5c211713d0e8f53c0fd017328fedd6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a87ce7fd35dec0bd79bea46f7ea9dfcd5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classzisa_1_1array.html#a87ce7fd35dec0bd79bea46f7ea9dfcd5">array</a> (const <a class="el" href="classzisa_1_1array__view.html">array_view</a>&lt; T, <a class="el" href="classzisa_1_1array__base.html#adc0f965cabe667bf5dd187df5c0dba49">n_dims</a>, Indexing &gt; &amp;other)</td></tr>
@@ -237,7 +239,7 @@ template&lt;class T , int n_dims, template&lt; int N &gt; class Indexing = row_m
 </div>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a95b481511d77cc80d5aff3a7d26d97a5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a95b481511d77cc80d5aff3a7d26d97a5">&#9670;&nbsp;</a></span>array() <span class="overload">[1/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a95b481511d77cc80d5aff3a7d26d97a5">&#9670;&nbsp;</a></span>array() <span class="overload">[1/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -265,7 +267,7 @@ template&lt;class T , int n_dims, template&lt; int N &gt; class Indexing = row_m
 </div>
 </div>
 <a id="ad514869663b35ea02f1aa87a6e2a0e15"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad514869663b35ea02f1aa87a6e2a0e15">&#9670;&nbsp;</a></span>array() <span class="overload">[2/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ad514869663b35ea02f1aa87a6e2a0e15">&#9670;&nbsp;</a></span>array() <span class="overload">[2/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -292,8 +294,38 @@ template&lt;class T , int n_dims, template&lt; int N &gt; class Indexing = row_m
 
 </div>
 </div>
+<a id="a48f5c6a02800afad58662f5742fa997b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a48f5c6a02800afad58662f5742fa997b">&#9670;&nbsp;</a></span>array() <span class="overload">[3/8]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T , int n_dims, template&lt; int N &gt; class Indexing&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classzisa_1_1array.html">zisa::array</a>&lt; T, <a class="el" href="classzisa_1_1array__base.html#adc0f965cabe667bf5dd187df5c0dba49">n_dims</a>, Indexing &gt;::<a class="el" href="classzisa_1_1array.html">array</a> </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classzisa_1_1array__const__view.html">array_const_view</a>&lt; T, <a class="el" href="classzisa_1_1array__base.html#adc0f965cabe667bf5dd187df5c0dba49">n_dims</a>, Indexing &gt; &amp;&#160;</td>
+          <td class="paramname"><em>other</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespacezisa.html#a08e677d0a5f62bf6c89f205262e44c99">device_type</a>&#160;</td>
+          <td class="paramname"><em>mem_loc</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="af5c211713d0e8f53c0fd017328fedd6e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af5c211713d0e8f53c0fd017328fedd6e">&#9670;&nbsp;</a></span>array() <span class="overload">[3/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#af5c211713d0e8f53c0fd017328fedd6e">&#9670;&nbsp;</a></span>array() <span class="overload">[4/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -321,7 +353,7 @@ template&lt;class T , int n_dims, template&lt; int N &gt; class Indexing&gt; </d
 </div>
 </div>
 <a id="a87ce7fd35dec0bd79bea46f7ea9dfcd5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a87ce7fd35dec0bd79bea46f7ea9dfcd5">&#9670;&nbsp;</a></span>array() <span class="overload">[4/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a87ce7fd35dec0bd79bea46f7ea9dfcd5">&#9670;&nbsp;</a></span>array() <span class="overload">[5/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -349,7 +381,7 @@ template&lt;class T , int n_dims, template&lt; int N &gt; class Indexing&gt; </d
 </div>
 </div>
 <a id="a4d4b05be197364d0fabaa60cebb350ac"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4d4b05be197364d0fabaa60cebb350ac">&#9670;&nbsp;</a></span>array() <span class="overload">[5/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a4d4b05be197364d0fabaa60cebb350ac">&#9670;&nbsp;</a></span>array() <span class="overload">[6/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -379,7 +411,7 @@ template&lt;class T , int n_dims, template&lt; int N &gt; class Indexing&gt; </d
 </div>
 </div>
 <a id="a7eafc36575e3fd403bf952ef1862c501"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7eafc36575e3fd403bf952ef1862c501">&#9670;&nbsp;</a></span>array() <span class="overload">[6/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a7eafc36575e3fd403bf952ef1862c501">&#9670;&nbsp;</a></span>array() <span class="overload">[7/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -417,7 +449,7 @@ template&lt;class T , int n_dims, template&lt; int N &gt; class Indexing&gt; </d
 </div>
 </div>
 <a id="a39229a0b19f5afca6e084b50d6f207af"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a39229a0b19f5afca6e084b50d6f207af">&#9670;&nbsp;</a></span>array() <span class="overload">[7/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a39229a0b19f5afca6e084b50d6f207af">&#9670;&nbsp;</a></span>array() <span class="overload">[8/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">

@@ -1,5 +1,6 @@
 var NAVTREEINDEX2 =
 {
+"md_dependencies.html#automated_dependencies":[1,0],
 "md_dependencies.html#autotoc_md2":[1,1],
 "md_dependencies.html#autotoc_md3":[1,1,0],
 "md_dependencies.html#autotoc_md4":[1,1,1],
