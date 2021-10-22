@@ -41,6 +41,13 @@ array<T, n_dims, Indexing>::array(const array_view<T, n_dims, Indexing> &other)
 }
 
 template <class T, int n_dims, template <int N> class Indexing>
+array<T, n_dims, Indexing>::array(
+    const array_const_view<T, n_dims, Indexing> &other, device_type device)
+    : array(other.shape(), device) {
+  zisa::copy(*this, other);
+}
+
+template <class T, int n_dims, template <int N> class Indexing>
 array<T, n_dims, Indexing> &array<T, n_dims, Indexing>::operator=(
     const array_const_view<T, n_dims, Indexing> &other) {
 
