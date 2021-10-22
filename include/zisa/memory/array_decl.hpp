@@ -41,6 +41,9 @@ public:
   array(const array &) = default;
   array(array &&) noexcept = default;
 
+  array(const array_const_view<T, n_dims, Indexing> &other,
+        device_type mem_loc);
+
   explicit array(const array_const_view<T, n_dims, Indexing> &other);
   explicit array(const array_view<T, n_dims, Indexing> &other);
 
