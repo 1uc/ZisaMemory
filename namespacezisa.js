@@ -3,6 +3,9 @@ var namespacezisa =
     [ "detail", "namespacezisa_1_1detail.html", "namespacezisa_1_1detail" ],
     [ "internal", "namespacezisa_1_1internal.html", "namespacezisa_1_1internal" ],
     [ "io", "namespacezisa_1_1io.html", "namespacezisa_1_1io" ],
+    [ "random", "namespacezisa_1_1random.html", [
+      [ "uniform", "namespacezisa_1_1random.html#ac36bf1e9d89ad161591511eae8ac2ddb", null ]
+    ] ],
     [ "cuda_memory_resource", "classzisa_1_1cuda__memory__resource.html", "classzisa_1_1cuda__memory__resource" ],
     [ "HDF5DataType", "classzisa_1_1HDF5DataType.html", "classzisa_1_1HDF5DataType" ],
     [ "HDF5File", "classzisa_1_1HDF5File.html", "classzisa_1_1HDF5File" ],

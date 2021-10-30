@@ -7,5 +7,6 @@ var array__decl_8hpp =
     [ "copy", "array__decl_8hpp.html#af5502c0b05f117a1887addd128ecc282", null ],
     [ "copy", "array__decl_8hpp.html#af657665b1d1e1b15b79fe5bd1ecc6410", null ],
     [ "empty_like", "array__decl_8hpp.html#a151429339e61ffeca264b68f727a5dd6", null ],
-    [ "save", "array__decl_8hpp.html#a6facf48c962efcdb04d6f9bb1bad1dcb", null ]
+    [ "save", "array__decl_8hpp.html#a6facf48c962efcdb04d6f9bb1bad1dcb", null ],
+    [ "uniform", "array__decl_8hpp.html#ac36bf1e9d89ad161591511eae8ac2ddb", null ]
 ];
