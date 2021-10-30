@@ -140,6 +140,31 @@ array<T, n_dims, Indexing>::load(HierarchicalReader &reader,
 
   return arr;
 }
+
+namespace random {
+template <class T, int n_dims, template <int N> class Indexing>
+array<T, n_dims, Indexing> uniform(const T &low,
+                                   const T &high,
+                                   const shape_t<n_dims> &shape,
+                                   device_type device) {
+  LOG_ERR_IF(device != device_type::cpu, "Implement first.");
+  static_assert(std::is_same<T, double>::value, "Implement first.");
+
+  auto n = product(shape);
+  auto x = array<T, n_dims, Indexing>(shape, device);
+
+  std::random_device r;
+  auto mt = std::mt19937(r());
+  auto dist = std::uniform_real_distribution<T>(low, high);
+
+  for (int_t i = 0; i < n; ++i) {
+    x[i] = dist(mt);
+  }
+
+  return x;
+}
+}
+
 } // namespace zisa
 
 #endif /* end of include guard */

@@ -12,6 +12,7 @@
 #include <zisa/memory/row_major.hpp>
 #include <zisa/memory/shape.hpp>
 
+#include <random>
 #include <zisa/memory/array_view.hpp>
 
 namespace zisa {
@@ -68,7 +69,14 @@ public:
 
   [[nodiscard]] static array<T, n_dims, row_major>
   load(HierarchicalReader &reader, const std::string &tag);
+
 };
+
+namespace random {
+template<class T, int n_dims, template <int N> class Indexing>
+array<T, n_dims, Indexing>
+uniform(const T &low, const T &high, const shape_t<n_dims> &shape, device_type device = device_type::cpu);
+}
 
 template <class T, int n_dims, template <int N> class Indexing>
 array<T, n_dims, Indexing> empty_like(const array<T, n_dims, Indexing> &other) {
