@@ -90,6 +90,7 @@ var namespacezisa =
     [ "empty_like", "namespacezisa.html#a151429339e61ffeca264b68f727a5dd6", null ],
     [ "erase_data_type", "namespacezisa.html#a41041ab6a6b75fe7e99ad7cdbb592f84", null ],
     [ "fill", "namespacezisa.html#aea01da05feea46bad35b521743d484a5", null ],
+    [ "fill", "namespacezisa.html#a6269a7083db69b205e9fbf0c503de722", null ],
     [ "fill", "namespacezisa.html#ad2a653d7c53c16ed764fcf1fdb20ec79", null ],
     [ "fill_cuda", "namespacezisa.html#a889665933fa841390a4b9e088c915a1f", null ],
     [ "fill_host", "namespacezisa.html#a28373473f9e1b4c975cfe40a732a2e30", null ],

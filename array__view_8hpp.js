@@ -9,6 +9,7 @@ var array__view_8hpp =
     [ "const_slice", "array__view_8hpp.html#a91fc0182ff23af86a80d4d1c1b6ec0c4", null ],
     [ "copy", "array__view_8hpp.html#a6539d38d619b4d53db4dd91cd89f47fa", null ],
     [ "copy", "array__view_8hpp.html#a458224fd59daaeee63a33e5b84aca2c0", null ],
+    [ "fill", "array__view_8hpp.html#a6269a7083db69b205e9fbf0c503de722", null ],
     [ "memory_location", "array__view_8hpp.html#aed4fa2902f6f1a7e9bb86a30f79bddd1", null ],
     [ "raw_ptr", "array__view_8hpp.html#a590d1cda905e883a3bf51bc14043de35", null ],
     [ "raw_ptr", "array__view_8hpp.html#af9b0a41557f8a6cae9cd75e0b70a85eb", null ],
