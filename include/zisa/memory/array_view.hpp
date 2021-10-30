@@ -212,6 +212,11 @@ ANY_DEVICE_INLINE auto raw_ptr(const array_const_view<T, n_dims, Indexing> &a)
 }
 
 template <class T, int n_dims, template <int> class Indexing>
+void fill(const array_view<T, n_dims, Indexing> &dst, const T &value) {
+  zisa::fill(raw_ptr(dst), memory_location(dst), dst.size(), value);
+}
+
+template <class T, int n_dims, template <int> class Indexing>
 void copy(const array_view<T, n_dims, Indexing> &dst,
           const array_const_view<T, n_dims, Indexing> &src) {
 
