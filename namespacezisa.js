@@ -128,6 +128,7 @@ var namespacezisa =
     [ "raw_ptr", "namespacezisa.html#a9c8ffbd2ebaada0c46e69571ebae0e45", null ],
     [ "raw_ptr", "namespacezisa.html#a66e62bf19157c7f12ece98a226416a64", null ],
     [ "raw_ptr", "namespacezisa.html#a3b867299da7509c0106e9bb08347bd86", null ],
+    [ "raw_ptr", "namespacezisa.html#a346de257eb9a049619e7cc336bfdf536", null ],
     [ "save", "namespacezisa.html#a6facf48c962efcdb04d6f9bb1bad1dcb", null ],
     [ "save", "namespacezisa.html#a36d0ba38371586973d6190cbb25232e8", null ],
     [ "save", "namespacezisa.html#aac07f8358e710eb73fc113822af10f0a", null ],

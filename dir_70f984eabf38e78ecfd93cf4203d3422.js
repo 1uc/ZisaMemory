@@ -8,8 +8,10 @@ var dir_70f984eabf38e78ecfd93cf4203d3422 =
     [ "array_decl.hpp", "array__decl_8hpp.html", "array__decl_8hpp" ],
     [ "array_impl.hpp", "array__impl_8hpp.html", "array__impl_8hpp" ],
     [ "array_traits.hpp", "array__traits_8hpp.html", "array__traits_8hpp" ],
-    [ "array_view.hpp", "array__view_8hpp.html", "array__view_8hpp" ],
+    [ "array_view.hpp", "array__view_8hpp.html", null ],
+    [ "array_view_decl.hpp", "array__view__decl_8hpp.html", "array__view__decl_8hpp" ],
     [ "array_view_fwd.hpp", "array__view__fwd_8hpp.html", null ],
+    [ "array_view_impl.hpp", "array__view__impl_8hpp.html", "array__view__impl_8hpp" ],
     [ "block_allocator.hpp", "block__allocator_8hpp.html", [
       [ "locked_ptr", "classzisa_1_1locked__ptr.html", "classzisa_1_1locked__ptr" ],
       [ "block_allocator", "classzisa_1_1block__allocator.html", "classzisa_1_1block__allocator" ]

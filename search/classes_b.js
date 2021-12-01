@@ -1,10 +1,10 @@
 var searchData=
 [
-  ['scientificconstructor_329',['ScientificConstructor',['../structzisa_1_1ScientificConstructor.html',1,'zisa']]],
-  ['scientificconstructorimpl_330',['ScientificConstructorImpl',['../structzisa_1_1internal_1_1ScientificConstructorImpl.html',1,'zisa::internal']]],
-  ['scientificconstructorimpl_3c_20t_2c_20typename_20std_3a_3aenable_5fif_3c_21std_3a_3ais_5ftrivially_5fcopyable_3c_20t_20_3e_3a_3avalue_20_3e_3a_3atype_20_3e_331',['ScientificConstructorImpl&lt; T, typename std::enable_if&lt;!std::is_trivially_copyable&lt; T &gt;::value &gt;::type &gt;',['../structzisa_1_1internal_1_1ScientificConstructorImpl_3_01T_00_01typename_01std_1_1enable__if_3_9sdec2d795a2d274da029e96e9938ce3dd.html',1,'zisa::internal']]],
-  ['shape_5ft_332',['shape_t',['../structzisa_1_1shape__t.html',1,'zisa']]],
-  ['shape_5ft_3c_20indexing_5ftraits_3c_20indexing_20_3e_3a_3an_5fdims_2c_20size_5ftype_20_3e_333',['shape_t&lt; indexing_traits&lt; Indexing &gt;::n_dims, size_type &gt;',['../structzisa_1_1shape__t.html',1,'zisa']]],
-  ['split_5farray_5fdispatch_5ftag_334',['split_array_dispatch_tag',['../structzisa_1_1split__array__dispatch__tag.html',1,'zisa']]],
-  ['stdallocatorequivalence_335',['STDAllocatorEquivalence',['../structzisa_1_1STDAllocatorEquivalence.html',1,'zisa']]]
+  ['scientificconstructor_331',['ScientificConstructor',['../structzisa_1_1ScientificConstructor.html',1,'zisa']]],
+  ['scientificconstructorimpl_332',['ScientificConstructorImpl',['../structzisa_1_1internal_1_1ScientificConstructorImpl.html',1,'zisa::internal']]],
+  ['scientificconstructorimpl_3c_20t_2c_20typename_20std_3a_3aenable_5fif_3c_21std_3a_3ais_5ftrivially_5fcopyable_3c_20t_20_3e_3a_3avalue_20_3e_3a_3atype_20_3e_333',['ScientificConstructorImpl&lt; T, typename std::enable_if&lt;!std::is_trivially_copyable&lt; T &gt;::value &gt;::type &gt;',['../structzisa_1_1internal_1_1ScientificConstructorImpl_3_01T_00_01typename_01std_1_1enable__if_3_9sdec2d795a2d274da029e96e9938ce3dd.html',1,'zisa::internal']]],
+  ['shape_5ft_334',['shape_t',['../structzisa_1_1shape__t.html',1,'zisa']]],
+  ['shape_5ft_3c_20indexing_5ftraits_3c_20indexing_20_3e_3a_3an_5fdims_2c_20size_5ftype_20_3e_335',['shape_t&lt; indexing_traits&lt; Indexing &gt;::n_dims, size_type &gt;',['../structzisa_1_1shape__t.html',1,'zisa']]],
+  ['split_5farray_5fdispatch_5ftag_336',['split_array_dispatch_tag',['../structzisa_1_1split__array__dispatch__tag.html',1,'zisa']]],
+  ['stdallocatorequivalence_337',['STDAllocatorEquivalence',['../structzisa_1_1STDAllocatorEquivalence.html',1,'zisa']]]
 ];

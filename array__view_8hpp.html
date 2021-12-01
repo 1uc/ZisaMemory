@@ -82,100 +82,14 @@ $(document).ready(function(){initNavTree('array__view_8hpp.html',''); initResiza
 </div>
 
 <div class="header">
-  <div class="summary">
-<a href="#nested-classes">Classes</a> &#124;
-<a href="#namespaces">Namespaces</a> &#124;
-<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">array_view.hpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;zisa/config.hpp&gt;</code><br />
-<code>#include &lt;<a class="el" href="hierarchical__writer_8hpp_source.html">zisa/io/hierarchical_writer.hpp</a>&gt;</code><br />
-<code>#include &lt;<a class="el" href="array__base_8hpp_source.html">zisa/memory/array_base.hpp</a>&gt;</code><br />
-<code>#include &lt;<a class="el" href="array__traits_8hpp_source.html">zisa/memory/array_traits.hpp</a>&gt;</code><br />
-<code>#include &lt;<a class="el" href="array__view__fwd_8hpp_source.html">zisa/memory/array_view_fwd.hpp</a>&gt;</code><br />
-<code>#include &lt;<a class="el" href="column__major_8hpp_source.html">zisa/memory/column_major.hpp</a>&gt;</code><br />
-<code>#include &lt;<a class="el" href="contiguous__memory_8hpp_source.html">zisa/memory/contiguous_memory.hpp</a>&gt;</code><br />
-<code>#include &lt;<a class="el" href="copy_8hpp_source.html">zisa/memory/copy.hpp</a>&gt;</code><br />
-<code>#include &lt;<a class="el" href="shape_8hpp_source.html">zisa/memory/shape.hpp</a>&gt;</code><br />
-<code>#include &lt;zisa/meta/add_const_if.hpp&gt;</code><br />
-<code>#include &lt;zisa/meta/if_t.hpp&gt;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="array__view__decl_8hpp_source.html">array_view_decl.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="array__view__impl_8hpp_source.html">array_view_impl.hpp</a>&quot;</code><br />
 </div>
 <p><a href="array__view_8hpp_source.html">Go to the source code of this file.</a></p>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structzisa_1_1array__traits_3_01T_01_5_01_4.html">zisa::array_traits&lt; T * &gt;</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classzisa_1_1array__view__base.html">zisa::array_view_base&lt; T, Indexing &gt;</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classzisa_1_1array__view.html">zisa::array_view&lt; T, n_dims, Indexing &gt;</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classzisa_1_1array__const__view.html">zisa::array_const_view&lt; T, n_dims, Indexing &gt;</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
-Namespaces</h2></td></tr>
-<tr class="memitem:namespacezisa"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacezisa.html">zisa</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:namespacezisa_1_1detail"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacezisa_1_1detail.html">zisa::detail</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:a3b867299da7509c0106e9bb08347bd86"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
-<tr class="memitem:a3b867299da7509c0106e9bb08347bd86"><td class="memTemplItemLeft" align="right" valign="top">ANY_DEVICE_INLINE auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacezisa.html#a3b867299da7509c0106e9bb08347bd86">zisa::raw_ptr</a> (T *a) -&gt; decltype(a)</td></tr>
-<tr class="separator:a3b867299da7509c0106e9bb08347bd86"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aed4fa2902f6f1a7e9bb86a30f79bddd1"><td class="memTemplParams" colspan="2">template&lt;class T , class Indexing &gt; </td></tr>
-<tr class="memitem:aed4fa2902f6f1a7e9bb86a30f79bddd1"><td class="memTemplItemLeft" align="right" valign="top">device_type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacezisa.html#aed4fa2902f6f1a7e9bb86a30f79bddd1">zisa::memory_location</a> (const array_view_base&lt; T, Indexing &gt; &amp;view)</td></tr>
-<tr class="separator:aed4fa2902f6f1a7e9bb86a30f79bddd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa5f068408c460a08b3682334bd0d83b8"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
-<tr class="memitem:aa5f068408c460a08b3682334bd0d83b8"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacezisa.html#aa5f068408c460a08b3682334bd0d83b8">zisa::array_view</a> (std::vector&lt; T &gt; &amp;v) -&gt; array_view&lt; T, 1, row_major &gt;</td></tr>
-<tr class="separator:aa5f068408c460a08b3682334bd0d83b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a349cc09b02825001d5343db22024bb9b"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
-<tr class="memitem:a349cc09b02825001d5343db22024bb9b"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacezisa.html#a349cc09b02825001d5343db22024bb9b">zisa::array_const_view</a> (const std::vector&lt; T &gt; &amp;) -&gt; array_const_view&lt; T, 1, row_major &gt;</td></tr>
-<tr class="separator:a349cc09b02825001d5343db22024bb9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a15ea12a69c60a4b34cdfe88c80c7031e"><td class="memTemplParams" colspan="2">template&lt;class T , int n_dims&gt; </td></tr>
-<tr class="memitem:a15ea12a69c60a4b34cdfe88c80c7031e"><td class="memTemplItemLeft" align="right" valign="top">array_const_view&lt; T, n_dims, row_major &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacezisa_1_1detail.html#a15ea12a69c60a4b34cdfe88c80c7031e">zisa::detail::slice</a> (const array_const_view&lt; T, n_dims, row_major &gt; &amp;arr, int_t i0, int_t i1)</td></tr>
-<tr class="separator:a15ea12a69c60a4b34cdfe88c80c7031e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a94366d61181f299e0ae68274172509fd"><td class="memTemplParams" colspan="2">template&lt;class T , int n_dims&gt; </td></tr>
-<tr class="memitem:a94366d61181f299e0ae68274172509fd"><td class="memTemplItemLeft" align="right" valign="top">array_view&lt; T, n_dims, row_major &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacezisa.html#a94366d61181f299e0ae68274172509fd">zisa::slice</a> (const array_view&lt; T, n_dims, row_major &gt; &amp;arr, int_t i0, int_t i1)</td></tr>
-<tr class="separator:a94366d61181f299e0ae68274172509fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a91fc0182ff23af86a80d4d1c1b6ec0c4"><td class="memTemplParams" colspan="2">template&lt;class T , int n_dims&gt; </td></tr>
-<tr class="memitem:a91fc0182ff23af86a80d4d1c1b6ec0c4"><td class="memTemplItemLeft" align="right" valign="top">array_const_view&lt; T, n_dims, row_major &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacezisa.html#a91fc0182ff23af86a80d4d1c1b6ec0c4">zisa::const_slice</a> (const array_const_view&lt; T, n_dims, row_major &gt; &amp;arr, int_t i0, int_t i1)</td></tr>
-<tr class="separator:a91fc0182ff23af86a80d4d1c1b6ec0c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af9b0a41557f8a6cae9cd75e0b70a85eb"><td class="memTemplParams" colspan="2">template&lt;class T , int n_dims, template&lt; int &gt; class Indexing&gt; </td></tr>
-<tr class="memitem:af9b0a41557f8a6cae9cd75e0b70a85eb"><td class="memTemplItemLeft" align="right" valign="top">ANY_DEVICE_INLINE auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacezisa.html#af9b0a41557f8a6cae9cd75e0b70a85eb">zisa::raw_ptr</a> (const array_view&lt; T, n_dims, Indexing &gt; &amp;a) -&gt; decltype(a.raw())</td></tr>
-<tr class="separator:af9b0a41557f8a6cae9cd75e0b70a85eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a590d1cda905e883a3bf51bc14043de35"><td class="memTemplParams" colspan="2">template&lt;class T , int n_dims, template&lt; int &gt; class Indexing&gt; </td></tr>
-<tr class="memitem:a590d1cda905e883a3bf51bc14043de35"><td class="memTemplItemLeft" align="right" valign="top">ANY_DEVICE_INLINE auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacezisa.html#a590d1cda905e883a3bf51bc14043de35">zisa::raw_ptr</a> (const array_const_view&lt; T, n_dims, Indexing &gt; &amp;a) -&gt; decltype(a.raw())</td></tr>
-<tr class="separator:a590d1cda905e883a3bf51bc14043de35"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6269a7083db69b205e9fbf0c503de722"><td class="memTemplParams" colspan="2">template&lt;class T , int n_dims, template&lt; int &gt; class Indexing&gt; </td></tr>
-<tr class="memitem:a6269a7083db69b205e9fbf0c503de722"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacezisa.html#a6269a7083db69b205e9fbf0c503de722">zisa::fill</a> (const array_view&lt; T, n_dims, Indexing &gt; &amp;dst, const T &amp;value)</td></tr>
-<tr class="separator:a6269a7083db69b205e9fbf0c503de722"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6539d38d619b4d53db4dd91cd89f47fa"><td class="memTemplParams" colspan="2">template&lt;class T , int n_dims, template&lt; int &gt; class Indexing&gt; </td></tr>
-<tr class="memitem:a6539d38d619b4d53db4dd91cd89f47fa"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacezisa.html#a6539d38d619b4d53db4dd91cd89f47fa">zisa::copy</a> (const array_view&lt; T, n_dims, Indexing &gt; &amp;dst, const array_const_view&lt; T, n_dims, Indexing &gt; &amp;src)</td></tr>
-<tr class="separator:a6539d38d619b4d53db4dd91cd89f47fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a458224fd59daaeee63a33e5b84aca2c0"><td class="memTemplParams" colspan="2">template&lt;class T , int n_dims, template&lt; int &gt; class Indexing&gt; </td></tr>
-<tr class="memitem:a458224fd59daaeee63a33e5b84aca2c0"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacezisa.html#a458224fd59daaeee63a33e5b84aca2c0">zisa::copy</a> (const array_view&lt; T, n_dims, Indexing &gt; &amp;dst, const array_view&lt; T, n_dims, Indexing &gt; &amp;src)</td></tr>
-<tr class="separator:a458224fd59daaeee63a33e5b84aca2c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4ddb00595e73d23340ea136c0bdb0206"><td class="memTemplParams" colspan="2">template&lt;class T , int n_dims, template&lt; int &gt; class Indexing&gt; </td></tr>
-<tr class="memitem:a4ddb00595e73d23340ea136c0bdb0206"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacezisa.html#a4ddb00595e73d23340ea136c0bdb0206">zisa::save</a> (HierarchicalWriter &amp;writer, const array_view&lt; T, n_dims, Indexing &gt; &amp;arr, const std::string &amp;tag)</td></tr>
-<tr class="separator:a4ddb00595e73d23340ea136c0bdb0206"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a85753cc400ed5afb9e0799464332d0e2"><td class="memTemplParams" colspan="2">template&lt;class T , int n_dims&gt; </td></tr>
-<tr class="memitem:a85753cc400ed5afb9e0799464332d0e2"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacezisa.html#a85753cc400ed5afb9e0799464332d0e2">zisa::save</a> (HierarchicalWriter &amp;writer, const array_const_view&lt; T, n_dims, row_major &gt; &amp;arr, const std::string &amp;tag, default_dispatch_tag)</td></tr>
-<tr class="separator:a85753cc400ed5afb9e0799464332d0e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a59549f0f14220181a91f9666ca00c3af"><td class="memTemplParams" colspan="2">template&lt;class T , int n_dims&gt; </td></tr>
-<tr class="memitem:a59549f0f14220181a91f9666ca00c3af"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacezisa.html#a59549f0f14220181a91f9666ca00c3af">zisa::save</a> (HierarchicalWriter &amp;writer, const array_const_view&lt; T, n_dims, row_major &gt; &amp;arr, const std::string &amp;tag, split_array_dispatch_tag)</td></tr>
-<tr class="separator:a59549f0f14220181a91f9666ca00c3af"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a36d0ba38371586973d6190cbb25232e8"><td class="memTemplParams" colspan="2">template&lt;int n_dims&gt; </td></tr>
-<tr class="memitem:a36d0ba38371586973d6190cbb25232e8"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacezisa.html#a36d0ba38371586973d6190cbb25232e8">zisa::save</a> (HierarchicalWriter &amp;writer, const array_const_view&lt; bool, n_dims, row_major &gt; &amp;arr, const std::string &amp;tag, bool_dispatch_tag)</td></tr>
-<tr class="separator:a36d0ba38371586973d6190cbb25232e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aac07f8358e710eb73fc113822af10f0a"><td class="memTemplParams" colspan="2">template&lt;class T , int n_dims, template&lt; int &gt; class Indexing&gt; </td></tr>
-<tr class="memitem:aac07f8358e710eb73fc113822af10f0a"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacezisa.html#aac07f8358e710eb73fc113822af10f0a">zisa::save</a> (HierarchicalWriter &amp;writer, const array_const_view&lt; T, n_dims, Indexing &gt; &amp;arr, const std::string &amp;tag)</td></tr>
-<tr class="separator:aac07f8358e710eb73fc113822af10f0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
