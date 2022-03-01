@@ -43,6 +43,15 @@ struct row_major<4> {
   }
 };
 
+template <>
+struct row_major<5> {
+  template <class Shape>
+  ANY_DEVICE_INLINE static int_t
+  linear_index(const Shape &shape, int_t i0, int_t i1, int_t i2, int_t i3, int_t i4) {
+    return i4 + shape[4] * (i3 + shape[3] * (i2 + shape[2] * (i1 + shape[1] * i0)));
+  }
+};
+
 template <class Indexing>
 struct indexing_traits;
 
@@ -64,6 +73,11 @@ struct indexing_traits<row_major<3>> {
 template <>
 struct indexing_traits<row_major<4>> {
   static constexpr int_t n_dims = 4;
+};
+
+template <>
+struct indexing_traits<row_major<5>> {
+  static constexpr int_t n_dims = 5;
 };
 
 } // namespace zisa
