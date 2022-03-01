@@ -5,7 +5,7 @@ var classzisa_1_1allocator =
     [ "value_type", "classzisa_1_1allocator.html#ade219b4232afceddb62a4375d6ee5b23", null ],
     [ "allocator", "classzisa_1_1allocator.html#a383fc537d9accbf9ce64cff788257420", null ],
     [ "allocator", "classzisa_1_1allocator.html#a93ced1e13a7341aefb5cdd8474aa5142", null ],
-    [ "allocator", "classzisa_1_1allocator.html#a69dc7c1ac11978771a75f6cac22559f9", null ],
+    [ "allocator", "classzisa_1_1allocator.html#a0147fc0db8649e10e1e8acef4edbc738", null ],
     [ "allocator", "classzisa_1_1allocator.html#a3d77d497dee199a95ad33c16d32a7923", null ],
     [ "allocator", "classzisa_1_1allocator.html#a7ddfb393e1f568ed05d7f3520bdd1308", null ],
     [ "allocate", "classzisa_1_1allocator.html#ab1f332b9687777d57505bc2eb5d4fccd", null ],

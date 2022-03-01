@@ -1,7 +1,7 @@
 var classzisa_1_1HierarchicalReader =
 [
-    [ "dims", "classzisa_1_1HierarchicalReader.html#a0e648cffd884241de64a0716d350c36d", null ],
-    [ "do_dims", "classzisa_1_1HierarchicalReader.html#a24b86e78b5aa2204d6db6c7ed4e7aa4b", null ],
+    [ "dims", "classzisa_1_1HierarchicalReader.html#a0e0391f1fe8d97981c7354823aa93192", null ],
+    [ "do_dims", "classzisa_1_1HierarchicalReader.html#ac7450a55571ce993ab2b5fbf507aba09", null ],
     [ "do_read_array", "classzisa_1_1HierarchicalReader.html#aeaefb684b71ce086015ceb26f80ae33b", null ],
     [ "do_read_scalar", "classzisa_1_1HierarchicalReader.html#a0758e284392757a7f13f55fca3a6cbc0", null ],
     [ "do_read_string", "classzisa_1_1HierarchicalReader.html#afcd7d43a82fc10bb84154d9a60397733", null ],

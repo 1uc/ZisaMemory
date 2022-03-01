@@ -61,6 +61,7 @@ var hierarchy =
     [ "zisa::indexing_traits< row_major< 2 > >", "structzisa_1_1indexing__traits_3_01row__major_3_012_01_4_01_4.html", null ],
     [ "zisa::indexing_traits< row_major< 3 > >", "structzisa_1_1indexing__traits_3_01row__major_3_013_01_4_01_4.html", null ],
     [ "zisa::indexing_traits< row_major< 4 > >", "structzisa_1_1indexing__traits_3_01row__major_3_014_01_4_01_4.html", null ],
+    [ "zisa::indexing_traits< row_major< 5 > >", "structzisa_1_1indexing__traits_3_01row__major_3_015_01_4_01_4.html", null ],
     [ "zisa::locked_ptr< T >", "classzisa_1_1locked__ptr.html", null ],
     [ "zisa::memory_resource< T >", "classzisa_1_1memory__resource.html", [
       [ "zisa::cuda_memory_resource< T >", "classzisa_1_1cuda__memory__resource.html", null ],
@@ -72,11 +73,13 @@ var hierarchy =
     [ "zisa::row_major< 2 >", "structzisa_1_1row__major_3_012_01_4.html", null ],
     [ "zisa::row_major< 3 >", "structzisa_1_1row__major_3_013_01_4.html", null ],
     [ "zisa::row_major< 4 >", "structzisa_1_1row__major_3_014_01_4.html", null ],
+    [ "zisa::row_major< 5 >", "structzisa_1_1row__major_3_015_01_4.html", null ],
     [ "zisa::ScientificConstructor< T >", "structzisa_1_1ScientificConstructor.html", null ],
     [ "zisa::internal::ScientificConstructorImpl< T, SFINAE >", "structzisa_1_1internal_1_1ScientificConstructorImpl.html", null ],
     [ "zisa::internal::ScientificConstructorImpl< T, typename std::enable_if<!std::is_trivially_copyable< T >::value >::type >", "structzisa_1_1internal_1_1ScientificConstructorImpl_3_01T_00_01typename_01std_1_1enable__if_3_9sdec2d795a2d274da029e96e9938ce3dd.html", null ],
     [ "zisa::shape_t< n_dims, Int >", "structzisa_1_1shape__t.html", null ],
     [ "zisa::shape_t< indexing_traits< Indexing >::n_dims, size_type >", "structzisa_1_1shape__t.html", null ],
+    [ "zisa::shape_t< indexing_traits< Indexing< n_dims > >::n_dims, size_type >", "structzisa_1_1shape__t.html", null ],
     [ "zisa::split_array_dispatch_tag", "structzisa_1_1split__array__dispatch__tag.html", null ],
     [ "zisa::STDAllocatorEquivalence< T >", "structzisa_1_1STDAllocatorEquivalence.html", null ]
 ];

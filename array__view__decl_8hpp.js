@@ -1,12 +1,12 @@
 var array__view__decl_8hpp =
 [
-    [ "array_traits< T * >", "structzisa_1_1array__traits_3_01T_01_5_01_4.html", "structzisa_1_1array__traits_3_01T_01_5_01_4" ],
-    [ "array_view_base", "classzisa_1_1array__view__base.html", "classzisa_1_1array__view__base" ],
-    [ "array_view", "classzisa_1_1array__view.html", "classzisa_1_1array__view" ],
-    [ "array_const_view", "classzisa_1_1array__const__view.html", "classzisa_1_1array__const__view" ],
+    [ "zisa::array_traits< T * >", "structzisa_1_1array__traits_3_01T_01_5_01_4.html", "structzisa_1_1array__traits_3_01T_01_5_01_4" ],
+    [ "zisa::array_view_base< T, Indexing >", "classzisa_1_1array__view__base.html", "classzisa_1_1array__view__base" ],
+    [ "zisa::array_view< T, n_dims, Indexing >", "classzisa_1_1array__view.html", "classzisa_1_1array__view" ],
+    [ "zisa::array_const_view< T, n_dims, Indexing >", "classzisa_1_1array__const__view.html", "classzisa_1_1array__const__view" ],
     [ "array_const_view", "array__view__decl_8hpp.html#a349cc09b02825001d5343db22024bb9b", null ],
     [ "array_view", "array__view__decl_8hpp.html#aa5f068408c460a08b3682334bd0d83b8", null ],
-    [ "const_slice", "array__view__decl_8hpp.html#a91fc0182ff23af86a80d4d1c1b6ec0c4", null ],
+    [ "const_slice", "array__view__decl_8hpp.html#af3bafe336bc649b17e1f297c948e8591", null ],
     [ "copy", "array__view__decl_8hpp.html#a6539d38d619b4d53db4dd91cd89f47fa", null ],
     [ "copy", "array__view__decl_8hpp.html#a458224fd59daaeee63a33e5b84aca2c0", null ],
     [ "fill", "array__view__decl_8hpp.html#a6269a7083db69b205e9fbf0c503de722", null ],
@@ -19,6 +19,6 @@ var array__view__decl_8hpp =
     [ "save", "array__view__decl_8hpp.html#a85753cc400ed5afb9e0799464332d0e2", null ],
     [ "save", "array__view__decl_8hpp.html#a59549f0f14220181a91f9666ca00c3af", null ],
     [ "save", "array__view__decl_8hpp.html#a4ddb00595e73d23340ea136c0bdb0206", null ],
-    [ "slice", "array__view__decl_8hpp.html#a15ea12a69c60a4b34cdfe88c80c7031e", null ],
-    [ "slice", "array__view__decl_8hpp.html#a94366d61181f299e0ae68274172509fd", null ]
+    [ "slice", "array__view__decl_8hpp.html#ab6b360be296c12f4ddf2c0fb197d4cc8", null ],
+    [ "slice", "array__view__decl_8hpp.html#a906a1d4090d06946caa8f69b96cbdf51", null ]
 ];

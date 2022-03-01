@@ -9,8 +9,8 @@ var classzisa_1_1array__view =
     [ "copy_data", "classzisa_1_1array__view.html#a10c9a1944bbf38fd5fd96f3fc1bdbb7b", null ],
     [ "copy_data", "classzisa_1_1array__view.html#a0893e37101af75e0b085b1b321c8665a", null ],
     [ "end", "classzisa_1_1array__view.html#ad67bf994463723fcf0e4ab799e4d9a48", null ],
-    [ "operator()", "classzisa_1_1array__view.html#a3cf50bd4d1e5ac329244901b78a52444", null ],
-    [ "operator()", "classzisa_1_1array__view.html#a40f2582b43ceabafa8f8bc263381a07a", null ],
+    [ "operator()", "classzisa_1_1array__view.html#a4859392b6febec8c90eda78317551c00", null ],
+    [ "operator()", "classzisa_1_1array__view.html#adb519900d6420e96bc2c0a7a54986425", null ],
     [ "operator[]", "classzisa_1_1array__view.html#a060276f564c73a4e29a480ea7428b95e", null ],
     [ "raw", "classzisa_1_1array__view.html#aa177413af636b8b4638d38b9d458fc6d", null ]
 ];

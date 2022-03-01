@@ -1,7 +1,7 @@
 var hierarchical__file_8hpp =
 [
-    [ "ErasedDataTypeFactory", "structzisa_1_1detail_1_1ErasedDataTypeFactory.html", null ],
-    [ "HierarchicalFile", "classzisa_1_1HierarchicalFile.html", "classzisa_1_1HierarchicalFile" ],
+    [ "zisa::detail::ErasedDataTypeFactory< T >", "structzisa_1_1detail_1_1ErasedDataTypeFactory.html", null ],
+    [ "zisa::HierarchicalFile", "classzisa_1_1HierarchicalFile.html", "classzisa_1_1HierarchicalFile" ],
     [ "ZISA_CREATE_DATA_TYPE_FACTORY", "hierarchical__file_8hpp.html#a791430060f79bec1517f5d84c077863b", null ],
     [ "ErasedDataType", "hierarchical__file_8hpp.html#abadee0513c88a753aea861c770e0444e", [
       [ "DOUBLE", "hierarchical__file_8hpp.html#abadee0513c88a753aea861c770e0444eafd3e4ece78a7d422280d5ed379482229", null ],
