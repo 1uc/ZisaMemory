@@ -119,4 +119,4 @@ var menudata={children:[
 {text:"File Members",url:"globals.html",children:[
 {text:"All",url:"globals.html"},
 {text:"Macros",url:"globals_defs.html"}]}]},
-{text:"Github Page",url:"https://github.com/1uc/ZisaMemory"}]}
+{text:"Github Page",url:"^https://github.com/1uc/ZisaMemory"}]}
