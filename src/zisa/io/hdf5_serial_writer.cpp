@@ -140,6 +140,9 @@ HDF5SerialReader::do_hdf5_dims(const std::string &tag) const {
 
   H5S::get_simple_extent_dims(dataspace, &(dims[0]), nullptr);
 
+  H5D::close(dataset);
+  H5S::close(dataspace);
+
   return dims;
 }
 
