@@ -8,7 +8,9 @@ target_sources(memory_generic_obj
   PRIVATE ${CMAKE_CURRENT_LIST_DIR}/array_impl.hpp
   PRIVATE ${CMAKE_CURRENT_LIST_DIR}/array_traits.hpp
   PRIVATE ${CMAKE_CURRENT_LIST_DIR}/array_view.hpp
+  PRIVATE ${CMAKE_CURRENT_LIST_DIR}/array_view_decl.hpp
   PRIVATE ${CMAKE_CURRENT_LIST_DIR}/array_view_fwd.hpp
+  PRIVATE ${CMAKE_CURRENT_LIST_DIR}/array_view_impl.hpp
   PRIVATE ${CMAKE_CURRENT_LIST_DIR}/block_allocator.hpp
   PRIVATE ${CMAKE_CURRENT_LIST_DIR}/column_major.hpp
   PRIVATE ${CMAKE_CURRENT_LIST_DIR}/contiguous_memory.hpp
