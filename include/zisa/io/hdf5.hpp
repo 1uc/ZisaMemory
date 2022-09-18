@@ -13,11 +13,15 @@
 #else
 
 #include <hdf5.h>
+#include <mutex>
 
 #include <zisa/config.hpp>
 #include <zisa/io/file_manipulation.hpp>
 
 namespace zisa {
+
+/// Locks the HDF5 library.
+extern std::recursive_mutex hdf5_mutex;
 
 #define HDF5_SAFE_CALL(h5_function, message)                                   \
   auto ret = h5_function(std::forward<Args>(args)...);                         \
