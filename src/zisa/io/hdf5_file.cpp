@@ -12,18 +12,10 @@ namespace zisa {
 std::recursive_mutex hdf5_mutex;
 
 HDF5DataType::HDF5DataType(const hid_t &h5_type, size_t size)
-    : size(size), h5_type(h5_type) {}
-
-HDF5DataType::~HDF5DataType() {
-  auto lock = std::lock_guard(hdf5_mutex);
-  zisa::H5T::close(h5_type);
-}
+    : super(h5_type, [](hid_t id) { zisa::H5T::close(id); }), size(size) {}
 
 /// Return the HDF5 identifier of the data-type.
-hid_t HDF5DataType::operator()() const {
-  assert(h5_type > 0);
-  return h5_type;
-}
+hid_t HDF5DataType::operator()() const { return *(*this); }
 
 HDF5DataType make_hdf5_data_type(const hid_t &hdf5_data_type, size_t size) {
   auto lock = std::lock_guard(hdf5_mutex);

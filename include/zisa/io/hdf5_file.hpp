@@ -4,19 +4,16 @@
 #ifndef HDF5_FILE_H_QYUAX
 #define HDF5_FILE_H_QYUAX
 
-#include <mutex>
 #include <stack>
 #include <string>
 #include <vector>
 
 #include <zisa/io/hdf5.hpp>
+#include <zisa/io/hdf5_resource.hpp>
 #include <zisa/io/hierarchical_file.hpp>
 #include <zisa/utils/integer_cast.hpp>
 
 namespace zisa {
-
-/// Locks the HDF5 library.
-extern std::recursive_mutex hdf5_mutex;
 
 /// Abstraction of the HDF5 data-type macros.
 /** More direct approaches using templates exist, however we intend to
@@ -25,7 +22,10 @@ extern std::recursive_mutex hdf5_mutex;
  *
  *  @see make_hdf5_data_type
  */
-class HDF5DataType {
+class HDF5DataType : public HDF5Resource {
+private:
+  using super = HDF5Resource;
+
 public:
   /// Initialize object.
   /** @param h5_type  The H5 identifier of the data-type.
@@ -33,16 +33,11 @@ public:
    */
   HDF5DataType(const hid_t &h5_type, size_t size);
 
-  virtual ~HDF5DataType();
-
-  /// Return the HDF5 identifier of the data-type.
+  /// Deprecated in favour of `operator*`.
   hid_t operator()() const;
 
 public:
   size_t size; ///< essentially, `sizeof(T)`
-
-protected:
-  hid_t h5_type;
 };
 
 namespace {
