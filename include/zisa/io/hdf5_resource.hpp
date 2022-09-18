@@ -77,6 +77,9 @@ public:
                                                                                \
   protected:                                                                   \
     static inline void close(hid_t id) { free_callback(id); }                  \
+                                                                               \
+  private:                                                                     \
+    friend class HDF5ResourceStaticFree<Resource>;                             \
   };
 
 ZISA_CREATE_SIMPLE_HDF5_RESOURCE(HDF5Dataset, H5D::close);
@@ -84,6 +87,5 @@ ZISA_CREATE_SIMPLE_HDF5_RESOURCE(HDF5Dataspace, H5S::close);
 ZISA_CREATE_SIMPLE_HDF5_RESOURCE(HDF5Property, H5P::close);
 
 #undef ZISA_CREATE_SIMPLE_HDF5_RESOURCE
-
 }
 #endif // HDF5_RESOURCE_HPP
