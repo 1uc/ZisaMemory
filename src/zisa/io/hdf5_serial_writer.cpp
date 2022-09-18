@@ -19,7 +19,7 @@ void HDF5SerialWriter::do_write_array(const void *data,
                                       const std::string &tag,
                                       int rank,
                                       const hsize_t *dims) {
-  assert(data_type() > 0);
+  assert(*data_type > 0);
   assert(rank > 0);
 
   auto urank = static_cast<std::size_t>(rank);
@@ -57,14 +57,14 @@ void HDF5SerialWriter::do_write_array(const void *data,
   // set meta data, where the data is say to represent the pressure.
   hid_t dataset = H5D::create(file.top(),
                               tag.c_str(),
-                              data_type(),
+                              *data_type,
                               dataspace,
                               H5P_DEFAULT,
                               properties,
                               H5P_DEFAULT);
 
   // finally, write the data
-  H5D::write(dataset, data_type(), H5S_ALL, H5S_ALL, H5P_DEFAULT, data);
+  H5D::write(dataset, *data_type, H5S_ALL, H5S_ALL, H5P_DEFAULT, data);
 
   // close
   H5D::close(dataset);
@@ -81,14 +81,14 @@ void HDF5SerialWriter::do_write_scalar(const void *data,
   // create dataspace
   hid_t dataset = H5D::create(file.top(),
                               tag.c_str(),
-                              data_type(),
+                              *data_type,
                               dataspace,
                               H5P_DEFAULT,
                               H5P_DEFAULT,
                               H5P_DEFAULT);
 
   // write the scalar
-  H5D::write(dataset, data_type(), H5S_ALL, H5S_ALL, H5P_DEFAULT, data);
+  H5D::write(dataset, *data_type, H5S_ALL, H5S_ALL, H5P_DEFAULT, data);
 
   // close
   H5D::close(dataset);
@@ -108,14 +108,14 @@ void HDF5SerialWriter::do_write_string(const std::string &data,
   // create dataset
   hid_t dataset = H5D::create(file.top(),
                               tag.c_str(),
-                              data_type(),
+                              *data_type,
                               dataspace,
                               H5P_DEFAULT,
                               H5P_DEFAULT,
                               H5P_DEFAULT);
 
   // write the string
-  H5D::write(dataset, data_type(), H5S_ALL, H5S_ALL, H5P_DEFAULT, data.c_str());
+  H5D::write(dataset, *data_type, H5S_ALL, H5S_ALL, H5P_DEFAULT, data.c_str());
 
   // close
   H5D::close(dataset);
@@ -150,7 +150,7 @@ void HDF5SerialReader::do_read_array(void *data,
                                      const HDF5DataType &data_type,
                                      const std::string &tag) const {
   hid_t dataset = open_dataset(tag);
-  H5D::read(dataset, data_type(), H5S_ALL, H5S_ALL, H5P_DEFAULT, data);
+  H5D::read(dataset, *data_type, H5S_ALL, H5S_ALL, H5P_DEFAULT, data);
   H5D::close(dataset);
 }
 
@@ -161,7 +161,7 @@ void HDF5SerialReader::do_read_scalar(void *data,
   hid_t dataspace = get_dataspace(dataset);
 
   // read the scalar
-  H5D::read(dataset, data_type(), H5S_ALL, H5S_ALL, H5P_DEFAULT, data);
+  H5D::read(dataset, *data_type, H5S_ALL, H5S_ALL, H5P_DEFAULT, data);
 
   // close
   H5D::close(dataset);
