@@ -33,8 +33,7 @@ public:
    */
   HDF5DataType(const hid_t &h5_type, size_t size);
 
-  /// Deprecated in favour of `operator*`.
-  hid_t operator()() const;
+  [[deprecated("Use `operator*`.")]] hid_t operator()() const;
 
 public:
   size_t size; ///< essentially, `sizeof(T)`
