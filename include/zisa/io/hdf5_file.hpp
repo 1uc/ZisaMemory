@@ -98,8 +98,8 @@ protected:
   }
 
 protected:
-  hid_t open_dataset(const std::string &tag) const;
-  hid_t get_dataspace(const hid_t &dataset) const;
+  HDF5Dataset open_dataset(const std::string &tag) const;
+  HDF5Dataspace get_dataspace(const hid_t &dataset) const;
 
 protected:
   std::stack<hid_t> file;        ///< HDF5 file/group identifiers (branch)

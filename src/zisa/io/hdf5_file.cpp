@@ -116,7 +116,7 @@ std::string HDF5File::do_hierarchy() const {
   return zisa::concatenate(path.begin(), path.end(), "/");
 }
 
-hid_t HDF5File::open_dataset(const std::string &tag) const {
+HDF5Dataset HDF5File::open_dataset(const std::string &tag) const {
   auto lock = std::lock_guard(hdf5_mutex);
   hid_t dataset = H5Dopen(file.top(), tag.c_str(), H5P_DEFAULT);
 
@@ -126,10 +126,10 @@ hid_t HDF5File::open_dataset(const std::string &tag) const {
                           hierarchy().c_str()));
   }
 
-  return dataset;
+  return HDF5Dataset(dataset);
 }
 
-hid_t HDF5File::get_dataspace(const hid_t &dataset) const {
+HDF5Dataspace HDF5File::get_dataspace(const hid_t &dataset) const {
   auto lock = std::lock_guard(hdf5_mutex);
   hid_t dataspace = H5Dget_space(dataset);
 
@@ -137,7 +137,7 @@ hid_t HDF5File::get_dataspace(const hid_t &dataset) const {
     LOG_ERR(string_format("Failed to open dataspace (%d).", dataset));
   }
 
-  return dataspace;
+  return HDF5Dataspace(dataspace);
 }
 
 } // namespace zisa
