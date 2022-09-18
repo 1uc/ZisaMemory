@@ -8,6 +8,18 @@
 #include <zisa/io/hdf5.hpp>
 
 namespace zisa {
+
+/// A RAII wrapper for HDF5's C-style resources.
+/** Given an `hid` and the function required to close this kind of IDs,
+ *  this class implements a RAII-style resource. For simplicity these resources
+ *  have unique ownership semantics and therefore cannot be copied; only moved.
+ *
+ *  In order to allow these to interact with other libraries that make
+ *  assumptions about ownership, this resource can drop ownership, via
+ *  `drop_ownership`.
+ *
+ *  Shared ownership can be obtained by using an `std::shared_ptr`.
+ */
 class HDF5Resource {
 private:
   using free_callback_t = std::function<void(hid_t)>;
