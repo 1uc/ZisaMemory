@@ -88,8 +88,7 @@ $(document).ready(function(){initNavTree('namespacezisa.html',''); initResizable
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
 <a href="#enum-members">Enumerations</a> &#124;
-<a href="#func-members">Functions</a> &#124;
-<a href="#var-members">Variables</a>  </div>
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">zisa Namespace Reference</div></div>
 </div><!--header-->
 <div class="contents">
@@ -157,6 +156,11 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classzisa_1_1HDF5Reader.html">HDF5Reader</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read data from HDF5 file.  <a href="classzisa_1_1HDF5Reader.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classzisa_1_1HDF5Resource.html">HDF5Resource</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A RAII wrapper for HDF5's C-style resources.  <a href="classzisa_1_1HDF5Resource.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classzisa_1_1HDF5ResourceStaticFree.html">HDF5ResourceStaticFree</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classzisa_1_1HDF5SerialReader.html">HDF5SerialReader</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read data from HDF5 file sequentially.  <a href="classzisa_1_1HDF5SerialReader.html#details">More...</a><br /></td></tr>
@@ -279,6 +283,12 @@ Functions</h2></td></tr>
 <tr class="separator:aa9225c1630121960a0d2d87e0813232f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af518991e81c249c80dc35eab8da59199"><td class="memItemLeft" align="right" valign="top">std::vector&lt; hsize_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacezisa.html#af518991e81c249c80dc35eab8da59199">make_hdf5_dims</a> (std::size_t const *const dims, int rank)</td></tr>
 <tr class="separator:af518991e81c249c80dc35eab8da59199"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ad8fd483cda063189d2ee16df5e3783"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacezisa.html#a2ad8fd483cda063189d2ee16df5e3783">ZISA_CREATE_SIMPLE_HDF5_RESOURCE</a> (HDF5Dataset, H5D::close)</td></tr>
+<tr class="separator:a2ad8fd483cda063189d2ee16df5e3783"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad0bb299720439117a96557afb18c59c9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacezisa.html#ad0bb299720439117a96557afb18c59c9">ZISA_CREATE_SIMPLE_HDF5_RESOURCE</a> (HDF5Dataspace, H5S::close)</td></tr>
+<tr class="separator:ad0bb299720439117a96557afb18c59c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c8064bae8213afe4e672dbd8bb84043"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacezisa.html#a4c8064bae8213afe4e672dbd8bb84043">ZISA_CREATE_SIMPLE_HDF5_RESOURCE</a> (HDF5Property, H5P::close)</td></tr>
+<tr class="separator:a4c8064bae8213afe4e672dbd8bb84043"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a36ab1188111a7e3aaa8961ecf881d848"><td class="memTemplParams" colspan="2">template&lt;class T , class... Args&gt; </td></tr>
 <tr class="memitem:a36ab1188111a7e3aaa8961ecf881d848"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacezisa.html#a36ab1188111a7e3aaa8961ecf881d848">load_serial</a> (const std::string &amp;filename, Args &amp;&amp;...args)</td></tr>
 <tr class="separator:a36ab1188111a7e3aaa8961ecf881d848"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -446,12 +456,6 @@ Functions</h2></td></tr>
 <tr class="memitem:a2c3081e2e0cc05ad8f9d8f0108102b4a"><td class="memTemplParams" colspan="2">template&lt;int n_dims, class Int &gt; </td></tr>
 <tr class="memitem:a2c3081e2e0cc05ad8f9d8f0108102b4a"><td class="memTemplItemLeft" align="right" valign="top">ANY_DEVICE_INLINE <a class="el" href="structzisa_1_1shape__t.html">shape_t</a>&lt; n_dims, Int &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacezisa.html#a2c3081e2e0cc05ad8f9d8f0108102b4a">operator-</a> (const <a class="el" href="structzisa_1_1shape__t.html">shape_t</a>&lt; n_dims, Int &gt; &amp;s0, const <a class="el" href="structzisa_1_1shape__t.html">shape_t</a>&lt; n_dims, Int &gt; &amp;s1)</td></tr>
 <tr class="separator:a2c3081e2e0cc05ad8f9d8f0108102b4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
-Variables</h2></td></tr>
-<tr class="memitem:af540d52258527e066f2d8eaa63680500"><td class="memItemLeft" align="right" valign="top">std::recursive_mutex&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacezisa.html#af540d52258527e066f2d8eaa63680500">hdf5_mutex</a></td></tr>
-<tr class="memdesc:af540d52258527e066f2d8eaa63680500"><td class="mdescLeft">&#160;</td><td class="mdescRight">Locks the HDF5 library.  <a href="namespacezisa.html#af540d52258527e066f2d8eaa63680500">More...</a><br /></td></tr>
-<tr class="separator:af540d52258527e066f2d8eaa63680500"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Typedef Documentation</h2>
 <a id="a907f7173a14809132b903e1a260e2081" name="a907f7173a14809132b903e1a260e2081"></a>
@@ -2304,28 +2308,87 @@ template&lt;class T , int n_dims&gt; </div>
 
 </div>
 </div>
-<h2 class="groupheader">Variable Documentation</h2>
-<a id="af540d52258527e066f2d8eaa63680500" name="af540d52258527e066f2d8eaa63680500"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af540d52258527e066f2d8eaa63680500">&#9670;&nbsp;</a></span>hdf5_mutex</h2>
+<a id="a2ad8fd483cda063189d2ee16df5e3783" name="a2ad8fd483cda063189d2ee16df5e3783"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2ad8fd483cda063189d2ee16df5e3783">&#9670;&nbsp;</a></span>ZISA_CREATE_SIMPLE_HDF5_RESOURCE() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::recursive_mutex zisa::hdf5_mutex</td>
+          <td class="memname">zisa::ZISA_CREATE_SIMPLE_HDF5_RESOURCE </td>
+          <td>(</td>
+          <td class="paramtype">HDF5Dataset&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">H5D::close&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">extern</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
-<p>Locks the HDF5 library. </p>
+</div>
+</div>
+<a id="ad0bb299720439117a96557afb18c59c9" name="ad0bb299720439117a96557afb18c59c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad0bb299720439117a96557afb18c59c9">&#9670;&nbsp;</a></span>ZISA_CREATE_SIMPLE_HDF5_RESOURCE() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">zisa::ZISA_CREATE_SIMPLE_HDF5_RESOURCE </td>
+          <td>(</td>
+          <td class="paramtype">HDF5Dataspace&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">H5S::close&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4c8064bae8213afe4e672dbd8bb84043" name="a4c8064bae8213afe4e672dbd8bb84043"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4c8064bae8213afe4e672dbd8bb84043">&#9670;&nbsp;</a></span>ZISA_CREATE_SIMPLE_HDF5_RESOURCE() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">zisa::ZISA_CREATE_SIMPLE_HDF5_RESOURCE </td>
+          <td>(</td>
+          <td class="paramtype">HDF5Property&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">H5P::close&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>

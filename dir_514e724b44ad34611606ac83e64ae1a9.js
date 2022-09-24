@@ -2,6 +2,7 @@ var dir_514e724b44ad34611606ac83e64ae1a9 =
 [
     [ "hdf5.hpp", "hdf5_8hpp.html", null ],
     [ "hdf5_file.hpp", "hdf5__file_8hpp.html", "hdf5__file_8hpp" ],
+    [ "hdf5_resource.hpp", "hdf5__resource_8hpp.html", "hdf5__resource_8hpp" ],
     [ "hdf5_serial_writer.hpp", "hdf5__serial__writer_8hpp.html", "hdf5__serial__writer_8hpp" ],
     [ "hdf5_writer.hpp", "hdf5__writer_8hpp.html", "hdf5__writer_8hpp" ],
     [ "hdf5_writer_fwd.hpp", "hdf5__writer__fwd_8hpp.html", null ],

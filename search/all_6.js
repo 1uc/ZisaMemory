@@ -7,5 +7,6 @@ var searchData=
   ['fill_5fcuda_4',['fill_cuda',['../namespacezisa.html#a889665933fa841390a4b9e088c915a1f',1,'zisa']]],
   ['fill_5fcuda_2ehpp_5',['fill_cuda.hpp',['../fill__cuda_8hpp.html',1,'']]],
   ['fill_5fhost_6',['fill_host',['../namespacezisa.html#a28373473f9e1b4c975cfe40a732a2e30',1,'zisa']]],
-  ['float_7',['FLOAT',['../namespacezisa.html#abadee0513c88a753aea861c770e0444eae738c26bf4ce1037fa81b039a915cbf6',1,'zisa']]]
+  ['float_7',['FLOAT',['../namespacezisa.html#abadee0513c88a753aea861c770e0444eae738c26bf4ce1037fa81b039a915cbf6',1,'zisa']]],
+  ['free_5finternals_8',['free_internals',['../classzisa_1_1HDF5Resource.html#a9e37b9fc89b305a9f1e19c0027a4741b',1,'zisa::HDF5Resource']]]
 ];

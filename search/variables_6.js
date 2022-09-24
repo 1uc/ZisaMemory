@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['resource_0',['resource',['../classzisa_1_1allocator.html#a8d5b1e4e673790b13fbb2db2827feef3',1,'zisa::allocator']]]
+  ['size_0',['size',['../classzisa_1_1HDF5DataType.html#ad0d03adf911591c919be455b83a899cc',1,'zisa::HDF5DataType']]]
 ];

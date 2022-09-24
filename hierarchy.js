@@ -29,7 +29,10 @@ var hierarchy =
       [ "zisa::block_allocator< T >", "classzisa_1_1block__allocator.html", null ]
     ] ],
     [ "zisa::detail::ErasedDataTypeFactory< T >", "structzisa_1_1detail_1_1ErasedDataTypeFactory.html", null ],
-    [ "zisa::HDF5DataType", "classzisa_1_1HDF5DataType.html", null ],
+    [ "zisa::HDF5Resource", "classzisa_1_1HDF5Resource.html", [
+      [ "zisa::HDF5DataType", "classzisa_1_1HDF5DataType.html", null ],
+      [ "zisa::HDF5ResourceStaticFree< Derived >", "classzisa_1_1HDF5ResourceStaticFree.html", null ]
+    ] ],
     [ "zisa::HierarchicalFile", "classzisa_1_1HierarchicalFile.html", [
       [ "zisa::HDF5File", "classzisa_1_1HDF5File.html", [
         [ "zisa::HDF5Reader", "classzisa_1_1HDF5Reader.html", [

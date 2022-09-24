@@ -30,6 +30,8 @@ var namespacezisa =
     [ "HDF5DataType", "classzisa_1_1HDF5DataType.html", "classzisa_1_1HDF5DataType" ],
     [ "HDF5File", "classzisa_1_1HDF5File.html", "classzisa_1_1HDF5File" ],
     [ "HDF5Reader", "classzisa_1_1HDF5Reader.html", "classzisa_1_1HDF5Reader" ],
+    [ "HDF5Resource", "classzisa_1_1HDF5Resource.html", "classzisa_1_1HDF5Resource" ],
+    [ "HDF5ResourceStaticFree", "classzisa_1_1HDF5ResourceStaticFree.html", "classzisa_1_1HDF5ResourceStaticFree" ],
     [ "HDF5SerialReader", "classzisa_1_1HDF5SerialReader.html", "classzisa_1_1HDF5SerialReader" ],
     [ "HDF5SerialWriter", "classzisa_1_1HDF5SerialWriter.html", "classzisa_1_1HDF5SerialWriter" ],
     [ "HDF5Writer", "classzisa_1_1HDF5Writer.html", "classzisa_1_1HDF5Writer" ],
@@ -140,5 +142,7 @@ var namespacezisa =
     [ "shape", "namespacezisa.html#a83ac9a12d428cfe9ac2853d3d1ea9e8c", null ],
     [ "shape", "namespacezisa.html#a0a6ca78810caf3e2f319fc46b1272792", null ],
     [ "slice", "namespacezisa.html#a906a1d4090d06946caa8f69b96cbdf51", null ],
-    [ "hdf5_mutex", "namespacezisa.html#af540d52258527e066f2d8eaa63680500", null ]
+    [ "ZISA_CREATE_SIMPLE_HDF5_RESOURCE", "namespacezisa.html#a2ad8fd483cda063189d2ee16df5e3783", null ],
+    [ "ZISA_CREATE_SIMPLE_HDF5_RESOURCE", "namespacezisa.html#ad0bb299720439117a96557afb18c59c9", null ],
+    [ "ZISA_CREATE_SIMPLE_HDF5_RESOURCE", "namespacezisa.html#a4c8064bae8213afe4e672dbd8bb84043", null ]
 ];

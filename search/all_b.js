@@ -10,5 +10,6 @@ var searchData=
   ['memory_5flocation_5f_7',['memory_location_',['../namespacezisa_1_1detail.html#ac8c04365e55ae743a91eed5d571828db',1,'zisa::detail::memory_location_(const A &amp;)'],['../namespacezisa_1_1detail.html#a556653161cb505461343415c7f38c6d6',1,'zisa::detail::memory_location_(const typename std::enable_if&lt; std::is_same&lt; decltype(std::declval&lt; A &gt;().device()), device_type &gt;::value, A &gt;::type &amp;a)']]],
   ['memory_5fresource_8',['memory_resource',['../classzisa_1_1memory__resource.html',1,'zisa']]],
   ['memory_5fresource_2ehpp_9',['memory_resource.hpp',['../memory__resource_8hpp.html',1,'']]],
-  ['memory_5fresource_5ffactory_2ehpp_10',['memory_resource_factory.hpp',['../memory__resource__factory_8hpp.html',1,'']]]
+  ['memory_5fresource_5ffactory_2ehpp_10',['memory_resource_factory.hpp',['../memory__resource__factory_8hpp.html',1,'']]],
+  ['move_5finternals_11',['move_internals',['../classzisa_1_1HDF5Resource.html#a3c7bd57bb610e756f2d50cca779ccc99',1,'zisa::HDF5Resource']]]
 ];

@@ -150,10 +150,10 @@ Protected Member Functions</h2></td></tr>
 <tr class="separator:a5fad76041763a93ff0ba3d5586b2ab77"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a46218e413b632695a5661ba56b2fc0b8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classzisa_1_1HDF5File.html#a46218e413b632695a5661ba56b2fc0b8">do_unlink</a> (const std::string &amp;tag) override</td></tr>
 <tr class="separator:a46218e413b632695a5661ba56b2fc0b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a30373e62f7add36a384f8662afd47adf"><td class="memItemLeft" align="right" valign="top">hid_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classzisa_1_1HDF5File.html#a30373e62f7add36a384f8662afd47adf">open_dataset</a> (const std::string &amp;tag) const</td></tr>
-<tr class="separator:a30373e62f7add36a384f8662afd47adf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab3db785d7c03f550504866bf81d96d0d"><td class="memItemLeft" align="right" valign="top">hid_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classzisa_1_1HDF5File.html#ab3db785d7c03f550504866bf81d96d0d">get_dataspace</a> (const hid_t &amp;dataset) const</td></tr>
-<tr class="separator:ab3db785d7c03f550504866bf81d96d0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4998e9fd7e9cac0402246e2bd40cc950"><td class="memItemLeft" align="right" valign="top">HDF5Dataset&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classzisa_1_1HDF5File.html#a4998e9fd7e9cac0402246e2bd40cc950">open_dataset</a> (const std::string &amp;tag) const</td></tr>
+<tr class="separator:a4998e9fd7e9cac0402246e2bd40cc950"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf04f96b43230c7bf80faeb62ec6cbe6"><td class="memItemLeft" align="right" valign="top">HDF5Dataspace&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classzisa_1_1HDF5File.html#aaf04f96b43230c7bf80faeb62ec6cbe6">get_dataspace</a> (const hid_t &amp;dataset) const</td></tr>
+<tr class="separator:aaf04f96b43230c7bf80faeb62ec6cbe6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae127ddb84345766048e24d045b8742ae"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classzisa_1_1HierarchicalFile.html#ae127ddb84345766048e24d045b8742ae">do_open_group</a> (const std::string &amp;group_name)=0</td></tr>
 <tr class="separator:ae127ddb84345766048e24d045b8742ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae2f5acf25b49930431b0a062754b8657"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classzisa_1_1HierarchicalFile.html#ae2f5acf25b49930431b0a062754b8657">do_close_group</a> ()=0</td></tr>
@@ -377,8 +377,8 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a id="ab3db785d7c03f550504866bf81d96d0d" name="ab3db785d7c03f550504866bf81d96d0d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab3db785d7c03f550504866bf81d96d0d">&#9670;&nbsp;</a></span>get_dataspace()</h2>
+<a id="aaf04f96b43230c7bf80faeb62ec6cbe6" name="aaf04f96b43230c7bf80faeb62ec6cbe6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaf04f96b43230c7bf80faeb62ec6cbe6">&#9670;&nbsp;</a></span>get_dataspace()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -387,7 +387,7 @@ Additional Inherited Members</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">hid_t zisa::HDF5File::get_dataspace </td>
+          <td class="memname">HDF5Dataspace zisa::HDF5File::get_dataspace </td>
           <td>(</td>
           <td class="paramtype">const hid_t &amp;&#160;</td>
           <td class="paramname"><em>dataset</em></td><td>)</td>
@@ -403,8 +403,8 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a id="a30373e62f7add36a384f8662afd47adf" name="a30373e62f7add36a384f8662afd47adf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a30373e62f7add36a384f8662afd47adf">&#9670;&nbsp;</a></span>open_dataset()</h2>
+<a id="a4998e9fd7e9cac0402246e2bd40cc950" name="a4998e9fd7e9cac0402246e2bd40cc950"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4998e9fd7e9cac0402246e2bd40cc950">&#9670;&nbsp;</a></span>open_dataset()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -413,7 +413,7 @@ Additional Inherited Members</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">hid_t zisa::HDF5File::open_dataset </td>
+          <td class="memname">HDF5Dataset zisa::HDF5File::open_dataset </td>
           <td>(</td>
           <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>tag</em></td><td>)</td>
