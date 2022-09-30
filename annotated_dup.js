@@ -35,6 +35,7 @@ var annotated_dup =
       [ "HDF5Resource", "classzisa_1_1HDF5Resource.html", "classzisa_1_1HDF5Resource" ],
       [ "HDF5ResourceStaticFree", "classzisa_1_1HDF5ResourceStaticFree.html", "classzisa_1_1HDF5ResourceStaticFree" ],
       [ "HDF5SerialReader", "classzisa_1_1HDF5SerialReader.html", "classzisa_1_1HDF5SerialReader" ],
+      [ "HDF5SerialReaderBase", "classzisa_1_1HDF5SerialReaderBase.html", "classzisa_1_1HDF5SerialReaderBase" ],
       [ "HDF5SerialWriter", "classzisa_1_1HDF5SerialWriter.html", "classzisa_1_1HDF5SerialWriter" ],
       [ "HDF5Writer", "classzisa_1_1HDF5Writer.html", "classzisa_1_1HDF5Writer" ],
       [ "HierarchicalFile", "classzisa_1_1HierarchicalFile.html", "classzisa_1_1HierarchicalFile" ],

@@ -85,7 +85,6 @@ $(document).ready(function(){initNavTree('classzisa_1_1HDF5SerialReader.html',''
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="classzisa_1_1HDF5SerialReader-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">zisa::HDF5SerialReader Class Reference</div></div>
 </div><!--header-->
@@ -101,11 +100,12 @@ Inheritance diagram for zisa::HDF5SerialReader:</div>
  <div class="center">
   <img src="classzisa_1_1HDF5SerialReader.png" usemap="#zisa::HDF5SerialReader_map" alt=""/>
   <map id="zisa::HDF5SerialReader_map" name="zisa::HDF5SerialReader_map">
-<area href="classzisa_1_1HDF5Reader.html" title="Read data from HDF5 file." alt="zisa::HDF5Reader" shape="rect" coords="80,112,231,136"/>
-<area href="classzisa_1_1HDF5File.html" title="Representation of the current branch of the opened HDF5 file." alt="zisa::HDF5File" shape="rect" coords="0,56,151,80"/>
-<area href="classzisa_1_1HierarchicalReader.html" title="Read data from a hierarchical file." alt="zisa::HierarchicalReader" shape="rect" coords="161,56,312,80"/>
-<area href="classzisa_1_1HierarchicalFile.html" alt="zisa::HierarchicalFile" shape="rect" coords="0,0,151,24"/>
-<area href="classzisa_1_1HierarchicalFile.html" alt="zisa::HierarchicalFile" shape="rect" coords="161,0,312,24"/>
+<area href="classzisa_1_1HDF5SerialReaderBase.html" alt="zisa::HDF5SerialReaderBase" shape="rect" coords="92,168,267,192"/>
+<area href="classzisa_1_1HDF5Reader.html" title="Read data from HDF5 file." alt="zisa::HDF5Reader" shape="rect" coords="92,112,267,136"/>
+<area href="classzisa_1_1HDF5File.html" title="Representation of the current branch of the opened HDF5 file." alt="zisa::HDF5File" shape="rect" coords="0,56,175,80"/>
+<area href="classzisa_1_1HierarchicalReader.html" title="Read data from a hierarchical file." alt="zisa::HierarchicalReader" shape="rect" coords="185,56,360,80"/>
+<area href="classzisa_1_1HierarchicalFile.html" alt="zisa::HierarchicalFile" shape="rect" coords="0,0,175,24"/>
+<area href="classzisa_1_1HierarchicalFile.html" alt="zisa::HierarchicalFile" shape="rect" coords="185,0,360,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -154,16 +154,20 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:aa923a93ed37233328a9b65eb0aad978a inherit pub_methods_classzisa_1_1HierarchicalReader"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read a string from the hierarchical file.  <a href="classzisa_1_1HierarchicalReader.html#aa923a93ed37233328a9b65eb0aad978a">More...</a><br /></td></tr>
 <tr class="separator:aa923a93ed37233328a9b65eb0aad978a inherit pub_methods_classzisa_1_1HierarchicalReader"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
-Protected Member Functions</h2></td></tr>
-<tr class="memitem:ac143fe61648ef455cf4574776f1d25bc"><td class="memItemLeft" align="right" valign="top">virtual std::vector&lt; hsize_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classzisa_1_1HDF5SerialReader.html#ac143fe61648ef455cf4574776f1d25bc">do_hdf5_dims</a> (const std::string &amp;tag) const override</td></tr>
-<tr class="separator:ac143fe61648ef455cf4574776f1d25bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a95bfd0e374a9ff59aba76f47cecc3c3d"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classzisa_1_1HDF5SerialReader.html#a95bfd0e374a9ff59aba76f47cecc3c3d">do_read_array</a> (void *data, const <a class="el" href="classzisa_1_1HDF5DataType.html">HDF5DataType</a> &amp;data_type, const std::string &amp;tag) const override</td></tr>
-<tr class="separator:a95bfd0e374a9ff59aba76f47cecc3c3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a62abbe0b8d6f1ffb73109cfc0b18003b"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classzisa_1_1HDF5SerialReader.html#a62abbe0b8d6f1ffb73109cfc0b18003b">do_read_scalar</a> (void *data, const <a class="el" href="classzisa_1_1HDF5DataType.html">HDF5DataType</a> &amp;data_type, const std::string &amp;tag) const override</td></tr>
-<tr class="separator:a62abbe0b8d6f1ffb73109cfc0b18003b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad8ba6e724c7ddcb7b393dca712618044"><td class="memItemLeft" align="right" valign="top">virtual std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classzisa_1_1HDF5SerialReader.html#ad8ba6e724c7ddcb7b393dca712618044">do_read_string</a> (const std::string &amp;tag) const override</td></tr>
-<tr class="separator:ad8ba6e724c7ddcb7b393dca712618044"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pub_types_classzisa_1_1HierarchicalFile"><td colspan="2" onclick="javascript:toggleInherit('pub_types_classzisa_1_1HierarchicalFile')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="classzisa_1_1HierarchicalFile.html">zisa::HierarchicalFile</a></td></tr>
+<tr class="memitem:ae818936e10ad4f86359dc5a76e9b3890 inherit pub_types_classzisa_1_1HierarchicalFile"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classzisa_1_1HierarchicalFile.html#ae818936e10ad4f86359dc5a76e9b3890">DataType</a> = <a class="el" href="namespacezisa.html#abadee0513c88a753aea861c770e0444e">ErasedDataType</a></td></tr>
+<tr class="separator:ae818936e10ad4f86359dc5a76e9b3890 inherit pub_types_classzisa_1_1HierarchicalFile"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_methods_classzisa_1_1HDF5SerialReaderBase"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classzisa_1_1HDF5SerialReaderBase')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classzisa_1_1HDF5SerialReaderBase.html">zisa::HDF5SerialReaderBase</a></td></tr>
+<tr class="memitem:a75ea5289b16831f8b552d9f7ffbf06b5 inherit pro_methods_classzisa_1_1HDF5SerialReaderBase"><td class="memItemLeft" align="right" valign="top">virtual std::vector&lt; hsize_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classzisa_1_1HDF5SerialReaderBase.html#a75ea5289b16831f8b552d9f7ffbf06b5">do_hdf5_dims</a> (const std::string &amp;tag) const override</td></tr>
+<tr class="separator:a75ea5289b16831f8b552d9f7ffbf06b5 inherit pro_methods_classzisa_1_1HDF5SerialReaderBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a87899b7d2a939067443f5b0050ece136 inherit pro_methods_classzisa_1_1HDF5SerialReaderBase"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classzisa_1_1HDF5SerialReaderBase.html#a87899b7d2a939067443f5b0050ece136">do_read_array</a> (void *data, const <a class="el" href="classzisa_1_1HDF5DataType.html">HDF5DataType</a> &amp;data_type, const std::string &amp;tag) const override</td></tr>
+<tr class="separator:a87899b7d2a939067443f5b0050ece136 inherit pro_methods_classzisa_1_1HDF5SerialReaderBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a861cea0da100da4ff0622ee4447e67d1 inherit pro_methods_classzisa_1_1HDF5SerialReaderBase"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classzisa_1_1HDF5SerialReaderBase.html#a861cea0da100da4ff0622ee4447e67d1">do_read_scalar</a> (void *data, const <a class="el" href="classzisa_1_1HDF5DataType.html">HDF5DataType</a> &amp;data_type, const std::string &amp;tag) const override</td></tr>
+<tr class="separator:a861cea0da100da4ff0622ee4447e67d1 inherit pro_methods_classzisa_1_1HDF5SerialReaderBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e285d15211d73a2c05fb6a2afbca509 inherit pro_methods_classzisa_1_1HDF5SerialReaderBase"><td class="memItemLeft" align="right" valign="top">virtual std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classzisa_1_1HDF5SerialReaderBase.html#a0e285d15211d73a2c05fb6a2afbca509">do_read_string</a> (const std::string &amp;tag) const override</td></tr>
+<tr class="separator:a0e285d15211d73a2c05fb6a2afbca509 inherit pro_methods_classzisa_1_1HDF5SerialReaderBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_methods_classzisa_1_1HDF5Reader"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classzisa_1_1HDF5Reader')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classzisa_1_1HDF5Reader.html">zisa::HDF5Reader</a></td></tr>
 <tr class="memitem:a4b720826a8058432f682af9027925aec inherit pro_methods_classzisa_1_1HDF5Reader"><td class="memItemLeft" align="right" valign="top">virtual std::vector&lt; std::size_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classzisa_1_1HDF5Reader.html#a4b720826a8058432f682af9027925aec">do_dims</a> (const std::string &amp;tag) const override</td></tr>
 <tr class="separator:a4b720826a8058432f682af9027925aec inherit pro_methods_classzisa_1_1HDF5Reader"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -214,12 +218,6 @@ Protected Member Functions</h2></td></tr>
 <tr class="separator:a0758e284392757a7f13f55fca3a6cbc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afcd7d43a82fc10bb84154d9a60397733"><td class="memItemLeft" align="right" valign="top">virtual std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classzisa_1_1HierarchicalReader.html#afcd7d43a82fc10bb84154d9a60397733">do_read_string</a> (const std::string &amp;tag) const =0</td></tr>
 <tr class="separator:afcd7d43a82fc10bb84154d9a60397733"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
-Additional Inherited Members</h2></td></tr>
-<tr class="inherit_header pub_types_classzisa_1_1HierarchicalFile"><td colspan="2" onclick="javascript:toggleInherit('pub_types_classzisa_1_1HierarchicalFile')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="classzisa_1_1HierarchicalFile.html">zisa::HierarchicalFile</a></td></tr>
-<tr class="memitem:ae818936e10ad4f86359dc5a76e9b3890 inherit pub_types_classzisa_1_1HierarchicalFile"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classzisa_1_1HierarchicalFile.html#ae818936e10ad4f86359dc5a76e9b3890">DataType</a> = <a class="el" href="namespacezisa.html#abadee0513c88a753aea861c770e0444e">ErasedDataType</a></td></tr>
-<tr class="separator:ae818936e10ad4f86359dc5a76e9b3890 inherit pub_types_classzisa_1_1HierarchicalFile"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_classzisa_1_1HDF5File"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classzisa_1_1HDF5File')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classzisa_1_1HDF5File.html">zisa::HDF5File</a></td></tr>
 <tr class="memitem:a9d803cdfb895f811c6f7e136192b3eed inherit pro_attribs_classzisa_1_1HDF5File"><td class="memItemLeft" align="right" valign="top">std::stack&lt; hid_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classzisa_1_1HDF5File.html#a9d803cdfb895f811c6f7e136192b3eed">file</a></td></tr>
 <tr class="memdesc:a9d803cdfb895f811c6f7e136192b3eed inherit pro_attribs_classzisa_1_1HDF5File"><td class="mdescLeft">&#160;</td><td class="mdescRight">HDF5 file/group identifiers (branch)  <a href="classzisa_1_1HDF5File.html#a9d803cdfb895f811c6f7e136192b3eed">More...</a><br /></td></tr>
@@ -254,151 +252,6 @@ Additional Inherited Members</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
-</div>
-</div>
-<h2 class="groupheader">Member Function Documentation</h2>
-<a id="ac143fe61648ef455cf4574776f1d25bc" name="ac143fe61648ef455cf4574776f1d25bc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac143fe61648ef455cf4574776f1d25bc">&#9670;&nbsp;</a></span>do_hdf5_dims()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual std::vector&lt; hsize_t &gt; zisa::HDF5SerialReader::do_hdf5_dims </td>
-          <td>(</td>
-          <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>tag</em></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Implements <a class="el" href="classzisa_1_1HDF5Reader.html#ad80362aa605162a1aa4339dcfae75bea">zisa::HDF5Reader</a>.</p>
-
-</div>
-</div>
-<a id="a95bfd0e374a9ff59aba76f47cecc3c3d" name="a95bfd0e374a9ff59aba76f47cecc3c3d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a95bfd0e374a9ff59aba76f47cecc3c3d">&#9670;&nbsp;</a></span>do_read_array()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual void zisa::HDF5SerialReader::do_read_array </td>
-          <td>(</td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>data</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classzisa_1_1HDF5DataType.html">HDF5DataType</a> &amp;&#160;</td>
-          <td class="paramname"><em>data_type</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>tag</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Implements <a class="el" href="classzisa_1_1HDF5Reader.html#aa42514beabf26233be08de020cd3a9a6">zisa::HDF5Reader</a>.</p>
-
-</div>
-</div>
-<a id="a62abbe0b8d6f1ffb73109cfc0b18003b" name="a62abbe0b8d6f1ffb73109cfc0b18003b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a62abbe0b8d6f1ffb73109cfc0b18003b">&#9670;&nbsp;</a></span>do_read_scalar()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual void zisa::HDF5SerialReader::do_read_scalar </td>
-          <td>(</td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>data</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classzisa_1_1HDF5DataType.html">HDF5DataType</a> &amp;&#160;</td>
-          <td class="paramname"><em>data_type</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>tag</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Implements <a class="el" href="classzisa_1_1HDF5Reader.html#a36b2fb61696d88ca651f2a82471d7ce4">zisa::HDF5Reader</a>.</p>
-
-</div>
-</div>
-<a id="ad8ba6e724c7ddcb7b393dca712618044" name="ad8ba6e724c7ddcb7b393dca712618044"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad8ba6e724c7ddcb7b393dca712618044">&#9670;&nbsp;</a></span>do_read_string()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual std::string zisa::HDF5SerialReader::do_read_string </td>
-          <td>(</td>
-          <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>tag</em></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Implements <a class="el" href="classzisa_1_1HierarchicalReader.html#afcd7d43a82fc10bb84154d9a60397733">zisa::HierarchicalReader</a>.</p>
 
 </div>
 </div>

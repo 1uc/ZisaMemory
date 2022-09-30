@@ -6,10 +6,11 @@ var searchData=
   ['hdf5resource_3',['HDF5Resource',['../classzisa_1_1HDF5Resource.html',1,'zisa']]],
   ['hdf5resourcestaticfree_4',['HDF5ResourceStaticFree',['../classzisa_1_1HDF5ResourceStaticFree.html',1,'zisa']]],
   ['hdf5serialreader_5',['HDF5SerialReader',['../classzisa_1_1HDF5SerialReader.html',1,'zisa']]],
-  ['hdf5serialwriter_6',['HDF5SerialWriter',['../classzisa_1_1HDF5SerialWriter.html',1,'zisa']]],
-  ['hdf5writer_7',['HDF5Writer',['../classzisa_1_1HDF5Writer.html',1,'zisa']]],
-  ['hierarchicalfile_8',['HierarchicalFile',['../classzisa_1_1HierarchicalFile.html',1,'zisa']]],
-  ['hierarchicalreader_9',['HierarchicalReader',['../classzisa_1_1HierarchicalReader.html',1,'zisa']]],
-  ['hierarchicalwriter_10',['HierarchicalWriter',['../classzisa_1_1HierarchicalWriter.html',1,'zisa']]],
-  ['host_5fmemory_5fresource_11',['host_memory_resource',['../classzisa_1_1host__memory__resource.html',1,'zisa']]]
+  ['hdf5serialreaderbase_6',['HDF5SerialReaderBase',['../classzisa_1_1HDF5SerialReaderBase.html',1,'zisa']]],
+  ['hdf5serialwriter_7',['HDF5SerialWriter',['../classzisa_1_1HDF5SerialWriter.html',1,'zisa']]],
+  ['hdf5writer_8',['HDF5Writer',['../classzisa_1_1HDF5Writer.html',1,'zisa']]],
+  ['hierarchicalfile_9',['HierarchicalFile',['../classzisa_1_1HierarchicalFile.html',1,'zisa']]],
+  ['hierarchicalreader_10',['HierarchicalReader',['../classzisa_1_1HierarchicalReader.html',1,'zisa']]],
+  ['hierarchicalwriter_11',['HierarchicalWriter',['../classzisa_1_1HierarchicalWriter.html',1,'zisa']]],
+  ['host_5fmemory_5fresource_12',['host_memory_resource',['../classzisa_1_1host__memory__resource.html',1,'zisa']]]
 ];

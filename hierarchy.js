@@ -36,7 +36,9 @@ var hierarchy =
     [ "zisa::HierarchicalFile", "classzisa_1_1HierarchicalFile.html", [
       [ "zisa::HDF5File", "classzisa_1_1HDF5File.html", [
         [ "zisa::HDF5Reader", "classzisa_1_1HDF5Reader.html", [
-          [ "zisa::HDF5SerialReader", "classzisa_1_1HDF5SerialReader.html", null ]
+          [ "zisa::HDF5SerialReaderBase", "classzisa_1_1HDF5SerialReaderBase.html", [
+            [ "zisa::HDF5SerialReader", "classzisa_1_1HDF5SerialReader.html", null ]
+          ] ]
         ] ],
         [ "zisa::HDF5Writer", "classzisa_1_1HDF5Writer.html", [
           [ "zisa::HDF5SerialWriter", "classzisa_1_1HDF5SerialWriter.html", null ]
