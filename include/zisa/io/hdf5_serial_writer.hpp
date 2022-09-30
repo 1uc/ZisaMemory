@@ -30,14 +30,8 @@ protected:
                                const std::string &tag) override;
 };
 
-/// Read data from HDF5 file sequentially.
-class HDF5SerialReader : public HDF5Reader {
-private:
-  using super = HDF5Reader;
 
-public:
-  explicit HDF5SerialReader(const std::string &filename);
-
+class HDF5SerialReaderBase : public HDF5Reader {
 protected:
   virtual std::vector<hsize_t>
   do_hdf5_dims(const std::string &tag) const override;
@@ -52,6 +46,17 @@ protected:
 
   virtual std::string do_read_string(const std::string &tag) const override;
 };
+
+
+/// Read data from HDF5 file sequentially.
+class HDF5SerialReader : public HDF5SerialReaderBase {
+private:
+  using super = HDF5Reader;
+
+public:
+  explicit HDF5SerialReader(const std::string &filename);
+};
+
 
 // TODO deprecate.
 template <class T, class... Args>
