@@ -143,7 +143,6 @@ void HDF5SerialReaderBase::do_read_scalar(void *data,
                                       const HDF5DataType &data_type,
                                       const std::string &tag) const {
   auto dataset = open_dataset(tag);
-  auto dataspace = get_dataspace(*dataset);
 
   // read the scalar
   H5D::read(*dataset, *data_type, H5S_ALL, H5S_ALL, H5P_DEFAULT, data);
