@@ -64,18 +64,12 @@ install_dir="$(
         --zisa_has_cuda=${ZISA_HAS_CUDA} \
 )"
 source_dir="${install_dir}/sources"
-conan_file="${zisa_root}/conanfile.txt"
 
 if [[ ${PRINT_INSTALL_PATH} -eq 1 ]]
 then
   echo $install_dir
   exit 0
 fi
-
-mkdir -p "${install_dir}/conan" && cd "${install_dir}/conan"
-conan install "$conan_file" \
-        -s compiler=$(basename "${CC}") \
-        -s compiler.libcxx=libstdc++11
 
 mkdir -p "${source_dir}"
 for dep in "${zisa_dependencies[@]}"
@@ -99,15 +93,13 @@ do
         fi
     fi
 
-    git clone ${repo_url} "${src_dir}"
+    git clone --recursive ${repo_url} "${src_dir}"
 
     mkdir -p "${src_dir}/build-dep"
     cd "${src_dir}/build-dep"
 
     ${CMAKE} -DCMAKE_INSTALL_PREFIX="${install_dir}/zisa" \
              -DCMAKE_PREFIX_PATH="${install_dir}/zisa/lib/cmake/zisa" \
-             -DCMAKE_MODULE_PATH="${install_dir}/zisa/lib/cmake/zisa" \
-             -DCMAKE_PROJECT_${dep}_INCLUDE="${install_dir}/conan/conan_paths.cmake" \
              -DCMAKE_C_COMPILER="${CC}" \
              -DCMAKE_CXX_COMPILER="${CXX}" \
              -DZISA_HAS_MPI="${ZISA_HAS_MPI}" \
@@ -124,9 +116,7 @@ echo "    export DEP_DIR=${install_dir}"
 echo ""
 echo "Use"
 echo "    ${CMAKE} \ "
-echo "        -DCMAKE_PROJECT_${component_name}_INCLUDE=${install_dir}/conan/conan_paths.cmake \ "
 echo "        -DCMAKE_PREFIX_PATH=${install_dir}/zisa/lib/cmake/zisa \ "
-echo "        -DCMAKE_MODULE_PATH=${install_dir}/zisa/lib/cmake/zisa \ "
 echo "        -DZISA_HAS_CUDA=${ZISA_HAS_CUDA} \ "
 echo "        -DCMAKE_C_COMPILER=${CC} \ "
 echo "        -DCMAKE_CXX_COMPILER=${CXX} \ "
