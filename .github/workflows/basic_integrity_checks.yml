@@ -33,6 +33,8 @@ jobs:
     steps:
       # Checks-out the repository.
       - uses: actions/checkout@v2
+        with:
+          submodules: recursive
 
       - name: Update Ubuntu
         run: |
