@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.5"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>ZisaMemory: Conan</title>
+<title>ZisaMemory: Spack Quick Guide</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -64,7 +64,7 @@ $(function() {
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('md_conan.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('md_spack.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -90,32 +90,28 @@ $(document).ready(function(){initNavTree('md_conan.html',''); initResizable(); }
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">Conan </div></div>
+  <div class="headertitle"><div class="title">Spack Quick Guide </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p >Conan is a wonderful tool to download and install compiled libraries to a local folder on your computer. In addition it generates the necesary information to link against these local versions.</p>
-<p >It can be installed either using the package manager or </p><pre class="fragment">$ pip install --user conan
-</pre><p> (or <code>pip3</code> depending on your Linux distribution).</p>
+<div class="textblock"><p >To install Spack you must clone the repository: </p><pre class="fragment">git clone https://github.com/spack/spack.git ${SPACK_DIR}
+</pre><p> In every shell you want to use Spack perform: </p><pre class="fragment">source ${SPACK_DIR}/share/spack/setup-env.sh
+</pre><p> which will modify environment variables such as <code>PATH</code> to include <code>spack</code>.</p>
 <h1><a class="anchor" id="autotoc_md10"></a>
-Quick Conan Primer</h1>
+Spack Environments</h1>
+<p >These are much like Python virtual environments. First create a Spack environment and activate it. Then add all dependencies and install everything </p><pre class="fragment">spack env create zisa-deps
+spack env activate -p zisa-deps
+spack add ...
+spack install -j $(nproc)
+</pre><p> The required dependencies are documented in a <code>spack-env.yml</code> found in each component of Zisa.</p>
+<p >Subsequently, activate the environment as follows: </p><pre class="fragment">spack env activate -p zisa-deps
+</pre><p> This will modify environment variables to ensure the dependencies are made available. Notably, it sets <code>CMAKE_PREFIX_PATH</code> which ensures that <code>find_package</code> can find the newly installed versions of, say, <code>Catch2</code>.</p>
 <h2><a class="anchor" id="autotoc_md11"></a>
-Conan Profiles</h2>
-<p >In order to obtain ABI compatible libraries, Conan must be told which compiler, compiler version and which standard library should be used. My initial faulty assumption was it would just deduce everything from the environment variable <code>CC</code>. Instead Conan has a concept of "profiles" which are textfiles containing all the relevant information.</p>
-<p >One easy way setup a custom profile would be to run </p><pre class="fragment">$ conan profile show default
-</pre><p> and see what can/needs to be modified. Then create a new profile <code>PROFILE</code> in the folder <code>~/.conan/profiles</code>. Use this profile by </p><pre class="fragment">$ conan install CONANFILE --profile PROFILE
-</pre><p> where <code>CONANFILE</code> is typically <code>../conanfile.txt</code> and <code>PROFILE</code> is the name of the file you created in <code>~/.conan/profiles</code>, e.g., <code>default</code> if you want to redundantly specify the default profile.</p>
+Known Issues</h2>
+<p >After adding new dependencies, it's prudent to deactivate and activate the environment again, since often important environment variables aren't updated until the next <code>spack env activate</code>.</p>
+<p >Adding the same dependency twice (with minor variations) will likely cause a conflict since the same library is now listed twice, i.e. <code>spack add</code> does not overwrite or update a dependency it adds a new one.</p>
 <h2><a class="anchor" id="autotoc_md12"></a>
-C++11 Standard Library</h2>
-<p >Modern C++ links to a C++11 compatible version of the standard library. Conan must be told to use the modern library, either by modifying a profile (possibly the default) or by adding </p><pre class="fragment">$ conan CONANFILE -s compiler.libcxx=libstdc++11
-</pre><h1><a class="anchor" id="autotoc_md13"></a>
-Combining CMake and Conan</h1>
-<p >Conan and CMake work very nicely together. There are several ways of combining the two. The rationale is to avoid a strong coupling of the two. Therefore, we strive for a <code>CMakeLists.txt</code> which does not contain Conan specific instructions. After all Conan is just a way of obtaining libraries and not the way. In particular, if all dependencies are installed in standard locations (meaning CMake can find them), then Conan should not be needed.</p>
-<p >The two <em>generators</em> we use are</p>
-<ul>
-<li><b>cmake_find_package</b> which automatically generates <code>FindXYZ.cmake</code>.</li>
-<li><b>cmake_paths</b> which generates a file with the CMake variables required to find the generated <code>FindXYZ.cmake</code> modules.</li>
-</ul>
-<p >Therefore, if we were to <code>include(conan_paths.cmake)</code>, CMake would pickup the Conan generated find modules. Fortunately, there's an interesting trick to avoid literally including the file in <code>CMakeLists.txt</code>. Namely, CMake has a command line argument <code>-DCMAKE_PROJECT_${PROJECT}_INCLUDE</code> which can be used to include a file, e.g., <code>conan_paths.cmake</code>. </p>
+Tricks</h2>
+<p >Use <code>spack config edit</code> to edit the environment. </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->

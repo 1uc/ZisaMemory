@@ -106,7 +106,7 @@ Overview of dependencies</h1>
 <p >Zisa uses modern CMake to manage any dependencies it has. We've devided them into four categories: <em>system dependencies</em> which are hard to install, low level libraries; <em>common dependencies</em> these are properly packaged libraries; <em>internal dependencies</em> meaning other parts of Zisa; and finally <em>scientific dependencies</em> these are dependencies on other scientific codes, which may not be nicely packaged and might not be open-source.</p>
 <h2><a class="anchor" id="autotoc_md3"></a>
 System dependencies</h2>
-<p >We simply assume that these are present on the system. On a personal computer these are intalled using the package manager or something similar.</p>
+<p >We simply assume that these are present on the system. On a personal computer these are installed using the package manager or something similar.</p>
 <p >Examples are:</p><ul>
 <li>CUDA</li>
 <li>MPI</li>
@@ -115,10 +115,8 @@ System dependencies</h2>
 </ul>
 <h2><a class="anchor" id="autotoc_md4"></a>
 Common dependencies</h2>
-<p >Since these are nicely packaged C++ libraries, we can use Conan to install them. Conan can be installed using <code>pip</code>, e.g., </p><pre class="fragment">pip install --user conan
-</pre><p> Remember that you might need to add a folder to your <code>PATH</code>. There is a <code>conanfile.txt</code> which lists the libraries that need to be installed.</p>
-<p ><b>Note:</b> If you're new to Conan and it's using the correct compiler, please read up on profiles. Which is how you can tell Conan the details required to pick an ABI compatible binary.</p>
-<p >Please refer to <a class="el" href="md_conan.html">Conan Details</a> for further details on how we use Conan.</p>
+<p >Since these are nicely packaged C++ libraries, we could use Spack to install them. Create a Spack environment and add the required libraries.</p>
+<p >Please refer to <a class="el" href="md_spack.html">Spack Details</a> for further details on how we use Spack.</p>
 <h2><a class="anchor" id="autotoc_md5"></a>
 Internal dependencies</h2>
 <p >These are distributed as source. Hence one must clone or download the repository; then compile and install using typical CMake commands. Once they're installed they are no different from common dependencies.</p>
