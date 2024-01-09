@@ -140,7 +140,9 @@ install(EXPORT ZisaMemoryTargets
   )
 
 # -- Tests ---------------------------------------------------------------------
-add_subdirectory(third_party/Catch2 REQUIRED)
+if(NOT TARGET Catch2::Catch2)
+  add_subdirectory(third_party/Catch2)
+endif()
 
 add_executable(memory_unit_tests "")
 set_target_properties(memory_unit_tests PROPERTIES OUTPUT_NAME unit_tests)
