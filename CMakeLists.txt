@@ -26,9 +26,6 @@ include("cmake/clang_tidy.cmake")
 # -- Dependencies --------------------------------------------------------------
 add_library(memory_dependencies INTERFACE)
 
-# experimental/filesystem
-target_link_libraries(memory_dependencies INTERFACE stdc++fs)
-
 # Logging
 if(ZISA_LOG_LEVEL)
   target_compile_definitions(memory_dependencies INTERFACE ZISA_LOG_LEVEL=${ZISA_LOG_LEVEL})
